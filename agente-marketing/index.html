@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6 tarefas de marketing que a IA já faz sozinha · Maiky Miguel</title>
+<meta name="description" content="Monte um agente de marketing no Claude e entregue a ele as tarefas do seu time, com comandos prontos. Por Maiky Miguel.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --azul:#0B3C8C; --azul-escuro:#082B66; --laranja:#F26A1B;
+    --cinza:#4A5568; --cinza-claro:#718096; --fundo:#FFFFFF; --fundo-2:#F3F6FB;
+    --verde:#1F8A4C; --amarelo:#F2B705; --vermelho:#C8372D; --linha:#DCE3EE;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--fundo);color:var(--cinza);font:400 17px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{font-family:"Plus Jakarta Sans",Inter,system-ui,sans-serif;color:var(--azul);line-height:1.15;margin:0}
+  h1{font-size:clamp(32px,6vw,52px);font-weight:800;letter-spacing:-.02em}
+  h2{font-size:clamp(24px,4vw,32px);font-weight:800;margin-bottom:16px}
+  h3{font-size:20px;font-weight:700;margin-bottom:8px}
+  p{margin:0 0 14px}
+  strong{color:var(--azul-escuro)}
+  .mark{background:linear-gradient(transparent 55%, rgba(242,106,27,.35) 55%);padding:0 2px}
+  .eyebrow{font:600 13px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--laranja);margin-bottom:14px}
+
+  /* capa */
+  .capa{padding:64px 0 48px;border-bottom:1px solid var(--linha)}
+  .capa .promessa{font-size:20px;color:var(--cinza);margin-top:18px;max-width:640px}
+  .tempo{display:inline-block;margin-top:20px;background:var(--fundo-2);color:var(--azul);font-weight:600;border-radius:999px;padding:8px 16px;font-size:15px}
+
+  section{padding:48px 0;border-bottom:1px solid var(--linha)}
+  .passos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;counter-reset:p}
+  .passo{background:var(--fundo-2);border-radius:14px;padding:20px}
+  .passo::before{counter-increment:p;content:counter(p);display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--laranja);color:#fff;font:800 16px "Plus Jakarta Sans",sans-serif;margin-bottom:10px}
+
+  .tag{display:inline-block;font-size:13px;font-weight:600;color:var(--azul);background:var(--fundo-2);border-radius:6px;padding:3px 10px;margin-bottom:10px}
+  .bloco{background:var(--fundo-2);border-left:4px solid var(--laranja);border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0}
+  .bloco p:last-child{margin:0}
+  ol.how,ul.how{margin:8px 0 0;padding-left:22px}
+  ol.how li,ul.how li{margin-bottom:8px}
+  .aviso{font-size:15px;color:var(--cinza-claro)}
+
+  /* critérios */
+  .degrau{display:grid;grid-template-columns:72px 1fr;gap:20px;padding:24px 0;border-top:1px dashed var(--linha)}
+  .degrau:first-of-type{border-top:0}
+  .num{width:72px;height:72px;border-radius:16px;background:var(--azul);color:#fff;display:grid;place-items:center;font:800 32px "Plus Jakarta Sans",sans-serif}
+  .degrau.ult .num{background:var(--laranja)}
+
+  /* calculadora */
+  .calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:18px 0}
+  .calc label{font-size:14px;font-weight:600;color:var(--azul)}
+  .calc input{width:100%;margin-top:6px;padding:12px;border:1px solid var(--linha);border-radius:10px;font:500 17px Inter,sans-serif;color:var(--azul-escuro)}
+  .calc input:focus{outline:2px solid var(--laranja);border-color:transparent}
+  .res{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+  .card{background:var(--fundo-2);border-radius:14px;padding:16px}
+  .card .k{font-size:13px;color:var(--cinza-claro)}
+  .card .v{font:800 26px "Plus Jakarta Sans",sans-serif;color:var(--azul)}
+  .card.destaque{background:var(--azul)} .card.destaque .k{color:#C9D6EE} .card.destaque .v{color:#fff}
+  .leitura{margin-top:16px}
+
+  table{width:100%;border-collapse:collapse;font-size:16px}
+  .tbl{overflow-x:auto}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--linha)}
+  th{color:var(--azul);font-weight:600;background:var(--fundo-2)}
+  td.n{text-align:right;font-variant-numeric:tabular-nums}
+
+  .proximo{background:var(--azul);color:#fff;border-radius:18px;padding:32px;margin:48px 0}
+  .proximo h2{color:#fff}
+  .proximo p{color:#DCE6F7;margin:0}
+
+  .prompt{border:1px solid var(--linha);border-radius:14px;padding:18px;margin:16px 0}
+  .prompt pre{white-space:pre-wrap;word-wrap:break-word;background:var(--fundo-2);border-radius:10px;padding:14px;margin:10px 0 12px;font:400 15px/1.55 Inter,system-ui,sans-serif;color:var(--azul-escuro)}
+  .btn{display:inline-block;background:var(--laranja);color:var(--azul-escuro);font:700 15px "Plus Jakarta Sans",sans-serif;border:0;border-radius:10px;padding:11px 18px;cursor:pointer;text-decoration:none}
+  .btn:hover{filter:brightness(.95)} .btn.grande{font-size:17px;padding:14px 24px}
+  footer{padding:28px 0 48px;font-size:14px;color:var(--cinza-claro)}
+  .assina{font:700 16px "Plus Jakarta Sans",sans-serif;color:var(--azul);border-bottom:3px solid var(--laranja);padding-bottom:2px}
+  @media (max-width:520px){.degrau{grid-template-columns:1fr}.num{width:56px;height:56px;font-size:26px}.proximo{padding:24px}}
+</style>
+</head>
+<body>
+
+<header class="capa">
+  <div class="wrap">
+    <div class="eyebrow">Material gratuito · Maiky Miguel</div>
+    <h1>6 tarefas de marketing que a IA já faz <span class="mark">sozinha</span></h1>
+    <p class="promessa">Monte um agente de marketing no Claude e entregue a ele as tarefas que hoje tomam o tempo do seu time. Com o comando pronto para cada uma.</p>
+    <span class="tempo">Leitura de 10 minutos · aplicação na mesma semana</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>Como usar em 3 passos</h2>
+    <div class="passos">
+      <div class="passo"><h3>Monte o agente-base</h3><p>Copie o primeiro comando, preencha os dados da sua empresa e cole no Claude. Você faz isso uma vez.</p></div>
+      <div class="passo"><h3>Escolha uma tarefa</h3><p>Das 6 abaixo, comece pela que mais toma tempo do seu time. Uma por semana é suficiente.</p></div>
+      <div class="passo"><h3>Revise e use</h3><p>O agente rascunha, você decide. Leia, ajuste com a sua voz e só então publique ou envie.</p></div>
+    </div>
+  </section>
+
+  <section id="agente-base">
+    <div class="eyebrow">Item 1 · O agente-base</div>
+    <h2>O mega agente: o Claude que conhece a sua empresa</h2>
+    <p>As respostas da IA ficam muito melhores quando ela sabe quem você é, quem compra de você e como você fala. Por isso, antes das tarefas, você cria um <strong>agente-base</strong>: um texto com os dados da empresa que fica guardado e vale para todas as 6 tarefas.</p>
+    <div class="prompt">
+      <span class="tag">Comando 1 · agente-base</span>
+<pre>Você é o meu agente de marketing e vendas. Trabalhe como um profissional experiente que conhece a minha empresa por dentro.
+
+A empresa: [nome], que vende [o que vende] para [cargo de quem decide, ex.: diretor comercial] de empresas de [setor] em [região].
+O problema que eu resolvo: [em uma frase, com as palavras do cliente].
+O que me diferencia: [em uma frase].
+Como eu falo: [ex.: simples, direto, sem termos técnicos, sem promessa exagerada].
+O que eu nunca faço: [ex.: prometer resultado, citar preço em post, falar mal de concorrente].
+
+Regras para tudo o que você escrever:
+- Português do Brasil, linguagem simples, sem sigla e sem jargão.
+- Nunca invente número, cliente, resultado ou depoimento. Se faltar dado, pergunte.
+- Entregue sempre um rascunho para eu revisar. Você não publica nem envia nada.
+- Se algo estiver fora do que eu te contei, diga que não sabe em vez de supor.
+
+Responda só: "Entendi. Qual é a primeira tarefa?"</pre>
+      <button class="btn copiar" type="button">Copiar comando</button>
+    </div>
+    <div class="bloco"><p><strong>Onde guardar:</strong> se o seu plano do Claude tiver "Projetos", salve este texto como instrução do projeto e ele vale para todas as conversas dali. Se não tiver, guarde numa nota e cole no começo de cada conversa nova.</p></div>
+  </section>
+
+  <section id="tarefas">
+    <div class="eyebrow">Item 2 · As 6 tarefas</div>
+    <h2>O antes e o depois de cada tarefa, com o comando pronto</h2>
+    <p>Depois de colar o agente-base, cole o comando da tarefa na mesma conversa.</p>
+
+    <div class="degrau">
+      <div class="num">1</div>
+      <div>
+        <span class="tag">Conteúdo</span>
+        <h3>Posts e roteiros de vídeo</h3>
+        <p><strong>Antes:</strong> alguém olha para a tela em branco, sem saber o que escrever. <strong>Depois:</strong> o agente propõe temas a partir das dúvidas dos seus clientes e entrega o rascunho de cada post.</p>
+        <div class="prompt">
+          <pre>Liste 10 dúvidas que os meus clientes costumam ter antes de comprar. Depois escolha as 3 mais fortes e escreva, para cada uma, um post de LinkedIn de até 12 linhas: gancho com uma cena real, explicação simples e uma pergunta no final. Sem oferta e sem preço.</pre>
+          <button class="btn copiar" type="button">Copiar comando</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="degrau">
+      <div class="num">2</div>
+      <div>
+        <span class="tag">Anúncios</span>
+        <h3>Variações de texto para testar</h3>
+        <p><strong>Antes:</strong> um texto só, escrito na pressa, que ninguém compara com outro. <strong>Depois:</strong> várias versões, cada uma com um ângulo diferente, prontas para testar.</p>
+        <div class="prompt">
+          <pre>Escreva 5 versões de texto de anúncio (até 3 linhas cada) para [oferta ou material]. Cada versão usa um ângulo diferente: dor, curiosidade, prova, comparação e pergunta direta. Depois diga, em uma frase, qual ângulo você testaria primeiro e por quê.</pre>
+          <button class="btn copiar" type="button">Copiar comando</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="degrau">
+      <div class="num">3</div>
+      <div>
+        <span class="tag">Resultados</span>
+        <h3>Ler o relatório da campanha</h3>
+        <p><strong>Antes:</strong> uma planilha cheia de número que ninguém tem tempo de interpretar. <strong>Depois:</strong> o agente diz onde o dinheiro está vazando e o que testar primeiro.</p>
+        <div class="prompt">
+          <pre>Estes são os números do último mês da minha campanha: [cole aqui o investimento, os cliques, os leads, as conversas e as vendas]. Diga em qual etapa as pessoas mais se perdem e o que eu devo testar primeiro. No máximo 2 ações, em linguagem simples. Se faltar dado para concluir, diga o que falta.</pre>
+          <button class="btn copiar" type="button">Copiar comando</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="degrau">
+      <div class="num">4</div>
+      <div>
+        <span class="tag">Comercial</span>
+        <h3>Resumir a reunião e deixar o próximo passo pronto</h3>
+        <p><strong>Antes:</strong> o vendedor sai da reunião e anota (ou esquece) o que ficou combinado. <strong>Depois:</strong> o agente transforma a conversa em resumo, pendências e uma mensagem de retorno.</p>
+        <div class="prompt">
+          <pre>Segue a transcrição (ou as minhas anotações) da reunião com [nome do cliente]: [cole aqui]. Faça: (1) um resumo de 5 linhas; (2) a lista do que ficou combinado e de quem é cada tarefa; (3) as objeções que a pessoa levantou; (4) uma mensagem de retorno de até 4 linhas para eu mandar hoje. Use só o que está no texto.</pre>
+          <button class="btn copiar" type="button">Copiar comando</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="degrau">
+      <div class="num">5</div>
+      <div>
+        <span class="tag">Mercado</span>
+        <h3>Pesquisar concorrentes e mercado</h3>
+        <p><strong>Antes:</strong> horas abrindo site por site. <strong>Depois:</strong> o agente monta uma comparação inicial para você aprofundar.</p>
+        <div class="prompt">
+          <pre>Pesquise 5 empresas que vendem [o que você vende] para [seu público]. Para cada uma, monte uma tabela com: o que prometem no site, para quem falam, como cobram (se for público) e o que eu poderia fazer diferente. Indique a fonte de cada informação. O que não tiver fonte, marque como "não confirmado".</pre>
+          <button class="btn copiar" type="button">Copiar comando</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="degrau ult">
+      <div class="num">6</div>
+      <div>
+        <span class="tag">Relacionamento</span>
+        <h3>Follow-up e e-mails de retomada</h3>
+        <p><strong>Antes:</strong> o contato esfria porque ninguém lembrou de chamar de novo. <strong>Depois:</strong> o agente escreve a sequência de mensagens, e o seu time só revisa e envia.</p>
+        <div class="prompt">
+          <pre>Escreva uma sequência de 4 mensagens curtas (até 3 linhas cada) para quem pediu orçamento comigo e sumiu. Intervalo sugerido entre elas: 2, 4 e 7 dias. Cada uma com uma única pergunta, tom humano e espaço para a pessoa dizer que não é o momento. A última fecha o assunto com educação.</pre>
+          <button class="btn copiar" type="button">Copiar comando</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="limites">
+    <div class="eyebrow">Item 3</div>
+    <h2>O que o agente pode e o que não pode fazer sozinho</h2>
+    <div class="tbl"><table>
+      <tr><th>O agente pode</th><th>Quem decide é você</th></tr>
+      <tr><td>Rascunhar posts, anúncios e e-mails</td><td>O que publicar e em que tom</td></tr>
+      <tr><td>Ler números e apontar onde olhar</td><td>Onde colocar o dinheiro</td></tr>
+      <tr><td>Resumir reuniões e listar pendências</td><td>O que prometer ao cliente</td></tr>
+      <tr><td>Montar a pesquisa inicial de mercado</td><td>A estratégia e o preço</td></tr>
+      <tr><td>Escrever a sequência de follow-up</td><td>Quem chamar e quando enviar</td></tr>
+    </table></div>
+    <div class="bloco"><p><strong>Cuidado com o que a IA responde em nome da empresa.</strong> Tudo o que vai para cliente, lead ou rede social passa por uma pessoa antes. O agente rascunha; quem assina é você. Não deixe a IA responder sozinha em nome da empresa.</p></div>
+    <div class="bloco"><p><strong>Privacidade.</strong> Mande ao Claude só o necessário. Nada de documento, dado de saúde, dado financeiro ou informação que o cliente pediu para manter em sigilo.</p></div>
+    <p class="aviso"><strong>Quando não confiar na resposta:</strong> se a IA citar um número que você não passou, um cliente que você não mencionou ou um fato sobre o seu mercado sem mostrar a fonte, ignore essa parte e confira.</p>
+  </section>
+
+  <section id="semana">
+    <div class="eyebrow">Item 4</div>
+    <h2>Por onde começar na semana</h2>
+    <div class="tbl"><table>
+      <tr><th>Dia</th><th>O que fazer</th></tr>
+      <tr><td>Segunda</td><td>Preencher e colar o agente-base (item 1)</td></tr>
+      <tr><td>Terça</td><td>Rodar a tarefa 3, ler o relatório da campanha (você já tem os números)</td></tr>
+      <tr><td>Quarta</td><td>Rodar a tarefa 1 e deixar 3 posts rascunhados</td></tr>
+      <tr><td>Quinta</td><td>Rodar a tarefa 4 na próxima reunião comercial</td></tr>
+      <tr><td>Sexta</td><td>Revisar o que funcionou e escolher a tarefa da semana seguinte</td></tr>
+    </table></div>
+    <p class="aviso" style="margin-top:12px">Sugestão de ritmo. Ajuste ao que mais pesa no seu time.</p>
+  </section>
+
+  <div class="proximo">
+    <h2>O próximo passo</h2>
+    <p>Agentes ajudam com tarefas soltas. Se você quer implementar uma estrutura de aquisição previsível no seu negócio, com total clareza de todo o seu fluxo de vendas, marque um diagnóstico estratégico comigo.</p>
+    <p style="margin-top:20px"><a class="btn grande" href="https://cal.com/maiky-miguel-rh5mjb/40min?overlayCalendar=true" target="_blank" rel="noopener">Marcar meu diagnóstico estratégico</a></p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="assina">Maiky Miguel</span>
+    <p style="margin-top:12px">Material gratuito. Este material não promete resultado.</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.copiar').forEach(b => b.addEventListener('click', () => {
+    const pre = b.parentElement.querySelector('pre');
+    const label = b.textContent;
+    const ok = () => { b.textContent = 'Copiado'; setTimeout(() => b.textContent = label, 1800); };
+    const manual = () => { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: aperte Ctrl+C'; };
+    if (navigator.clipboard) navigator.clipboard.writeText(pre.innerText).then(ok).catch(manual); else manual();
+  }));
+</script>
+</body>
+</html>
