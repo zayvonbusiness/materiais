@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A IA do seu anúncio sabe quem comprou? · Maiky Miguel · Zayvon</title>
+<meta name="description" content="Calculadora de custo por lead e custo por venda, 7 perguntas de diagnóstico e um agente de IA no Claude que lê o relatório da sua campanha. Por Maiky Miguel, Zayvon Assessoria.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --azul:#116BF8; --azul-medio:#052698; --azul-escuro:#031452; --ciano:#21BCEE;
+    --cinza:#5A6072; --cinza-claro:#878EA0; --fundo:#FFFFFF; --fundo-2:#F4F7FB;
+    --linha:#DCE3EB; --verde:#1F8A4C; --vermelho:#C8372D;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--fundo);color:var(--cinza);font:400 17px/1.6 "Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{font-family:"Instrument Sans",system-ui,sans-serif;color:var(--azul-escuro);line-height:1.15;margin:0}
+  h1{font-size:clamp(32px,6vw,52px);font-weight:700;letter-spacing:-.02em;color:#fff}
+  h2{font-size:clamp(24px,4vw,32px);font-weight:700;margin-bottom:16px}
+  h3{font-size:20px;font-weight:700;margin-bottom:8px}
+  p{margin:0 0 14px}
+  strong{color:var(--azul-escuro)}
+  .mark{background:linear-gradient(transparent 58%, rgba(33,188,238,.55) 58%);padding:0 2px}
+  .eyebrow{font:600 13px/1 "Instrument Sans",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);margin-bottom:14px}
+
+  /* capa (escura, com a logo) */
+  .capa{background:var(--azul-escuro);padding:40px 0 56px;border-bottom:4px solid var(--azul)}
+  .capa .logo{height:26px;display:block;margin-bottom:44px}
+  .capa .eyebrow{color:var(--ciano)}
+  .capa .mark{background:linear-gradient(transparent 58%, rgba(33,188,238,.45) 58%)}
+  .capa .promessa{font-size:20px;color:#C9D6EE;margin-top:18px;max-width:640px}
+  .tempo{display:inline-block;margin-top:20px;background:rgba(255,255,255,.1);color:#fff;font-weight:600;border-radius:999px;padding:8px 16px;font-size:15px}
+
+  section{padding:48px 0;border-bottom:1px solid var(--linha)}
+  .passos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;counter-reset:p}
+  .passo{background:var(--fundo-2);border-radius:14px;padding:20px}
+  .passo::before{counter-increment:p;content:counter(p);display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--azul);color:#fff;font:700 16px "Instrument Sans",sans-serif;margin-bottom:10px}
+
+  .tag{display:inline-block;font-size:13px;font-weight:600;color:var(--azul-medio);background:var(--fundo-2);border-radius:6px;padding:3px 10px;margin-bottom:10px}
+  .bloco{background:var(--fundo-2);border-left:4px solid var(--azul);border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0}
+  .bloco p:last-child{margin:0}
+  ol.how,ul.how{margin:8px 0 0;padding-left:22px}
+  ol.how li,ul.how li{margin-bottom:8px}
+  .aviso{font-size:15px;color:var(--cinza-claro)}
+
+  .degrau{display:grid;grid-template-columns:72px 1fr;gap:20px;padding:24px 0;border-top:1px dashed var(--linha)}
+  .degrau:first-of-type{border-top:0}
+  .num{width:72px;height:72px;border-radius:16px;background:var(--azul-medio);color:#fff;display:grid;place-items:center;font:700 32px "Instrument Sans",sans-serif}
+  .degrau.ult .num{background:var(--azul)}
+
+  /* calculadora */
+  .calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:18px 0}
+  .calc label{font-size:14px;font-weight:600;color:var(--azul-medio)}
+  .calc input{width:100%;margin-top:6px;padding:12px;border:1px solid var(--linha);border-radius:10px;font:500 17px "Instrument Sans",sans-serif;color:var(--azul-escuro)}
+  .calc input:focus{outline:2px solid var(--azul);border-color:transparent}
+  .res{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+  .card{background:var(--fundo-2);border-radius:14px;padding:16px}
+  .card .k{font-size:13px;color:var(--cinza-claro)}
+  .card .v{font:700 26px "Instrument Sans",sans-serif;color:var(--azul-medio)}
+  .card.destaque{background:var(--azul)} .card.destaque .k{color:#D8E6FF} .card.destaque .v{color:#fff}
+  .leitura{margin-top:16px}
+
+  /* diagnóstico */
+  .perg{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1px solid var(--linha);border-radius:12px;margin-bottom:10px;cursor:pointer}
+  .perg input{margin-top:4px;width:20px;height:20px;accent-color:var(--azul);flex:none}
+  .perg:has(input:checked){background:var(--fundo-2);border-color:var(--azul)}
+  .nota{font:700 28px "Instrument Sans",sans-serif;color:var(--azul-medio)}
+
+  table{width:100%;border-collapse:collapse;font-size:16px}
+  .tbl{overflow-x:auto}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--linha)}
+  th{color:var(--azul-medio);font-weight:600;background:var(--fundo-2)}
+  td.n{text-align:right;font-variant-numeric:tabular-nums}
+
+  .prompt{border:1px solid var(--linha);border-radius:14px;padding:18px;margin:16px 0}
+  .prompt pre{white-space:pre-wrap;word-wrap:break-word;background:var(--fundo-2);border-radius:10px;padding:14px;margin:10px 0 12px;font:400 15px/1.55 "Instrument Sans",system-ui,sans-serif;color:var(--azul-escuro)}
+  .btn{display:inline-block;background:var(--azul);color:#fff;font:600 15px "Instrument Sans",sans-serif;border:0;border-radius:999px;padding:11px 20px;cursor:pointer;text-decoration:none}
+  .btn:hover{filter:brightness(.93)} .btn.grande{font-size:17px;padding:14px 26px}
+
+  /* quem preparou */
+  .autor{display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:center}
+  .autor img{width:100%;border-radius:18px;display:block}
+  .autor .nome{font:700 24px "Instrument Sans",sans-serif;color:var(--azul-escuro);margin-bottom:2px}
+  .autor .cargo{color:var(--azul);font-weight:600;margin-bottom:12px}
+
+  .proximo{background:var(--azul-escuro);color:#fff;border-radius:18px;padding:32px;margin:48px 0}
+  .proximo h2{color:#fff}
+  .proximo p{color:#D2DDF2;margin:0}
+  .proximo .btn{background:var(--ciano);color:var(--azul-escuro)}
+
+  footer{background:var(--azul-escuro);padding:32px 0 44px;font-size:14px;color:#9FB0D0}
+  footer img{height:22px;display:block;margin-bottom:14px}
+  @media (max-width:560px){.degrau{grid-template-columns:1fr}.num{width:56px;height:56px;font-size:26px}.proximo{padding:24px}.autor{grid-template-columns:1fr}.autor img{max-width:220px}}
+</style>
+</head>
+<body>
+
+<header class="capa">
+  <div class="wrap">
+    <img class="logo" src="logo-branca.png" alt="Zayvon">
+    <div class="eyebrow">Material gratuito · Maiky Miguel</div>
+    <h1>A IA do seu anúncio sabe quem <span class="mark">comprou</span>?</h1>
+    <p class="promessa">Descubra quanto custa, de verdade, cada venda que o seu anúncio traz. E use o Claude para ler o relatório da campanha e apontar onde o dinheiro está indo embora.</p>
+    <span class="tempo">Leitura de 10 minutos · primeira resposta no mesmo dia</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>Como usar em 3 passos</h2>
+    <div class="passos">
+      <div class="passo"><h3>Faça a conta</h3><p>Coloque na calculadora os números do último mês e veja o custo por lead ao lado do custo por venda.</p></div>
+      <div class="passo"><h3>Responda as 7 perguntas</h3><p>Em 2 minutos você sabe se a IA do anúncio aprende com a venda ou só com o formulário.</p></div>
+      <div class="passo"><h3>Peça a leitura ao Claude</h3><p>Cole o comando, mande o relatório da campanha e receba até 2 ações para testar.</p></div>
+    </div>
+  </section>
+
+  <section id="calculadora">
+    <div class="eyebrow">Item 1 · A calculadora</div>
+    <h2>O número do relatório x o número do seu caixa</h2>
+    <p>O relatório da campanha mostra o custo por lead. O que pesa no caixa é o custo por venda. Coloque os seus números no último mês.</p>
+    <p class="aviso">Os valores que já aparecem abaixo são um cenário ilustrativo (valores de exemplo). Troque pelos seus.</p>
+    <div class="calc">
+      <div><label for="inv">Quanto você investiu em anúncio (R$)</label><input id="inv" type="number" inputmode="decimal" min="0" value="10000"></div>
+      <div><label for="led">Quantos leads chegaram</label><input id="led" type="number" inputmode="numeric" min="0" value="200"></div>
+      <div><label for="ven">Quantos viraram venda</label><input id="ven" type="number" inputmode="numeric" min="0" value="5"></div>
+      <div><label for="tic">Valor médio de cada venda (R$)</label><input id="tic" type="number" inputmode="decimal" min="0" value="8000"></div>
+    </div>
+    <div class="res">
+      <div class="card"><div class="k">Custo por lead (o que o relatório mostra)</div><div class="v" id="r1">–</div></div>
+      <div class="card destaque"><div class="k">Custo por venda (o que pesa no caixa)</div><div class="v" id="r2">–</div></div>
+      <div class="card"><div class="k">Leads para fechar 1 venda</div><div class="v" id="r3">–</div></div>
+      <div class="card"><div class="k">Para cada R$ 1 investido, voltam</div><div class="v" id="r4">–</div></div>
+    </div>
+    <div class="bloco leitura"><p id="leitura">Preencha os campos para ver a leitura.</p></div>
+  </section>
+
+  <section id="diagnostico">
+    <div class="eyebrow">Item 2 · O diagnóstico</div>
+    <h2>7 perguntas: a IA do seu anúncio aprende com a venda?</h2>
+    <p>As plataformas de anúncio decidem cada vez mais sozinhas quem vê, quando e por quanto. E elas aprendem com o que você informa. Marque o que já acontece na sua empresa.</p>
+    <label class="perg"><input type="checkbox" class="q"><span>Cada lead chega ao CRM com a informação de qual anúncio o trouxe.</span></label>
+    <label class="perg"><input type="checkbox" class="q"><span>Quando um lead fecha, alguém marca isso no CRM no mesmo dia.</span></label>
+    <label class="perg"><input type="checkbox" class="q"><span>As vendas voltam para a plataforma de anúncios: ela fica sabendo quais leads fecharam.</span></label>
+    <label class="perg"><input type="checkbox" class="q"><span>Você sabe o custo por venda do último mês, não só o custo por lead.</span></label>
+    <label class="perg"><input type="checkbox" class="q"><span>Você sabe quantos leads nunca receberam uma resposta do comercial.</span></label>
+    <label class="perg"><input type="checkbox" class="q"><span>Marketing e comercial olham o mesmo relatório toda semana.</span></label>
+    <label class="perg"><input type="checkbox" class="q"><span>Você sabe quantos dias, em média, passam entre o lead chegar e a venda fechar.</span></label>
+    <div class="bloco leitura"><p><span class="nota" id="nota">0 de 7</span><br><span id="nota-txt">Marque as perguntas que já são verdade na sua empresa.</span></p></div>
+    <p class="aviso">Faixas de leitura criadas para este material, como referência simples. Não são um padrão de mercado.</p>
+  </section>
+
+  <section id="agente">
+    <div class="eyebrow">Item 3 · O agente de IA</div>
+    <h2>O Claude que lê o relatório da campanha e aponta o furo</h2>
+    <p>Sem programar e sem ferramenta nova. Você junta dois arquivos e o Claude faz a leitura.</p>
+
+    <div class="degrau">
+      <div class="num">1</div>
+      <div>
+        <h3>Separe os dois arquivos</h3>
+        <ul class="how">
+          <li><strong>O relatório da campanha:</strong> exporte da plataforma de anúncios, por campanha, com o que você gastou e quantos leads vieram.</li>
+          <li><strong>As vendas do CRM:</strong> exporte a lista de quem fechou, com a campanha ou o anúncio de origem e o valor.</li>
+        </ul>
+        <div class="bloco"><p><strong>Se você usa um CRM:</strong> conte ao Claude qual é o seu CRM e qual é a sua plataforma de anúncios. Ele te guia, passo a passo, em como exportar cada arquivo.</p></div>
+        <p class="aviso">Tire do arquivo qualquer dado pessoal de cliente (nome, telefone, e-mail) antes de mandar. Para esta análise, só campanha, custo, leads e vendas importam.</p>
+      </div>
+    </div>
+
+    <div class="degrau">
+      <div class="num">2</div>
+      <div>
+        <h3>Cole o comando e anexe os arquivos</h3>
+        <div class="prompt">
+          <span class="tag">Comando 1 · leitura da campanha</span>
+<pre>Você é o meu analista de anúncios. Vou te mandar dois arquivos: o relatório da campanha (gasto e leads por campanha) e a lista de vendas do CRM (campanha de origem e valor de cada venda).
+
+Faça, nesta ordem:
+1. Uma tabela por campanha com: gasto, leads, vendas, custo por lead e custo por venda.
+2. Diga qual campanha traz lead barato que não vira venda, e qual traz lead mais caro que fecha mais.
+3. Calcule o custo por venda geral e compare com o custo por lead geral.
+4. Liste no máximo 2 ações para eu testar primeiro, em linguagem simples.
+
+Regras: use só os números dos arquivos. Não invente dado. Se faltar informação para concluir, diga exatamente o que falta. Escreva em português do Brasil, sem sigla e sem jargão.</pre>
+          <button class="btn copiar" type="button">Copiar comando</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="degrau ult">
+      <div class="num">3</div>
+      <div>
+        <h3>Peça a rotina da semana</h3>
+        <p>Depois da primeira leitura, deixe o Claude repetir isso toda semana.</p>
+        <div class="prompt">
+          <span class="tag">Comando 2 · rotina semanal</span>
+<pre>Com base na análise que acabamos de fazer, monte a minha rotina de 15 minutos por semana para acompanhar isso. Inclua: (1) quais 4 números eu olho toda semana; (2) um sinal de alerta para cada número; (3) a pergunta que eu faço ao time comercial toda sexta; (4) um modelo de planilha simples, em colunas, para eu preencher.</pre>
+          <button class="btn copiar" type="button">Copiar comando</button>
+        </div>
+      </div>
+    </div>
+    <div class="bloco"><p><strong>Quem decide é você.</strong> O Claude lê e sugere. Orçamento, pausa de campanha e mudança de oferta passam por uma pessoa antes. Se ele citar um número que não está nos seus arquivos, ignore e confira.</p></div>
+  </section>
+
+  <section id="devolver">
+    <div class="eyebrow">Item 4 · Devolver a venda ao anúncio</div>
+    <h2>Como a IA do anúncio passa a saber quem comprou</h2>
+    <p>Esse é o ponto que quase ninguém faz. Existem três níveis, do mais simples ao mais completo. Comece pelo primeiro.</p>
+    <div class="tbl"><table>
+      <tr><th>Nível</th><th>O que é</th><th>Quem faz</th></tr>
+      <tr><td>1 · Planilha</td><td>Toda sexta, conferir as vendas por campanha (o agente do item 3 ajuda)</td><td>Você ou o marketing</td></tr>
+      <tr><td>2 · Origem no CRM</td><td>Cada lead entra no CRM já com a campanha que o trouxe, e o comercial marca quem fechou</td><td>Marketing e comercial</td></tr>
+      <tr><td>3 · Avisar a plataforma</td><td>As vendas fechadas voltam para a plataforma de anúncios, que passa a buscar mais gente parecida com quem comprou</td><td>Quem cuida dos seus anúncios e do seu CRM</td></tr>
+    </table></div>
+    <div class="bloco"><p><strong>Dica:</strong> pergunte ao Claude: "Uso [plataforma de anúncios] e [CRM]. Como eu informo à plataforma quais leads viraram venda?" Ele explica o caminho para a sua combinação de ferramentas. Confira sempre na ajuda oficial da plataforma, porque os menus mudam.</p></div>
+  </section>
+
+  <section id="rotina">
+    <div class="eyebrow">Item 5</div>
+    <h2>15 minutos por semana</h2>
+    <div class="tbl"><table>
+      <tr><th>Quando</th><th>O que fazer</th></tr>
+      <tr><td>Sexta, 5 min</td><td>Exportar o relatório da campanha e a lista de vendas</td></tr>
+      <tr><td>Sexta, 5 min</td><td>Colar no Claude com o Comando 1 e ler as 2 ações</td></tr>
+      <tr><td>Sexta, 5 min</td><td>Decidir uma ação com o time e anotar para olhar na semana seguinte</td></tr>
+    </table></div>
+    <p class="aviso" style="margin-top:12px">Sugestão de ritmo. Ajuste ao tamanho da sua operação.</p>
+  </section>
+
+  <section id="autor">
+    <div class="eyebrow">Quem preparou este material</div>
+    <div class="autor">
+      <img src="foto-maiky.png" alt="Maiky Miguel">
+      <div>
+        <div class="nome">Maiky Miguel</div>
+        <div class="cargo">Zayvon Assessoria</div>
+        <p>Atuo há mais de 5 anos com marketing digital e sou bacharel em Marketing. Me especializei em tráfego pago com foco em performance e já investi mais de R$ 3 milhões em mídia paga.</p>
+        <p>À frente da Zayvon, ajudo empresas B2B, da indústria à tecnologia e aos serviços, a estruturar a venda pela internet, do anúncio até o fechamento.</p>
+        <p style="margin:0">Minha missão é ensinar quem decide a entender marketing de verdade e a vender com consistência.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="proximo">
+    <h2>O próximo passo</h2>
+    <p>Este material mostra onde olhar. Se você quer implementar uma estrutura de aquisição previsível no seu negócio, com total clareza de todo o seu fluxo de vendas, marque um diagnóstico estratégico comigo.</p>
+    <p style="margin-top:20px"><a class="btn grande" href="https://cal.com/maiky-miguel-rh5mjb/40min?overlayCalendar=true" target="_blank" rel="noopener">Marcar meu diagnóstico estratégico</a></p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="logo-branca.png" alt="Zayvon">
+    <span>Maiky Miguel · Zayvon Assessoria</span>
+    <p style="margin-top:12px">Material gratuito. Os valores da calculadora são um exemplo. Este material não promete resultado.</p>
+  </div>
+</footer>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const brl = n => n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+  function calc(){
+    const inv = parseFloat($('inv').value)||0, led = parseFloat($('led').value)||0,
+          ven = parseFloat($('ven').value)||0, tic = parseFloat($('tic').value)||0;
+    $('r1').textContent = led>0 ? brl(inv/led) : '–';
+    $('r2').textContent = ven>0 ? brl(inv/ven) : '–';
+    $('r3').textContent = ven>0 ? (led/ven).toLocaleString('pt-BR',{maximumFractionDigits:0}) : '–';
+    $('r4').textContent = inv>0 ? ((ven*tic)/inv).toLocaleString('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:2,maximumFractionDigits:2}) : '–';
+    let t;
+    if(inv<=0||led<=0) t='Preencha os campos para ver a leitura.';
+    else if(ven<=0) t='Você teve leads, mas nenhuma venda registrada. O custo por venda não existe ainda, e o relatório da campanha não mostra esse problema. É o primeiro ponto para investigar.';
+    else t='O relatório mostra '+brl(inv/led)+' por lead. Mas cada venda custou '+brl(inv/ven)+', cerca de '+(((inv/ven)/(inv/led))).toLocaleString('pt-BR',{maximumFractionDigits:0})+' vezes mais. Se a plataforma só aprende com "o lead chegou", ela otimiza para o número menor, não para o maior.';
+    $('leitura').textContent = t;
+  }
+  ['inv','led','ven','tic'].forEach(i=>$(i).addEventListener('input',calc)); calc();
+
+  const faixas = [
+    [2,'A IA do seu anúncio aprende, quase só, com o formulário. Há muito espaço para ganhar: comece pelo nível 1 do item 4.'],
+    [5,'Você já enxerga parte do caminho, mas a venda ainda não volta inteira para o anúncio. Veja o item 4 e escolha o próximo nível.'],
+    [7,'Bem encaminhado. Use o agente do item 3 toda semana para manter isso afiado.']
+  ];
+  function diag(){
+    const n = document.querySelectorAll('.q:checked').length;
+    $('nota').textContent = n+' de 7';
+    $('nota-txt').textContent = n===0 ? 'Marque as perguntas que já são verdade na sua empresa.' : faixas.find(f=>n<=f[0])[1];
+  }
+  document.querySelectorAll('.q').forEach(c=>c.addEventListener('change',diag));
+
+  document.querySelectorAll('.copiar').forEach(b => b.addEventListener('click', () => {
+    const pre = b.parentElement.querySelector('pre');
+    const label = b.textContent;
+    const ok = () => { b.textContent = 'Copiado'; setTimeout(() => b.textContent = label, 1800); };
+    const manual = () => { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: aperte Ctrl+C'; };
+    if (navigator.clipboard) navigator.clipboard.writeText(pre.innerText).then(ok).catch(manual); else manual();
+  }));
+</script>
+</body>
+</html>
