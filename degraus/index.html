@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Os 3 degraus antes do WhatsApp do seu vendedor · Maiky Miguel</title>
+<meta name="description" content="O passo a passo para qualificar o lead antes de ele chegar no seu vendedor. Por Maiky Miguel.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --azul:#0B3C8C; --azul-escuro:#082B66; --laranja:#F26A1B;
+    --cinza:#4A5568; --cinza-claro:#718096; --fundo:#FFFFFF; --fundo-2:#F3F6FB;
+    --verde:#1F8A4C; --amarelo:#F2B705; --vermelho:#C8372D; --linha:#DCE3EE;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--fundo);color:var(--cinza);font:400 17px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{font-family:"Plus Jakarta Sans",Inter,system-ui,sans-serif;color:var(--azul);line-height:1.15;margin:0}
+  h1{font-size:clamp(32px,6vw,52px);font-weight:800;letter-spacing:-.02em}
+  h2{font-size:clamp(24px,4vw,32px);font-weight:800;margin-bottom:16px}
+  h3{font-size:20px;font-weight:700;margin-bottom:8px}
+  p{margin:0 0 14px}
+  strong{color:var(--azul-escuro)}
+  .mark{background:linear-gradient(transparent 55%, rgba(242,106,27,.35) 55%);padding:0 2px}
+  .eyebrow{font:600 13px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--laranja);margin-bottom:14px}
+
+  /* capa */
+  .capa{padding:64px 0 48px;border-bottom:1px solid var(--linha)}
+  .capa .promessa{font-size:20px;color:var(--cinza);margin-top:18px;max-width:640px}
+  .tempo{display:inline-block;margin-top:20px;background:var(--fundo-2);color:var(--azul);font-weight:600;border-radius:999px;padding:8px 16px;font-size:15px}
+
+  section{padding:48px 0;border-bottom:1px solid var(--linha)}
+  .passos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;counter-reset:p}
+  .passo{background:var(--fundo-2);border-radius:14px;padding:20px}
+  .passo::before{counter-increment:p;content:counter(p);display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--laranja);color:#fff;font:800 16px "Plus Jakarta Sans",sans-serif;margin-bottom:10px}
+
+  .video{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 10px 30px rgba(11,60,140,.15)}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .legenda{font-size:14px;color:var(--cinza-claro);margin-top:10px}
+
+  /* degraus */
+  .degrau{display:grid;grid-template-columns:72px 1fr;gap:20px;padding:28px 0;border-top:1px dashed var(--linha)}
+  .degrau:first-of-type{border-top:0}
+  .num{width:72px;height:72px;border-radius:16px;background:var(--azul);color:#fff;display:grid;place-items:center;font:800 32px "Plus Jakarta Sans",sans-serif}
+  .degrau.ult .num{background:var(--laranja)}
+  .tag{display:inline-block;font-size:13px;font-weight:600;color:var(--azul);background:var(--fundo-2);border-radius:6px;padding:3px 10px;margin-bottom:10px}
+  .bloco{background:var(--fundo-2);border-left:4px solid var(--laranja);border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0}
+  .bloco p:last-child{margin:0}
+  ol.how,ul.how{margin:8px 0 0;padding-left:22px}
+  ol.how li,ul.how li{margin-bottom:8px}
+  .aviso{font-size:15px;color:var(--cinza-claro)}
+
+  /* grupos */
+  .grupos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px}
+  .grupo{border:1px solid var(--linha);border-radius:14px;padding:18px}
+  .grupo .t{font:700 17px "Plus Jakarta Sans",sans-serif;color:var(--azul);margin-bottom:6px}
+  .temp{font-size:13px;font-weight:600;border-radius:6px;padding:2px 8px;display:inline-block;margin-bottom:10px}
+  .frio{background:#E8EEF8;color:var(--azul)} .morno{background:#FFF4D6;color:#8A6500} .quente{background:#FDE6D8;color:#A1400B}
+
+  /* sinais */
+  .sinais{list-style:none;padding:0;margin:0}
+  .sinais li{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--linha)}
+  .sinais input{width:22px;height:22px;accent-color:var(--laranja);flex:none;margin-top:2px}
+  .placar{margin-top:18px;padding:16px 18px;border-radius:12px;font-weight:600}
+
+  /* calculadora */
+  .calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:18px 0}
+  .calc label{font-size:14px;font-weight:600;color:var(--azul)}
+  .calc input{width:100%;margin-top:6px;padding:12px;border:1px solid var(--linha);border-radius:10px;font:500 17px Inter,sans-serif;color:var(--azul-escuro)}
+  .calc input:focus{outline:2px solid var(--laranja);border-color:transparent}
+  .res{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+  .card{background:var(--fundo-2);border-radius:14px;padding:16px}
+  .card .k{font-size:13px;color:var(--cinza-claro)}
+  .card .v{font:800 26px "Plus Jakarta Sans",sans-serif;color:var(--azul)}
+  .card.destaque{background:var(--azul)} .card.destaque .k{color:#C9D6EE} .card.destaque .v{color:#fff}
+  .leitura{margin-top:16px}
+
+  table{width:100%;border-collapse:collapse;font-size:16px}
+  .tbl{overflow-x:auto}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--linha)}
+  th{color:var(--azul);font-weight:600;background:var(--fundo-2)}
+  td.n{text-align:right;font-variant-numeric:tabular-nums}
+
+  .proximo{background:var(--azul);color:#fff;border-radius:18px;padding:32px;margin:48px 0}
+  .proximo h2{color:#fff}
+  .proximo p{color:#DCE6F7;margin:0}
+
+  .prompt{border:1px solid var(--linha);border-radius:14px;padding:18px;margin:16px 0}
+  .prompt pre{white-space:pre-wrap;word-wrap:break-word;background:var(--fundo-2);border-radius:10px;padding:14px;margin:10px 0 12px;font:400 15px/1.55 Inter,system-ui,sans-serif;color:var(--azul-escuro)}
+  .btn{display:inline-block;background:var(--laranja);color:var(--azul-escuro);font:700 15px "Plus Jakarta Sans",sans-serif;border:0;border-radius:10px;padding:11px 18px;cursor:pointer;text-decoration:none}
+  .btn:hover{filter:brightness(.95)} .btn.grande{font-size:17px;padding:14px 24px}
+  footer{padding:28px 0 48px;font-size:14px;color:var(--cinza-claro)}
+  .assina{font:700 16px "Plus Jakarta Sans",sans-serif;color:var(--azul);border-bottom:3px solid var(--laranja);padding-bottom:2px}
+  @media (max-width:520px){.degrau{grid-template-columns:1fr}.num{width:56px;height:56px;font-size:26px}.proximo{padding:24px}}
+</style>
+</head>
+<body>
+
+<header class="capa">
+  <div class="wrap">
+    <div class="eyebrow">Material gratuito · Maiky Miguel</div>
+    <h1>Os 3 degraus antes do <span class="mark">WhatsApp</span> do seu vendedor</h1>
+    <p class="promessa">O passo a passo para o lead chegar na conversa já sabendo quem você é, e o seu vendedor parar de fazer papel de filtro.</p>
+    <span class="tempo">Leitura de 10 minutos · aplicação na mesma semana</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>Como usar em 3 passos</h2>
+    <div class="passos">
+      <div class="passo"><h3>Assista ao vídeo</h3><p>São poucos minutos e mostram, na tela, cada clique dos 3 degraus.</p></div>
+      <div class="passo"><h3>Monte os degraus</h3><p>Siga o passo a passo abaixo e use os comandos prontos para a IA escrever o texto de cada degrau. Suba um degrau por semana, se preferir.</p></div>
+      <div class="passo"><h3>Faça a conta</h3><p>Use a calculadora no fim para medir o custo de cada venda, não de cada lead.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">A aula completa</div>
+    <h2>O vídeo, na prática</h2>
+    <div class="video">
+      <iframe src="https://www.youtube-nocookie.com/embed/5Ysx9GCpz6U" title="O funil que qualifica o lead antes do WhatsApp" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="legenda">Se o vídeo não abrir, assista no YouTube: youtube.com/watch?v=5Ysx9GCpz6U</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Antes de começar</div>
+    <h2>3 ideias que mudam o jeito de olhar o lead</h2>
+    <div class="bloco"><p><strong>1. Lead desqualificado não acaba.</strong> Todo anúncio traz gente que não vai comprar agora. Você mesmo já entrou numa loja, gostou de algo e saiu sem comprar. O objetivo não é zerar o lead ruim; é ele não chegar no vendedor antes da hora.</p></div>
+    <div class="bloco"><p><strong>2. Lead pronto sabe três coisas:</strong> que você existe, qual é o problema dele e que você resolve esse problema. Quando ele chega na conversa assim, o assunto começa pelo problema, não pelo preço.</p></div>
+    <div class="bloco"><p><strong>3. Quem assistiu metade do seu vídeo não é igual a quem parou em 3 segundos.</strong> A plataforma de anúncios sabe a diferença. Se você mostra o mesmo convite de "fale com o vendedor" para os dois, está pagando para o vendedor separar quem é quem.</p></div>
+  </section>
+
+  <section id="degraus">
+    <div class="eyebrow">Item 1 · O passo a passo</div>
+    <h2>Os 3 degraus, com o que mostrar em cada um</h2>
+
+    <div class="degrau">
+      <div class="num">1</div>
+      <div>
+        <span class="tag">Conhecer · para quem nunca ouviu falar de você</span>
+        <h3>Faça a pessoa descobrir que você existe</h3>
+        <p><strong>O que mostrar:</strong> um conteúdo curto (vídeo de até 1 minuto, de preferência) sobre um problema que o seu cliente vive. Nada de oferta ainda.</p>
+        <p><strong>Como montar:</strong></p>
+        <ol class="how">
+          <li>Escolha uma publicação que você já fez e que fala do problema do cliente.</li>
+          <li>Impulsione essa publicação com o objetivo <strong>"receber mais visitas ao perfil"</strong>.</li>
+          <li>Desligue a opção de público automático da plataforma. Você quer decidir quem vê.</li>
+          <li>Defina quem deve ver: cidade ou região, faixa de idade e interesses ligados ao seu mercado.</li>
+          <li>Comece com cerca de R$ 20 por dia. Ajuste depois de ver os primeiros resultados.</li>
+        </ol>
+        <p class="aviso">Por que funciona: quem visita o perfil começa a seguir e a interagir. São essas pessoas que vão alimentar o degrau 2.</p>
+      </div>
+    </div>
+
+    <div class="degrau">
+      <div class="num">2</div>
+      <div>
+        <span class="tag">Confiar · para quem já viu você</span>
+        <h3>Volte a aparecer para quem já te conhece</h3>
+        <p><strong>O que mostrar:</strong> conteúdos que aprofundam o problema e mostram como você pensa. É o anúncio de relacionamento: a pessoa passa a ver você como quem entende do assunto.</p>
+        <p><strong>Como montar:</strong></p>
+        <ol class="how">
+          <li>Crie os 3 grupos de pessoas da próxima seção (quem interagiu, quem segue e quem assistiu metade dos vídeos).</li>
+          <li>Crie uma campanha com o objetivo de <strong>visualização de vídeo</strong>.</li>
+          <li>Use só esses 3 grupos como público e <strong>desligue toda opção de expandir o público</strong>. A ideia é falar só com quem já te viu.</li>
+          <li>Comece com R$ 20 a R$ 30 por dia, de acordo com o que você investe no degrau 1.</li>
+        </ol>
+        <p class="aviso">No começo esses grupos são pequenos. Com o degrau 1 rodando, eles crescem sozinhos, todos os dias.</p>
+      </div>
+    </div>
+
+    <div class="degrau ult">
+      <div class="num">3</div>
+      <div>
+        <span class="tag">Conversar · para quem já confia</span>
+        <h3>Só agora, o convite para falar com o time</h3>
+        <p><strong>O que mostrar:</strong> um convite direto para a conversa, ligado ao problema que você vem mostrando nos degraus anteriores.</p>
+        <p><strong>Como montar:</strong></p>
+        <ol class="how">
+          <li>Crie uma campanha de <strong>mensagens para o WhatsApp</strong>.</li>
+          <li>Faça <strong>duas versões</strong>: uma para os 3 grupos do degrau 2 (quem já te conhece) e outra para quem nunca te viu.</li>
+          <li>Na versão para quem já te conhece, desligue de novo a expansão de público.</li>
+          <li>Comece com cerca de R$ 20 por dia em cada uma.</li>
+        </ol>
+        <p class="aviso">Por que duas versões: assim você não depende só de quem já te conhece. No começo, a conversa com quem já te conhece costuma sair mais cara por lead, mas vende mais. Com o tempo, os grupos crescem e esse custo cai.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="grupos">
+    <div class="eyebrow">Item 2</div>
+    <h2>Como separar quem já te conhece de quem nunca ouviu falar de você</h2>
+    <p>Na plataforma de anúncios, procure por <strong>"públicos" → "criar público personalizado"</strong> e crie estes 3 grupos. Dê nomes claros, porque você vai escolher cada um depois, na campanha.</p>
+    <div class="grupos">
+      <div class="grupo"><span class="temp morno">morno</span><div class="t">Interagiram nos últimos 60 dias</div><p>Quem curtiu, comentou, salvou, mandou mensagem ou visitou o seu perfil profissional. Fonte: a sua conta do Instagram. Sugestão de nome: "Engajados 60 dias".</p></div>
+      <div class="grupo"><span class="temp morno">morno</span><div class="t">Todos os seguidores</div><p>Todo mundo que começou a seguir a sua conta. Sugestão de nome: "Todos os seguidores".</p></div>
+      <div class="grupo"><span class="temp quente">quente</span><div class="t">Assistiram 50% dos seus vídeos</div><p>Fonte: vídeos. Selecione todos os vídeos que você já anunciou. Comece com 50%; quando o grupo crescer, crie outro com 75%. Sugestão de nome: "Vídeos 50%".</p></div>
+    </div>
+    <div class="bloco"><p><strong>Quem fica de fora:</strong> quem nunca interagiu, não segue e não assistiu nada. Essa pessoa é "fria": ela vê o degrau 1, não o convite do degrau 3 para quem já te conhece.</p></div>
+  </section>
+
+  <section id="sinais">
+    <div class="eyebrow">Bônus</div>
+    <h2>Os sinais de que um lead está pronto para falar com o vendedor</h2>
+    <p>Marque o que vale para o último lead que chegou no seu WhatsApp:</p>
+    <ul class="sinais" id="listaSinais">
+      <li><input type="checkbox" id="s1"><label for="s1">Ele já seguia ou tinha interagido com a sua conta antes de mandar mensagem.</label></li>
+      <li><input type="checkbox" id="s2"><label for="s2">Ele assistiu a pelo menos metade de um vídeo seu.</label></li>
+      <li><input type="checkbox" id="s3"><label for="s3">A primeira mensagem fala do problema dele, não do preço.</label></li>
+      <li><input type="checkbox" id="s4"><label for="s4">Ele sabe o que você faz sem precisar de explicação.</label></li>
+      <li><input type="checkbox" id="s5"><label for="s5">O cargo ou a empresa dele combinam com quem você atende.</label></li>
+      <li><input type="checkbox" id="s6"><label for="s6">Ele voltou a falar com você mais de uma vez, ou cita um conteúdo seu.</label></li>
+    </ul>
+    <div class="placar" id="placar" style="background:var(--fundo-2);color:var(--azul)">Marque os sinais para ver a leitura.</div>
+  </section>
+
+  <section id="prompts">
+    <div class="eyebrow">Item 3</div>
+    <h2>5 comandos prontos para a IA escrever cada degrau</h2>
+    <p>Copie, troque o que está entre [colchetes] e cole no assistente de IA que você já usa. Depois leia tudo e ajuste com a sua voz: a IA ajuda a escrever, quem decide é você.</p>
+
+    <div class="prompt">
+      <span class="tag">Degrau 1 · quem deve ver</span>
+      <h3>1. Público do primeiro anúncio</h3>
+      <pre>Você é um estrategista de anúncios para empresas B2B. Eu vendo [o que você vende] para [cargo de quem decide, ex.: diretor comercial] de empresas de [setor] em [cidade ou região].
+Liste 15 interesses, cargos e assuntos que essa pessoa costuma seguir ou pesquisar, para eu usar na segmentação do anúncio.
+Depois liste 5 interesses que parecem certos mas trazem gente fora do perfil, e explique em uma frase por quê.
+Use linguagem simples e sem sigla.</pre>
+      <button class="btn copiar" type="button">Copiar comando</button>
+    </div>
+
+    <div class="prompt">
+      <span class="tag">Degrau 1 · conhecer</span>
+      <h3>2. Vídeos curtos para quem nunca ouviu falar de você</h3>
+      <pre>Escreva 3 roteiros de vídeo de até 60 segundos para eu gravar com o celular.
+Tema: [problema que o seu cliente vive, ex.: lead que chega e não compra].
+Cada roteiro tem: (1) um gancho de uma frase, com uma cena real; (2) o que acontece e por que acontece, em 2 ou 3 frases; (3) o que a pessoa deve olhar primeiro.
+Sem oferta, sem preço, sem sigla. O objetivo é fazer a pessoa querer ver o próximo vídeo.</pre>
+      <button class="btn copiar" type="button">Copiar comando</button>
+    </div>
+
+    <div class="prompt">
+      <span class="tag">Degrau 2 · confiar</span>
+      <h3>3. Vídeos para quem já te conhece</h3>
+      <pre>Com base nos 3 roteiros acima, escreva 3 vídeos de até 90 segundos para quem já me conhece.
+Cada um mostra como eu penso o problema: [seu jeito de resolver, em uma frase] e o erro mais comum de quem tenta resolver sozinho.
+Tom de quem explica com calma, sem vender.
+Termine cada vídeo com uma pergunta que a pessoa possa responder pensando na própria empresa.</pre>
+      <button class="btn copiar" type="button">Copiar comando</button>
+    </div>
+
+    <div class="prompt">
+      <span class="tag">Degrau 3 · conversar</span>
+      <h3>4. O convite para o WhatsApp e a primeira mensagem</h3>
+      <pre>Escreva 3 versões de um anúncio curto (até 3 linhas) que convida a pessoa a falar comigo no WhatsApp. Ele será mostrado só para quem já assistiu aos meus vídeos.
+Problema que eu resolvo: [problema].
+Depois escreva a primeira mensagem que eu mando quando a pessoa chamar: 2 ou 3 linhas, uma única pergunta sobre a situação da empresa dela, e espaço para ela dizer que não é o momento. Sem preço.</pre>
+      <button class="btn copiar" type="button">Copiar comando</button>
+    </div>
+
+    <div class="prompt">
+      <span class="tag">Toda semana · ler o resultado</span>
+      <h3>5. Descobrir em qual degrau o lead se perde</h3>
+      <pre>Estes são os números do último mês da minha campanha, degrau por degrau: [cole aqui o investimento, o alcance, as visualizações de vídeo, as mensagens recebidas e as vendas fechadas].
+Diga em qual degrau a pessoa mais se perde e o que eu devo testar primeiro. Dê no máximo 2 ações, em linguagem simples.
+Se faltar dado para concluir, diga o que falta em vez de supor.</pre>
+      <button class="btn copiar" type="button">Copiar comando</button>
+    </div>
+
+    <p class="aviso"><strong>Quando não confiar na resposta:</strong> se a IA citar um número que você não passou, ou afirmar algo sobre o seu mercado sem mostrar de onde veio, ignore essa parte e confira com os seus dados.</p>
+  </section>
+
+  <section id="conta">
+    <div class="eyebrow">Item 4</div>
+    <h2>Uma conta simples para medir o custo de cada venda, não de cada lead</h2>
+    <p>Custo por lead engana. Uma campanha com lead caro pode vender mais do que uma com lead barato. Preencha com os seus números do último mês:</p>
+    <div class="calc">
+      <label>Quanto você investiu em anúncio (R$)<input id="verba" type="number" min="0" step="any" value="7500"></label>
+      <label>Quantos leads chegaram<input id="leads" type="number" min="0" step="1" value="100"></label>
+      <label>Quantos compraram<input id="vendas" type="number" min="0" step="1" value="15"></label>
+      <label>Valor médio de cada venda (R$)<input id="ticket" type="number" min="0" step="any" value="2000"></label>
+    </div>
+    <div class="res">
+      <div class="card"><div class="k">Custo por lead</div><div class="v" id="cpl">–</div></div>
+      <div class="card destaque"><div class="k">Custo por venda</div><div class="v" id="cpv">–</div></div>
+      <div class="card"><div class="k">Leads que não compraram</div><div class="v" id="nao">–</div></div>
+      <div class="card"><div class="k">Para cada R$ 1 investido, voltaram</div><div class="v" id="ret">–</div></div>
+    </div>
+    <p class="leitura" id="leitura"></p>
+
+    <h3 style="margin-top:32px">Exemplo preenchido</h3>
+    <p class="aviso">Cenário ilustrativo, valores de exemplo. São os números que já aparecem na calculadora.</p>
+    <div class="tbl"><table>
+      <tr><th>Linha</th><th class="n">Valor</th></tr>
+      <tr><td>Investimento em anúncio</td><td class="n">R$ 7.500</td></tr>
+      <tr><td>Pessoas que chamaram o vendedor</td><td class="n">100</td></tr>
+      <tr><td>Não compraram</td><td class="n">85</td></tr>
+      <tr><td>Compraram (serviço de R$ 2.000)</td><td class="n">15</td></tr>
+      <tr><td>Total vendido</td><td class="n">R$ 30.000</td></tr>
+      <tr><td>Custo por lead</td><td class="n">R$ 75</td></tr>
+      <tr><td><strong>Custo por venda</strong></td><td class="n"><strong>R$ 500</strong></td></tr>
+      <tr><td>Retorno</td><td class="n">4 vezes o investido</td></tr>
+    </table></div>
+    <p style="margin-top:14px">Leitura: 85% dos leads "não serviram", e mesmo assim a campanha devolveu 4 vezes o que custou. Olhando só o custo por lead, alguém teria desligado essa campanha.</p>
+  </section>
+
+  <div class="proximo">
+    <h2>O próximo passo</h2>
+    <p>Montou os degraus e quer olhar o seu caso junto? Escolha um horário para uma análise gratuita de 40 minutos comigo.</p>
+    <p style="margin-top:20px"><a class="btn grande" href="https://cal.com/maiky-miguel-rh5mjb/40min" target="_blank" rel="noopener">Marcar uma conversa de 40 minutos</a></p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="assina">Maiky Miguel</span>
+    <p style="margin-top:12px">Material gratuito. Os números de exemplo são ilustrativos e não representam resultado de nenhum cliente.</p>
+  </div>
+</footer>
+
+<script>
+  const brl = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+  const $ = id => document.getElementById(id);
+  function calc(){
+    const verba=+$('verba').value||0, leads=+$('leads').value||0, vendas=+$('vendas').value||0, ticket=+$('ticket').value||0;
+    $('cpl').textContent = leads ? brl(verba/leads) : '–';
+    $('cpv').textContent = vendas ? brl(verba/vendas) : '–';
+    $('nao').textContent = leads ? Math.max(leads-vendas,0) + ' (' + Math.round(Math.max(leads-vendas,0)/leads*100) + '%)' : '–';
+    const ret = verba ? (vendas*ticket)/verba : 0;
+    $('ret').textContent = verba ? 'R$ ' + ret.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}) : '–';
+    if (verba && ticket && vendas) {
+      const custoVenda = verba/vendas;
+      $('leitura').innerHTML = custoVenda < ticket
+        ? 'Cada venda custou <strong>' + brl(custoVenda) + '</strong> e trouxe <strong>' + brl(ticket) + '</strong>. Antes de cortar a campanha por causa do lead "ruim", olhe este número.'
+        : 'Cada venda está custando <strong>' + brl(custoVenda) + '</strong>, mais do que ela traz (' + brl(ticket) + '). Vale olhar em qual degrau o lead está se perdendo.';
+    } else { $('leitura').textContent = ''; }
+  }
+  ['verba','leads','vendas','ticket'].forEach(id => $(id).addEventListener('input', calc));
+  calc();
+
+  function sinais(){
+    const n = document.querySelectorAll('#listaSinais input:checked').length, p = $('placar');
+    if (!n) { p.textContent='Marque os sinais para ver a leitura.'; p.style.background='var(--fundo-2)'; p.style.color='var(--azul)'; return; }
+    if (n>=4) { p.textContent = n+' de 6: lead pronto. Esta conversa pode começar pelo problema, não pelo preço.'; p.style.background='#E3F4EA'; p.style.color='var(--verde)'; }
+    else if (n>=2) { p.textContent = n+' de 6: lead em aquecimento. Ele ainda está no degrau 2; responda com conteúdo antes de mandar proposta.'; p.style.background='#FFF4D6'; p.style.color='#8A6500'; }
+    else { p.textContent = n+' de 6: lead frio. Ele chegou cedo demais; o vendedor está fazendo papel de filtro.'; p.style.background='#FBE5E3'; p.style.color='var(--vermelho)'; }
+  }
+  document.querySelectorAll('#listaSinais input').forEach(i => i.addEventListener('change', sinais));
+
+  document.querySelectorAll('.copiar').forEach(b => b.addEventListener('click', () => {
+    const pre = b.parentElement.querySelector('pre');
+    const ok = () => { b.textContent = 'Copiado'; setTimeout(() => b.textContent = 'Copiar comando', 1800); };
+    const manual = () => { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: aperte Ctrl+C'; };
+    if (navigator.clipboard) navigator.clipboard.writeText(pre.innerText).then(ok).catch(manual); else manual();
+  }));
+</script>
+</body>
+</html>
