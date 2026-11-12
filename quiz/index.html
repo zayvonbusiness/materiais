@@ -25,13 +25,14 @@
   h3{font-size:20px;font-weight:700;margin-bottom:8px}
   p{margin:0 0 14px}
   strong{color:var(--azul-escuro)}
-  .mark{background:linear-gradient(transparent 58%, rgba(33,188,238,.55) 58%);padding:0 2px}
+  .mark{color:var(--azul)}
   .eyebrow{font:600 13px/1 "Instrument Sans",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);margin-bottom:14px}
 
   .capa{background:var(--azul-escuro);padding:40px 0 56px;border-bottom:4px solid var(--azul)}
   .capa .logo{height:26px;display:block;margin-bottom:44px}
   .capa .eyebrow{color:var(--ciano)}
-  .capa .mark{background:linear-gradient(transparent 58%, rgba(33,188,238,.45) 58%)}
+  .capa .mark{color:var(--ciano)}
+  .capa h1{line-height:1.12}
   .capa .promessa{font-size:20px;color:#C9D6EE;margin-top:18px;max-width:640px}
   .tempo{display:inline-block;margin-top:20px;background:rgba(255,255,255,.1);color:#fff;font-weight:600;border-radius:999px;padding:8px 16px;font-size:15px}
 
@@ -53,14 +54,21 @@
   .degrau.ult .num{background:var(--azul)}
 
   /* mapa do fluxo */
-  .fluxo{display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr;gap:6px;align-items:stretch;margin:20px 0}
-  .fluxo .seta{display:grid;place-items:center;color:var(--cinza-claro);font-size:22px}
-  .no{border-radius:14px;padding:14px;background:var(--fundo-2);border:1px solid var(--linha);text-align:center;font-weight:600;color:var(--azul-escuro);display:grid;align-content:center;gap:4px}
+  .fluxo{margin:22px 0}
+  .fluxo .topo{display:grid;grid-template-columns:1fr 28px 1fr;gap:6px;align-items:stretch}
+  .fluxo .seta{display:grid;place-items:center;color:var(--cinza-claro);font-size:22px;line-height:1}
+  .fluxo .ramos{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-top:6px}
+  .fluxo .trilha{display:grid;gap:6px;align-content:start}
+  .fluxo .trilha .seta{height:22px}
+  .no{border-radius:14px;padding:14px 16px;background:var(--fundo-2);border:1px solid var(--linha);text-align:center;font-weight:600;color:var(--azul-escuro);display:grid;align-content:center;gap:4px}
   .no small{font-weight:400;color:var(--cinza);font-size:14px}
+  .no .pn{font:700 12px "Instrument Sans",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--azul)}
   .no.ok{background:#E7F5EC;border-color:#9AD3B1}
+  .no.aviso-plat{background:#EAF2FF;border-color:#A9C8FB}
   .no.fora{background:#FBE9E7;border-color:#EAA7A1}
-  .ramo{display:grid;gap:10px}
-  @media (max-width:640px){.fluxo{grid-template-columns:1fr}.fluxo .seta{transform:rotate(90deg)}}
+  .rot{font:700 12px "Instrument Sans",sans-serif;letter-spacing:.12em;text-transform:uppercase;text-align:center;margin:10px 0 2px}
+  .rot.v{color:var(--verde)} .rot.r{color:var(--vermelho)}
+  @media (max-width:640px){.fluxo .topo{grid-template-columns:1fr}.fluxo .topo .seta{transform:rotate(90deg);height:22px}.fluxo .ramos{grid-template-columns:1fr}}
 
   /* calculadora */
   .calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:18px 0}
@@ -132,17 +140,34 @@
     <p>No lugar de um formulário que aceita qualquer pessoa, o anúncio leva ao quiz. As respostas decidem o que acontece com cada lead.</p>
 
     <div class="fluxo">
-      <div class="no">Anúncio<small>Google ou Meta</small></div>
-      <div class="seta">→</div>
-      <div class="no">Quiz<small>a pessoa responde as perguntas</small></div>
-      <div class="seta">→</div>
-      <div class="ramo">
-        <div class="no ok">Lead qualificado<small>vai para a automação e para o comercial</small></div>
-        <div class="no fora">Lead fora da automação<small>recebe um agradecimento e não entra no seu fluxo</small></div>
+      <div class="topo">
+        <div class="no">Anúncio<small>Google ou Meta</small></div>
+        <div class="seta">→</div>
+        <div class="no">Quiz<small>a pessoa responde as perguntas</small></div>
+      </div>
+      <div class="ramos">
+        <div>
+          <div class="rot v">Lead qualificado</div>
+          <div class="trilha">
+            <div class="no ok"><span class="pn">Passo 1</span>Entra na automação e vai para o comercial</div>
+            <div class="seta">↓</div>
+            <div class="no aviso-plat"><span class="pn">Passo 2</span>Avisa o Google e a Meta<small>"este lead é qualificado": a plataforma passa a buscar gente parecida</small></div>
+            <div class="seta">↓</div>
+            <div class="no ok"><span class="pn">Passo 3</span>O comercial atende e fecha a venda<small>muitas vezes uma ou duas semanas depois</small></div>
+            <div class="seta">↓</div>
+            <div class="no aviso-plat"><span class="pn">Passo 4</span>Conversões Offline<small>avisa o Google e a Meta quem comprou</small></div>
+          </div>
+        </div>
+        <div>
+          <div class="rot r">Lead desqualificado</div>
+          <div class="trilha">
+            <div class="no fora">Lead fora da automação<small>recebe um agradecimento e não entra no seu fluxo, nem é avisado à plataforma como qualificado</small></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <p>Depois, quando o lead qualificado compra (muitas vezes uma ou duas semanas depois), a venda volta para o Google e para a Meta. Esse envio se chama <strong>Conversões Offline</strong>: é avisar a plataforma de anúncios sobre uma venda que aconteceu fora do site, no seu comercial. O anúncio passa a aprender com quem compra, e não só com quem preenche.</p>
+    <p>Essa é a metodologia em duas devoluções ao anúncio. Na <strong>primeira</strong>, assim que o quiz qualifica o lead, você avisa o Google e a Meta que ele é um lead qualificado. Na <strong>segunda</strong>, quando ele compra, você avisa quem comprou. Esse segundo envio se chama <strong>Conversões Offline</strong>: é informar a plataforma sobre uma venda que aconteceu fora do site, no seu comercial. Com as duas, o anúncio aprende com quem tem o perfil e com quem compra, e não só com quem preenche.</p>
 
     <div class="bloco"><p><strong>O caso real que serviu de base.</strong> Em uma campanha de Google Ads que conduzi para uma indústria B2B, em 30 dias, com o quiz no lugar do formulário comum: R$ 3.000 investidos, 113 leads, 32 vendas e R$ 19.104 em vendas faturadas (faturamento, não lucro). É o resultado de um caso, não uma promessa. Cada empresa tem o seu ponto de partida.</p></div>
 
@@ -213,7 +238,8 @@ Requisitos:
 3. Enviar os dados para o formulário do meu CRM (vou informar qual é), junto com a pontuação e a faixa (quente, morno ou frio).
 4. Guardar, junto com o lead, o código que o anúncio deixa no clique (no Google, o "gclid"; na Meta, o "fbclid") e as informações de campanha que vêm no endereço (UTM).
 5. Lead quente e morno vai para a página de obrigado com o próximo passo. Lead frio vai para uma página de agradecimento e NÃO é enviado para a automação.
-6. Não coletar nenhum dado além dos listados.
+6. Só para lead quente e morno (e somente se ele deu o consentimento), registrar um evento de "lead qualificado" para avisar o Google e a Meta, usando o código do clique guardado. Para lead frio, não enviar esse evento.
+7. Não coletar nenhum dado além dos listados.
 
 Antes de escrever o código, me diga o que você precisa saber sobre o meu CRM e o meu site.</pre>
       <button class="btn copiar" type="button">Copiar comando</button>
@@ -223,18 +249,22 @@ Antes de escrever o código, me diga o que você precisa saber sobre o meu CRM e
   </section>
 
   <section id="offline">
-    <div class="eyebrow">Item 4 · Conversões Offline</div>
-    <h2>Como o anúncio passa a saber quem comprou</h2>
-    <p>Do mais simples ao mais completo. Comece pelo nível 1.</p>
+    <div class="eyebrow">Item 4 · Avisar o Google e a Meta</div>
+    <h2>Duas devoluções: quem é lead qualificado e quem comprou</h2>
+    <div class="passos" style="margin-bottom:18px">
+      <div class="passo"><h3>Lead qualificado</h3><p>Assim que o quiz qualifica a pessoa, você avisa o Google e a Meta. É o Passo 2 do mapa. A plataforma deixa de buscar quem só preenche e passa a buscar quem tem o perfil.</p></div>
+      <div class="passo"><h3>Conversões Offline</h3><p>Quando o lead compra, você avisa o Google e a Meta quem comprou. É o Passo 4 do mapa. A plataforma aprende com a venda, mesmo que ela aconteça semanas depois.</p></div>
+    </div>
+    <p>Os dois avisos usam o mesmo código do clique guardado no quiz. Do mais simples ao mais completo, comece pelo nível 1.</p>
     <div class="tbl"><table>
       <tr><th>Nível</th><th>O que é</th><th>Quem faz</th></tr>
-      <tr><td>1 · Planilha</td><td>Toda semana, enviar à plataforma a lista de quem comprou, com o código do clique</td><td>Você ou o marketing</td></tr>
-      <tr><td>2 · Pelo CRM</td><td>O CRM marca a venda e já guarda o código do clique de cada lead</td><td>Marketing e comercial</td></tr>
-      <tr><td>3 · Automático</td><td>A venda registrada no CRM é enviada sozinha ao Google e à Meta</td><td>Quem cuida dos seus anúncios e do seu CRM</td></tr>
+      <tr><td>1 · Planilha</td><td>Toda semana, enviar à plataforma a lista de leads qualificados e a lista de quem comprou, com o código do clique</td><td>Você ou o marketing</td></tr>
+      <tr><td>2 · Pelo CRM</td><td>O CRM marca o lead qualificado e a venda, e já guarda o código do clique de cada lead</td><td>Marketing e comercial</td></tr>
+      <tr><td>3 · Automático</td><td>O lead qualificado e a venda registrada no CRM são enviados sozinhos ao Google e à Meta</td><td>Quem cuida dos seus anúncios e do seu CRM</td></tr>
     </table></div>
     <div class="prompt">
       <span class="tag">Comando 3 · caminho para o seu CRM</span>
-<pre>Uso o [Google Ads e/ou Meta Ads] e o CRM [nome do CRM]. Quero avisar a plataforma de anúncios quais leads compraram (conversões offline). Me explique, passo a passo e em linguagem simples: (1) o que preciso guardar de cada lead; (2) como registrar a venda no CRM; (3) como enviar para a plataforma, começando pelo método mais simples; (4) como conferir se funcionou. Diga quando algo depender de uma configuração que só a minha equipe técnica pode fazer.</pre>
+<pre>Uso o [Google Ads e/ou Meta Ads] e o CRM [nome do CRM]. Quero avisar a plataforma de anúncios duas coisas: (A) quais leads são qualificados, assim que o quiz os classifica; e (B) quais leads compraram (conversões offline). Me explique, passo a passo e em linguagem simples: (1) o que preciso guardar de cada lead; (2) como registrar o lead qualificado e a venda no CRM; (3) como enviar cada aviso para a plataforma, começando pelo método mais simples; (4) como conferir se funcionou. Diga quando algo depender de uma configuração que só a minha equipe técnica pode fazer.</pre>
       <button class="btn copiar" type="button">Copiar comando</button>
     </div>
     <div class="bloco"><p>Os menus das plataformas mudam. Confira sempre na ajuda oficial do Google e da Meta.</p></div>
