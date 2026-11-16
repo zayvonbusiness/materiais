@@ -115,8 +115,8 @@
     <p>Preencha com os seus números. Os valores que já aparecem são de exemplo, não uma média de mercado. Se não souber, use um palpite honesto e corrija depois do primeiro lote.</p>
     <div class="calc">
       <label>Leads antigos na base<input id="base" type="number" min="0" step="1" value="2000"></label>
-      <label>% que volta a conversar<input id="volta" type="number" min="0" step="any" value="1"></label>
-      <label>De cada 100 conversas, quantas viram venda<input id="fecha" type="number" min="0" step="any" value="10"></label>
+      <label>% que volta a conversar<input id="volta" type="number" min="0" max="100" step="any" value="1"></label>
+      <label>De cada 100 conversas, quantas viram venda<input id="fecha" type="number" min="0" max="100" step="any" value="10"></label>
       <label>Valor médio de uma venda (R$)<input id="ticket" type="number" min="0" step="any" value="5000"></label>
     </div>
     <div class="res">
@@ -347,7 +347,8 @@ Diga qual é o caminho mais simples para o meu caso (planilha, conexão direta c
   const brl = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
   const $ = id => document.getElementById(id);
   function calc(){
-    const b=+$('base').value||0, v=(+$('volta').value||0)/100, f=(+$('fecha').value||0)/100, t=+$('ticket').value||0;
+    const n=(id,max)=>Math.min(Math.max(+$(id).value||0,0),max);
+    const b=n('base',Infinity), v=n('volta',100)/100, f=n('fecha',100)/100, t=n('ticket',Infinity);
     const conv=b*v, vend=conv*f, din=vend*t;
     $('r1').textContent = (Math.round(conv*10)/10).toLocaleString('pt-BR');
     $('r2').textContent = (Math.round(vend*10)/10).toLocaleString('pt-BR');
