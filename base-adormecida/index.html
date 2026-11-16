@@ -69,6 +69,11 @@
   .btn{display:inline-block;background:var(--preto);color:#fff;font:500 15px "Instrument Sans",sans-serif;border:0;border-radius:999px;padding:11px 22px;cursor:pointer;text-decoration:none;transition:background .2s}
   .btn:hover{background:var(--azul)} .btn.grande{font-size:16px;padding:14px 28px}
 
+  .check{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--linha);cursor:pointer}
+  .check:first-of-type{border-top:0}
+  .check input{margin-top:5px;width:18px;height:18px;accent-color:var(--azul);flex:none}
+  .check:has(input:checked) span{color:var(--texto-2);text-decoration:line-through}
+  .check b{color:var(--preto);font-weight:600}
   .proximo{background:var(--cinza);border-radius:20px;padding:40px;margin:16px 0 72px}
   .proximo p{margin:0}
   .proximo .btn{background:var(--azul)} .proximo .btn:hover{background:var(--preto)}
@@ -104,7 +109,7 @@
   <section id="conta">
     <span class="eyebrow">Item 1</span>
     <h2>A calculadora: quanto está parado</h2>
-    <p>Preencha com os seus números. Os valores que já aparecem são de exemplo.</p>
+    <p>Preencha com os seus números. Os valores que já aparecem são de exemplo, não uma média de mercado. Se não souber, use um palpite honesto e corrija depois do primeiro lote.</p>
     <div class="calc">
       <label>Leads antigos na base<input id="base" type="number" min="0" step="1" value="2000"></label>
       <label>% que volta a conversar<input id="volta" type="number" min="0" step="any" value="1"></label>
@@ -157,17 +162,44 @@
 
   <section id="mensagem">
     <span class="eyebrow">Item 3</span>
-    <h2>Uma mensagem curta para reabrir a conversa sem parecer cobrança</h2>
+    <h2>Uma sequência de 3 mensagens, não uma só</h2>
+    <p>Quase ninguém responde a primeira mensagem. A sequência abaixo dá três chances, com intervalo, sem virar insistência. Troque o que está entre colchetes.</p>
     <div class="prompt">
-      <span class="tag">Mensagem de retomada</span>
+      <span class="tag">Dia 1 · retomada</span>
       <pre>Oi, [nome]. Faz um tempo que conversamos sobre [assunto]. Fiquei pensando: isso ainda é uma prioridade aí na [empresa], ou mudou alguma coisa? Se não for o momento, sem problema, me diga e eu fecho o assunto por aqui.</pre>
       <button class="btn copiar" type="button">Copiar mensagem</button>
     </div>
-    <p class="aviso"><strong>Regras:</strong> uma pergunta só, dê espaço para a pessoa dizer não, e nada de "só passando para lembrar".</p>
+    <div class="prompt">
+      <span class="tag">Dia 4 · só para quem não respondeu</span>
+      <pre>[nome], retomo porque ainda acho que vale olhar [assunto] na [empresa]. Se fizer sentido, separo 15 minutos esta semana para conversarmos. Se não, é só me avisar.</pre>
+      <button class="btn copiar" type="button">Copiar mensagem</button>
+    </div>
+    <div class="prompt">
+      <span class="tag">Dia 9 · encerramento</span>
+      <pre>[nome], vou encerrar por aqui para não te incomodar. Se [assunto] voltar a ser prioridade na [empresa], é só me chamar neste número. Obrigado pelo tempo.</pre>
+      <button class="btn copiar" type="button">Copiar mensagem</button>
+    </div>
+    <div class="bloco"><p><strong>Regras:</strong> uma pergunta por mensagem, sempre deixe espaço para a pessoa dizer não, e pare a sequência assim que ela responder, mesmo que seja um "não". No máximo 3 mensagens por contato em cada lote.</p></div>
   </section>
 
+  <section id="respostas">
+    <span class="eyebrow">Item 4</span>
+    <h2>O que fazer quando a pessoa responde</h2>
+    <p>É aqui que a maioria trava. Tenha uma resposta pensada para cada situação.</p>
+    <div class="tbl"><table>
+      <tr><th>Se a pessoa disser</th><th>Faça isto</th></tr>
+      <tr><td>"Me manda os valores"</td><td>Não mande preço às cegas. Faça uma pergunta para entender o caso e proponha uma conversa curta de 15 minutos.</td></tr>
+      <tr><td>"Agora não" / "mês que vem"</td><td>Pergunte quando faz sentido voltar, anote a data no CRM e retome nela.</td></tr>
+      <tr><td>"Já fechei com outro"</td><td>Agradeça, pergunte em uma linha se está satisfeito e deixe a porta aberta. Marque como "concorrente" e volte em 6 meses.</td></tr>
+      <tr><td>"Quem é você?"</td><td>Lembre em uma frase o último assunto e quem conversou com ela. Sem pressão.</td></tr>
+      <tr><td>"Não tenho interesse" / "pare"</td><td>Confirme que não vai chamar mais, marque como "não contatar" e encerre. Sem insistir.</td></tr>
+      <tr><td>Nenhuma resposta após as 3 mensagens</td><td>Marque como "frio" e deixe descansar 90 dias antes de uma nova tentativa.</td></tr>
+    </table></div>
+  </section>
+
+
   <section id="agente">
-    <span class="eyebrow">Item 4 · Automação completa</span>
+    <span class="eyebrow">Item 5 · Automação completa</span>
     <h2>O agente de IA que recupera a base</h2>
     <p>Você não precisa programar nada. O agente é um conjunto de instruções que você cola numa conversa do Claude. Ele lê a sua lista de contatos antigos, escolhe quem chamar primeiro, escreve a mensagem de cada um e, no final, monta com você a rotina para isso acontecer toda semana, sem depender de ninguém lembrar.</p>
 
@@ -194,7 +226,8 @@ Vou te mandar uma lista de leads antigos do nosso CRM. Para cada um:
 
 1. Dê uma nota de 1 a 3 de quão perto de comprar ele chegou
    (3 = pediu proposta ou reunião; 2 = pediu orçamento; 1 = só baixou material).
-2. Escreva UMA mensagem de WhatsApp de até 3 linhas para reabrir a conversa.
+2. Escreva a sequência de 3 mensagens de WhatsApp (dia 1, dia 4 e dia 9), cada uma com até 3 linhas, para reabrir a conversa.
+   Adapte o ângulo ao motivo de ter parado (preço, momento, sócio, concorrente, sumiu).
    Regras da mensagem:
    - cite o último assunto que conversamos;
    - faça uma única pergunta;
@@ -202,7 +235,7 @@ Vou te mandar uma lista de leads antigos do nosso CRM. Para cada um:
    - tom humano, sem "prezado", sem "só passando para lembrar", sem pressão.
 3. Sugira o melhor dia e horário para enviar, se eu tiver informado.
 
-No final, me entregue uma tabela com: nome, nota, mensagem.
+No final, me entregue uma tabela com: nome, nota, mensagem do dia 1, mensagem do dia 4, mensagem do dia 9.
 Nunca invente informação que não esteja na lista. Se faltar dado, pergunte.
 Nome do vendedor que assina: [nome do vendedor].</pre>
           <button class="btn copiar" type="button">Copiar comando</button>
@@ -242,17 +275,52 @@ Diga qual é o caminho mais simples para o meu caso (planilha, conexão direta c
     <p class="aviso"><strong>Quando não confiar na resposta:</strong> se a IA citar um dado que você não passou, ou inventar um detalhe sobre o contato, ignore essa parte e confira no seu CRM.</p>
   </section>
 
-  <section id="tempo">
-    <span class="eyebrow">Item 5</span>
-    <h2>Quanto tempo reservar por semana</h2>
+  <section id="cuidados">
+    <span class="eyebrow">Item 6</span>
+    <h2>Cuidados de envio para não queimar o número</h2>
+    <ul class="how">
+      <li><strong>Mande um a um</strong>, pelo número comercial que já falou com a pessoa. Evite lista de transmissão e disparo em massa.</li>
+      <li><strong>Comece devagar:</strong> de 10 a 15 contatos por dia e vá subindo. É uma referência prática, o WhatsApp não publica um limite oficial.</li>
+      <li><strong>Revise cada mensagem</strong> antes de enviar: nome, empresa e assunto precisam estar certos. Erro de personalização denuncia automação.</li>
+      <li><strong>Horário comercial</strong>, de segunda a sexta.</li>
+      <li><strong>Respeite o "pare"</strong> na hora e registre no CRM. Este conteúdo não é aconselhamento jurídico: em caso de dúvida sobre a LGPD, consulte quem cuida disso na sua empresa.</li>
+    </ul>
+  </section>
+
+  <section id="metricas">
+    <span class="eyebrow">Item 7</span>
+    <h2>Como medir o lote de 50</h2>
+    <p>Ao fim da sequência, anote 4 números. Eles dizem o que ajustar.</p>
+    <div class="tbl"><table>
+      <tr><th>Número</th><th>Se estiver baixo, revise</th></tr>
+      <tr><td>Quantos responderam (de 50)</td><td>A mensagem do dia 1 ou a escolha dos contatos (talvez estejam frios demais)</td></tr>
+      <tr><td>Quantas conversas viraram interesse real</td><td>A pergunta da mensagem e a forma de responder</td></tr>
+      <tr><td>Quantas reuniões foram marcadas</td><td>O convite para a conversa de 15 minutos</td></tr>
+      <tr><td>Quantas vendas e quanto valeram</td><td>O processo comercial, não a recuperação da base</td></tr>
+    </table></div>
+    <div class="bloco"><p><strong>Feche o ciclo:</strong> volte à calculadora no topo e troque o "% que volta a conversar" e o "quantas viram venda" pelos números reais do seu lote. A partir do segundo lote, a conta deixa de ser chute.</p></div>
+  </section>
+
+  <section id="plano">
+    <span class="eyebrow">Item 8</span>
+    <h2>Plano das primeiras 2 semanas</h2>
+    <label class="check"><input type="checkbox"><span><b>Dia 1.</b> Preencher a calculadora e separar os 50 primeiros contatos pelos 3 critérios.</span></label>
+    <label class="check"><input type="checkbox"><span><b>Dia 2.</b> Montar o agente no Claude, gerar as mensagens e revisar uma por uma.</span></label>
+    <label class="check"><input type="checkbox"><span><b>Dias 3 e 4.</b> Enviar a mensagem do dia 1 (cerca de 25 contatos por dia). Responder quem voltar usando o Item 4.</span></label>
+    <label class="check"><input type="checkbox"><span><b>Dias 7 e 8.</b> Enviar a mensagem do dia 4 só para quem não respondeu.</span></label>
+    <label class="check"><input type="checkbox"><span><b>Dias 12 e 13.</b> Enviar a mensagem de encerramento. Marcar os sem resposta como "frio".</span></label>
+    <label class="check"><input type="checkbox"><span><b>Dia 14.</b> Anotar os 4 números do Item 7, atualizar a calculadora e separar os próximos 50.</span></label>
+
+    <h3 style="margin-top:32px">Quanto tempo reservar por semana</h3>
     <div class="tbl"><table>
       <tr><th>Atividade</th><th class="n">Tempo</th></tr>
       <tr><td>Separar 50 contatos pelos 3 critérios</td><td class="n">30 min (só na 1ª vez)</td></tr>
       <tr><td>Gerar as mensagens com o agente e revisar</td><td class="n">30 min</td></tr>
       <tr><td>Enviar e responder quem voltar</td><td class="n">1 hora</td></tr>
-      <tr><td><strong>Total por semana, por lote de 50</strong></td><td class="n"><strong>cerca de 2 horas</strong></td></tr>
+      <tr><td>Medir o resultado do lote</td><td class="n">15 min</td></tr>
+      <tr><td><strong>Total por lote de 50</strong></td><td class="n"><strong>cerca de 2 horas</strong></td></tr>
     </table></div>
-    <p class="aviso" style="margin-top:12px">Estimativa de referência. Ajuste ao ritmo do seu time.</p>
+    <p class="aviso" style="margin-top:12px">Estimativa de referência, espalhada ao longo das semanas do lote. Ajuste ao ritmo do seu time.</p>
   </section>
 
 
@@ -282,7 +350,7 @@ Diga qual é o caminho mais simples para o meu caso (planilha, conexão direta c
     $('r2').textContent = (Math.round(vend*10)/10).toLocaleString('pt-BR');
     $('r3').textContent = brl(din);
     $('leitura').innerHTML = din
-      ? 'Com os seus números, a base parada vale cerca de <strong>' + brl(din) + '</strong>. Comece pelos primeiros 50 contatos e veja quantos respondem.'
+      ? 'Com os seus números, a base parada vale cerca de <strong>' + brl(din) + '</strong>. Se vier só a metade, são ' + brl(din/2) + '; se vier o dobro, ' + brl(din*2) + '. Os percentuais são chutes: meça o seu primeiro lote de 50 e volte aqui com o número real.'
       : '';
   }
   ['base','volta','fecha','ticket'].forEach(id => $(id).addEventListener('input', calc));
