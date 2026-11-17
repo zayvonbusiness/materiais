@@ -128,18 +128,21 @@
       </div>
       <div class="ramos">
         <div class="trilha">
-          <div class="card destaque"><div class="k">3 · Passou nos filtros e atingiu a nota mínima</div><div class="v">Qualificado</div></div>
+          <div class="card destaque"><div class="k">3 · Passou nos filtros</div><div class="v">Qualificado</div></div>
           <div class="seta">↓</div>
-          <div class="card"><div class="k">4 · Deixa Nome, WhatsApp e e-mail (opcional)</div><div class="v">Vai direto ao comercial</div></div>
+          <div class="card"><div class="k">4 · Deixa Nome, WhatsApp e e-mail (opcional) para liberar</div><div class="v">Vê o resultado</div></div>
+          <div class="seta">↓</div>
+          <div class="card"><div class="k">5 · Página de obrigado com botão</div><div class="v">Fala no WhatsApp</div></div>
         </div>
         <div class="card"><div class="k">3 · Fora do perfil</div><div class="v">Barrado</div><div class="k">Não deixa dado e não vira registro</div></div>
       </div>
     </div>
-    <h3 style="margin-top:28px">As três partes do quiz</h3>
+    <h3 style="margin-top:28px">As partes do quiz</h3>
     <div class="passos">
+      <div class="passo"><h3>Abertura com a dor</h3><p>O título nomeia o problema do cliente. Ele toca nas dores que vive e vê o que vai descobrir no fim.</p></div>
       <div class="passo"><h3>Perguntas de filtro</h3><p>As primeiras. Confirmam se a pessoa é o seu cliente ideal (tipo de empresa, volume, verba, quem decide). Uma resposta fora do perfil barra na hora.</p></div>
-      <div class="passo"><h3>Perguntas de dor</h3><p>As últimas. Medem o quanto o problema dói e se a pessoa quer resolver agora. Cada resposta soma pontos.</p></div>
-      <div class="passo"><h3>Nota mínima</h3><p>Quem passa nos filtros e chega à nota mínima vê o formulário. Os demais veem um agradecimento e uma dica útil.</p></div>
+      <div class="passo"><h3>Perguntas de dor</h3><p>As últimas. Medem o quanto o problema dói e se é para agora. A nota vira a temperatura do lead.</p></div>
+      <div class="passo"><h3>Resultado e WhatsApp</h3><p>O qualificado deixa os dados para liberar o resultado e cai na página de obrigado, com o botão do WhatsApp.</p></div>
     </div>
     <div class="bloco"><p><strong>Só o lead qualificado é contabilizado.</strong> No fim, o seu painel mostra apenas as pessoas que valem uma conversa.</p></div>
   </section>
@@ -191,7 +194,7 @@ Você é o agente que **cria o quiz de qualificação** do usuário. Você não 
 Um quiz que **qualifica sozinho**, sem inteligência artificial e sem atendente. Funciona como um filtro:
 
 - Muita gente entra (ex.: 200, valores de exemplo). **Só os qualificados chegam ao comercial.** O restante é barrado pelo próprio quiz, sem gastar tempo de ninguém.
-- No fim, os qualificados deixam **Nome, WhatsApp e E-mail (opcional)** e vão direto para o WhatsApp do comercial.
+- O caminho do qualificado: **abertura → perguntas → &quot;seu diagnóstico está pronto&quot; (deixa Nome, WhatsApp e E-mail opcional para liberar) → página de obrigado com o resultado e o botão do WhatsApp.**
 - **Só lead qualificado é contabilizado.** Quem foi barrado não pede dado nenhum e não vira registro.
 - É um formato usado por empresas de software e de serviço para qualificar contatos antes da conversa de venda.
 
@@ -212,26 +215,39 @@ Se faltar algo, **não invente**: use um padrão marcado **[A CONFIRMAR]**.
 
 ## Passo 2 · Desenho do quiz (mostrar ao usuário e esperar aprovação)
 
-Entregue em tabela, **antes** de gerar o arquivo:
+Entregue **antes** de gerar o arquivo:
 
-| # | Pergunta | Opções | Pontos | Barra? |
-|---|---|---|---|---|
+**A abertura** (é ela que faz a pessoa começar):
+- Selo curto (ex.: &quot;Diagnóstico gratuito&quot;).
+- Título que **nomeia a dor** do cliente, em forma de pergunta.
+- Subtítulo com a promessa do diagnóstico e o tempo.
+- **3 dores** que o cliente reconhece (ele toca nas que vive).
+- **3 ganhos**: o que ele descobre no fim.
+- Texto do botão e uma nota que tira a trava (&quot;Sem cadastro para começar...&quot;).
+
+**A tabela de perguntas:**
+
+| # | Pergunta | Apoio | Opção (título · descrição) | Pontos | Barra? | Ícone | Achado no resultado |
+|---|---|---|---|---|---|---|---|
+
+**Os níveis do resultado** (de 2 a 3 faixas de nota, cada uma com nome e uma frase).
 
 **Regras de desenho:**
-- **De 6 a 8 perguntas.** Uma por tela. Opções de clique, sem texto livre.
+- **De 6 a 8 perguntas.** Uma por tela. Opções de clique com título e descrição curta, sem texto livre.
 - **Dois tipos de pergunta, nessa ordem:**
-  1. **Filtro (as primeiras 3 ou 4):** confirmam se a pessoa é o perfil (tipo de empresa, volume, verba, quem decide). Uma opção fora do perfil **barra** na hora.
+  1. **Filtro (as primeiras 3 ou 4):** confirmam se a pessoa é o perfil (tipo de empresa, volume, verba, quem decide). Uma opção fora do perfil **barra** na hora. **Só essas opções barram.**
   2. **Dor e urgência (as últimas):** medem o quanto o problema dói e se é para agora. Dão pontos.
-- Cada opção tem pontos. Defina uma **nota mínima** e explique em uma linha por que esse corte.
+- **Quem passa nos filtros é qualificado.** A nota não barra ninguém (`MIN_SCORE = 0`): ela vira a **temperatura** do lead e define o nível do resultado. Só use nota mínima se o usuário pedir.
+- Cada opção de dor pode ter um **achado**: a frase que aparece no resultado (&quot;Histórico espalhado: o retorno ao cliente se perde...&quot;). Escreva achados concretos, no formato &quot;problema: consequência&quot;.
 - A pergunta **não pode entregar a resposta certa**: quem quer passar escolhe a opção mais bonita, então deixe as opções neutras.
 - Abra com a pergunta **mais fácil** (aumenta quem termina).
 - Linguagem simples, sem sigla e sem jargão que o cliente não usa.
-- **Sem preço, sem promessa de resultado, sem número inventado.** Número de exemplo sempre rotulado &quot;valores de exemplo&quot;.
+- **Sem preço, sem promessa de resultado, sem número inventado, sem depoimento inventado.** Número de exemplo sempre rotulado &quot;valores de exemplo&quot;.
 
-**Fim do quiz, telas possíveis:**
-1. **Qualificado:** título que reconhece o problema, formulário e botão para o WhatsApp.
-2. **Barrado:** agradece, **não pede nenhum dado**, não envia nada. Dá uma dica útil de uma linha para não parecer porta na cara.
-3. (Opcional) **Quase lá:** só se o usuário pedir uma faixa intermediária.
+**Fim do quiz:**
+1. **Qualificado → &quot;Seu diagnóstico está pronto&quot;:** mostra o resultado travado (quantos pontos de atenção) e pede os dados para liberar.
+2. **Obrigado:** mostra o nível, a lista &quot;Onde você está perdendo venda&quot; (dores marcadas + achados) e o botão verde do WhatsApp, com a mensagem pronta já citando o resultado.
+3. **Barrado:** agradece, **não pede nenhum dado**, não envia nada. Dá uma dica útil de uma linha para não parecer porta na cara.
 
 **Formulário (lei de proteção de dados, LGPD):**
 - Campos: **Nome** e **WhatsApp** obrigatórios, **E-mail opcional**. Sem texto livre.
@@ -242,16 +258,20 @@ Entregue em tabela, **antes** de gerar o arquivo:
 
 Depois da aprovação, gere **um arquivo HTML único** (sem instalar nada, abre no navegador e hospeda em qualquer lugar).
 
-- **Base obrigatória:** o arquivo `quiz-modelo.html` anexado ao projeto. Copie a estrutura e **troque só o bloco `CONFIGURAÇÃO`** (`EMPRESA`, `POLITICA`, `WHATSAPP`, `WEBHOOK`, `MIN_SCORE`, `PERGUNTAS`), os textos de abertura e de fim e as cores do `:root`. Não reescreva a lógica.
+- **Base obrigatória:** o arquivo `quiz-modelo.html` anexado ao projeto. Copie a estrutura e **troque só o bloco `CONFIGURAÇÃO`** (`EMPRESA`, `POLITICA`, `WHATSAPP`, `WEBHOOK`, `MIN_SCORE`, `ABERTURA`, `QUALIFICADO`, `NIVEIS`, `OBRIGADO`, `BARRADO`, `PERGUNTAS`) e, se houver marca, as cores do `:root`. Não reescreva a lógica nem o visual.
 - Se o modelo não estiver anexado, peça ao usuário antes de continuar.
-- Cada opção segue o formato `[texto, pontos, elimina?]`.
+- Cada pergunta é `{q:&quot;pergunta&quot;, s:&quot;apoio&quot;, o:[opções]}` e cada opção é `[título, descrição, pontos, elimina?, ícone, achado]` (o achado é opcional).
+- Ícones disponíveis: `pessoa, grupo, empresa, caixa, grafico, alvo, relogio, raio, chat, planilha, dinheiro, lupa, x`.
+- No `OBRIGADO`, troque &quot;horário comercial&quot; pelo prazo real de resposta do comercial.
 - Use as cores da marca do usuário. Sem marca definida, mantenha as cores do modelo.
 - Funciona no celular (a maior parte do tráfego vem do celular).
 - Deixe o que não foi informado com **[A CONFIRMAR]**.
 
 ## Passo 4 · Antes de entregar (checklist)
 
-- [ ] Só quem passa nos filtros **e** atinge a nota mínima vê o formulário.
+- [ ] Só quem passa nos filtros vê a tela de dados (e a nota mínima, se o usuário pediu uma).
+- [ ] A abertura nomeia a dor do cliente, e as 3 dores e os 3 ganhos são do negócio dele.
+- [ ] Cada achado é concreto e só aparece para quem escolheu aquela opção.
 - [ ] Quem é barrado **não** deixa dado e **não** dispara nada.
 - [ ] Nenhuma opção entrega qual é a resposta &quot;certa&quot;.
 - [ ] Sem sigla sem explicação, sem preço, sem número inventado.
@@ -263,7 +283,7 @@ Depois da aprovação, gere **um arquivo HTML único** (sem instalar nada, abre 
 
 1. Entregue o arquivo e a **tabela de qualificação** (para o usuário ajustar sem abrir código).
 2. Liste os **[A CONFIRMAR]** que faltam.
-3. Explique **como testar**: responder uma vez como lead bom (tem que chegar ao formulário) e uma vez como lead ruim (tem que ser barrado).
+3. Explique **como testar**: responder uma vez como lead bom (tem que chegar à tela de dados e depois ao obrigado com o resultado) e uma vez como lead ruim (tem que ser barrado). A página de obrigado muda o endereço para `#obrigado`, o que permite medir a conversão.
 4. Sugira o que acompanhar depois de publicado: quantos qualificados por semana e quantos deles viraram conversa de venda.
 
 ## O que este agente nunca faz
@@ -276,7 +296,7 @@ Depois da aprovação, gere **um arquivo HTML único** (sem instalar nada, abre 
       <button class="btn copiar" type="button">Copiar o agente</button>
     </div>
     <h3 style="margin-top:28px">O quiz modelo</h3>
-    <p>O agente adapta este arquivo ao seu negócio. Baixe e anexe junto ao agente.</p>
+    <p>O agente adapta este arquivo ao seu negócio. Baixe e anexe junto ao agente. Abra no navegador para ver o quiz funcionando.</p>
     <p><a class="btn" href="https://raw.githubusercontent.com/zayvonbusiness/agente-quiz-funil-americano/main/quiz-modelo.html" download="quiz-modelo.html">Baixar o quiz modelo</a>
        &nbsp;<a class="btn" href="https://github.com/zayvonbusiness/agente-quiz-funil-americano" target="_blank" rel="noopener">Ver no GitHub</a></p>
     <p class="aviso">Antes de publicar o seu quiz, troque o número do WhatsApp e o endereço que recebe os leads, no começo do arquivo.</p>
