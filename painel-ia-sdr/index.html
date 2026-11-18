@@ -264,7 +264,10 @@ function donoNome(id){const p=S.perfis.find(x=>x.id===id);return p?(p.nome||p.em
 function renderCrm(){
   const f=S.filtro;
   const lista=S.cards.filter(c=>!f||[c.nome,c.email,c.telefone,c.cargo,c.empresa].some(v=>norm(v).includes(f)));
-  $("#kp").innerHTML=`<span><b>${lista.length}</b> cards</span><span>Na mesa: <b>${brl(S.mtr?.na_mesa)}</b></span>`;
+  const ult=S.cards.filter(c=>c.origem==="tally"||c.origem==="cal").map(c=>new Date(c.criado_em).getTime()).sort((a,b)=>b-a)[0];
+  const dias=ult?Math.floor((Date.now()-ult)/864e5):null;
+  const ultTxt=ult==null?"nenhum ainda":dias===0?"hoje":dias===1?"há 1 dia":`há ${dias} dias`;
+  $("#kp").innerHTML=`<span><b>${lista.length}</b> cards</span><span>Último lead recebido: <b style="color:${dias!=null&&dias>=3?"var(--red)":"inherit"}">${ultTxt}</b></span><span>Na mesa: <b>${brl(S.mtr?.na_mesa)}</b></span>`;
   $("#board").innerHTML=S.etapas.map(e=>{
     const cs=lista.filter(c=>c.etapa_id===e.id);
     return `<div class="col" data-e="${e.id}"><h3>${esc(e.nome)} <span>${cs.length}</span></h3>${cs.map(cardHtml).join("")}</div>`;
