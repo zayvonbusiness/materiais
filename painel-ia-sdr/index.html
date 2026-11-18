@@ -96,11 +96,11 @@ th{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.05e
     <div><h1>Funil Comercial</h1><small>Painel da IA SDR · integrado ao CRM Yollo (fluxo 5123)</small></div>
     <div id="period" style="font-weight:600">Novembro de 2026</div>
   </div>
-  <div class="banner" id="banner">Modo demonstração: os números e leads abaixo são fictícios. Os textos do Fluxo da IA que você editar ficam salvos neste navegador e podem ser exportados em JSON.</div>
+  <div class="banner" id="banner">Sem dados ainda: o painel aguarda a conexão com o CRM Yollo. Os textos do Fluxo da IA que você editar ficam salvos neste navegador e podem ser exportados em JSON.</div>
 
   <div class="card">
     <div class="head">
-      <div><h2>IA SDR</h2><div class="sub">Atualizado em 18/11 · rodando de seg a sex, 8h às 19h</div></div>
+      <div><h2>IA SDR</h2><div class="sub">Aguardando conexão com o Yollo</div></div>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <span class="pill" id="status"><i></i><span>Ativa</span></span>
         <button class="btn" id="toggle">Desligar a IA</button>
@@ -109,10 +109,10 @@ th{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.05e
     </div>
 
     <div class="kpis">
-      <div class="kpi"><div class="l">Conversas abertas hoje</div><div class="v">3 <small>/ 12</small></div><div class="bar"><b style="width:25%"></b></div><div class="n">aguardando: 0 / 6</div></div>
-      <div class="kpi"><div class="l">Mensagens enviadas hoje</div><div class="v">52</div><div class="n">9 follow-up(s) entre elas</div></div>
-      <div class="kpi"><div class="l">Na fila</div><div class="v">11</div><div class="n">leads esperando a vez de receber a 1ª mensagem</div></div>
-      <div class="kpi"><div class="l">Última atividade</div><div class="v" style="font-size:20px">há 13 min</div><div class="n">Dentro do horário de envio · seg, ter, qua, qui, sex, 8h às 19h</div></div>
+      <div class="kpi"><div class="l">Conversas abertas hoje</div><div class="v">0 <small>/ 0</small></div><div class="bar"><b style="width:0"></b></div><div class="n">sem conversas ainda</div></div>
+      <div class="kpi"><div class="l">Mensagens enviadas hoje</div><div class="v">0</div><div class="n">nenhuma enviada ainda</div></div>
+      <div class="kpi"><div class="l">Na fila</div><div class="v">0</div><div class="n">leads esperando a 1ª mensagem</div></div>
+      <div class="kpi"><div class="l">Última atividade</div><div class="v" style="font-size:20px">—</div><div class="n">sem atividade registrada</div></div>
     </div>
 
     <div class="tabs" id="tabs"></div>
@@ -120,11 +120,11 @@ th{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.05e
 
     <div class="grid2">
       <div class="card">
-        <h3>Reuniões que a IA acompanha <span>7 próximas</span></h3>
+        <h3>Reuniões que a IA acompanha <span id="nm"></span></h3>
         <div id="meetings"></div>
       </div>
       <div class="card">
-        <h3>Precisa de você <span>5 itens</span></h3>
+        <h3>Precisa de você <span id="nn"></span></h3>
         <div id="needs"></div>
       </div>
     </div>
@@ -243,10 +243,10 @@ const DEFAULT_FLOW = [
 const SAMPLE = {nome:"Marcos",seu_nome:"Maiky",empresa:"Demanda Infinita",material:"Kit Comercial",dor:"gerar reunião qualificada",evento:"Workshop de Vendas",assunto:"gerar reunião qualificada",closer:"Ricardo",quando:"quinta às 15h",opcao_a:"amanhã às 10h",opcao_b:"quinta às 15h",link:"https://cal.com/exemplo"};
 
 /* ===== Dados fictícios de demonstração (sem lead real) ===== */
-const MEETINGS=[["Marcos Almeida","qua, 19/11 10h · Ricardo","Aguardando"],["Carla Mendes","qua, 19/11 15h · Ricardo","Aguardando"],["Paulo Ribeiro","qui, 20/11 9h · Maiky","Confirmado"],["Juliana Costa","qui, 20/11 16h · Ricardo","Aguardando"],["Fábio Nogueira","sex, 21/11 11h · Maiky","Aguardando"],["Renata Lopes","seg, 24/11 14h · Ricardo","Aguardando"],["Thiago Prado","ter, 25/11 10h · Maiky","Confirmado"]];
-const NEEDS=[["Bruna Teixeira","sem horário na agenda · há 5 h"],["Mauro Vieira","pediu uma pessoa · há 5 h"],["Fernando Barros","sem horário na agenda · há 5 h"],["Leandro Dias","número respondeu · há 5 d"],["Daniela Souza","número respondeu · há 5 d"]];
-const STAGES=[["Na fila",11,"#9ca3af"],["Aguardando resposta",58,"#d4a017"],["Em conversa",6,"#2563eb"],["Reunião marcada",8,"#0f9d3a"],["Encerrado",16,"#6b7280"],["Pediu para parar",1,"#c0392b"],["Fora do perfil",1,"#8b5cf6"]];
-const ACTIVITY=[["13 min","Abertura enviada","Carlos (lead novo)"],["41 min","Lead respondeu","Marcos A."],["1 h","Agendou reunião","Carla M. · qua 15h com Ricardo"],["2 h","Follow-up dia 3 enviado","Paulo R."],["3 h","Pausou: humano respondeu","Fábio N."],["5 h","Pediu uma pessoa","Mauro V."]];
+const MEETINGS=[];
+const NEEDS=[];
+const STAGES=[["Na fila",0,"#9ca3af"],["Aguardando resposta",0,"#d4a017"],["Em conversa",0,"#2563eb"],["Reunião marcada",0,"#0f9d3a"],["Encerrado",0,"#6b7280"],["Pediu para parar",0,"#c0392b"],["Fora do perfil",0,"#8b5cf6"]];
+const ACTIVITY=[];
 
 /* ===== Estado ===== */
 const KEY="painel-ia-sdr:v1";
@@ -276,10 +276,11 @@ function renderLanes(){
   document.querySelectorAll(".node").forEach(b=>b.onclick=()=>openNode(+b.dataset.l,+b.dataset.n));
 }
 function renderStatic(){
-  $("#meetings").innerHTML=MEETINGS.map(m=>`<div class="row"><span>${esc(m[0])}</span><span class="r"><span class="tag">${m[2]}</span>${esc(m[1])}</span></div>`).join("");
-  $("#needs").innerHTML=NEEDS.map(m=>`<div class="row"><span>${esc(m[0])}</span><span class="r">${esc(m[1])}</span></div>`).join("");
+  $("#nm").textContent=MEETINGS.length?MEETINGS.length+" próximas":"";$("#nn").textContent=NEEDS.length?NEEDS.length+" itens":"";
+  $("#meetings").innerHTML=!MEETINGS.length?'<div class="row"><span class="r">Nenhuma reunião ainda.</span></div>':MEETINGS.map(m=>`<div class="row"><span>${esc(m[0])}</span><span class="r"><span class="tag">${m[2]}</span>${esc(m[1])}</span></div>`).join("");
+  $("#needs").innerHTML=!NEEDS.length?'<div class="row"><span class="r">Nada pendente.</span></div>':NEEDS.map(m=>`<div class="row"><span>${esc(m[0])}</span><span class="r">${esc(m[1])}</span></div>`).join("");
   const tot=STAGES.reduce((a,s)=>a+s[1],0);
-  $("#dist").innerHTML=STAGES.map(s=>`<div title="${s[0]}: ${s[1]}" style="width:${s[1]/tot*100}%;background:${s[2]}"></div>`).join("");
+  $("#dist").innerHTML=tot?STAGES.map(s=>`<div title="${s[0]}: ${s[1]}" style="width:${s[1]/tot*100}%;background:${s[2]}"></div>`).join(""):'<div style="width:100%;background:#e1e6e1"></div>';
   $("#legend").innerHTML=STAGES.map(s=>`<span><i style="background:${s[2]}"></i>${s[0]} ${s[1]}</span>`).join("");
 }
 function renderStatus(){
@@ -289,9 +290,9 @@ function renderStatus(){
 
 /* ===== Abas ===== */
 const TABS={
- "Resultado do período":()=>`<div class="kpis" style="margin:0"><div class="kpi"><div class="l">Aberturas</div><div class="v">148</div></div><div class="kpi"><div class="l">Taxa de resposta</div><div class="v">34%</div></div><div class="kpi"><div class="l">Reuniões agendadas</div><div class="v">19</div></div><div class="kpi"><div class="l">Comparecimento</div><div class="v">71%</div></div></div><p class="n" style="color:var(--mute);font-size:12px">Dados de demonstração. Na integração real virão do CRM Yollo.</p>`,
- "Relatório":()=>`<table><tr><th>Semana</th><th>Aberturas</th><th>Respostas</th><th>Reuniões</th><th>Pediram parar</th></tr><tr><td>03–09/11</td><td>48</td><td>10</td><td>4</td><td>3</td></tr><tr><td>10–16/11</td><td>52</td><td>17</td><td>7</td><td>1</td></tr><tr><td>17–23/11</td><td>48</td><td>17</td><td>8</td><td>1</td></tr></table>`,
- "Atividade recente":()=>`<table><tr><th>Quando</th><th>Ação</th><th>Detalhe</th></tr>${ACTIVITY.map(a=>`<tr><td>${a[0]}</td><td>${a[1]}</td><td>${a[2]}</td></tr>`).join("")}</table>`,
+ "Resultado do período":()=>`<div class="kpis" style="margin:0"><div class="kpi"><div class="l">Aberturas</div><div class="v">0</div></div><div class="kpi"><div class="l">Taxa de resposta</div><div class="v">—</div></div><div class="kpi"><div class="l">Reuniões agendadas</div><div class="v">0</div></div><div class="kpi"><div class="l">Comparecimento</div><div class="v">—</div></div></div>`,
+ "Relatório":()=>`<table><tr><th>Semana</th><th>Aberturas</th><th>Respostas</th><th>Reuniões</th><th>Pediram parar</th></tr><tr><td colspan="5">Sem dados ainda.</td></tr></table>`,
+ "Atividade recente":()=>`<table><tr><th>Quando</th><th>Ação</th><th>Detalhe</th></tr>${ACTIVITY.map(a=>`<tr><td>${a[0]}</td><td>${a[1]}</td><td>${a[2]}</td></tr>`).join("")||'<tr><td colspan="3">Nenhuma atividade ainda.</td></tr>'}</table>`,
  "Configurações":()=>`<div class="form">
    <label>Modo teste (só números de teste)<select id="c-teste"><option value="0">Desligado</option><option value="1">Ligado</option></select></label>
    <label>Números de teste (separe por vírgula)<input id="c-num" value="${esc(cfg.numerosTeste)}" placeholder="5511999999999"></label>
