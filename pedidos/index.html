@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantos pedidos de orçamento da sua indústria viram refugo? · Maiky Miguel · Zayvon</title>
+<meta name="description" content="Plano de inspeção do pedido de orçamento: separe quem compra de quem só cota, calcule o custo do refugo e a meta de pedidos qualificados da sua indústria. Por Maiky Miguel, Zayvon Assessoria.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --azul:#116BF8; --azul-medio:#052698; --azul-escuro:#031452; --ciano:#21BCEE;
+    --cinza:#5A6072; --cinza-claro:#878EA0; --fundo:#FFFFFF; --fundo-2:#F4F7FB;
+    --linha:#DCE3EB; --verde:#1F8A4C; --vermelho:#C8372D;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--fundo);color:var(--cinza);font:400 17px/1.6 "Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{font-family:"Instrument Sans",system-ui,sans-serif;color:var(--azul-escuro);line-height:1.15;margin:0}
+  h1{font-size:clamp(32px,6vw,52px);font-weight:700;letter-spacing:-.02em;color:#fff}
+  h2{font-size:clamp(24px,4vw,32px);font-weight:700;margin-bottom:16px}
+  h3{font-size:20px;font-weight:700;margin-bottom:8px}
+  p{margin:0 0 14px}
+  strong{color:var(--azul-escuro)}
+  .mark{background:linear-gradient(transparent 58%, rgba(33,188,238,.55) 58%);padding:0 2px}
+  .eyebrow{font:600 13px/1 "Instrument Sans",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);margin-bottom:14px}
+
+  /* capa (escura, com a logo) */
+  .capa{background:var(--azul-escuro);padding:40px 0 56px;border-bottom:4px solid var(--azul)}
+  .capa .logo{height:26px;display:block;margin-bottom:44px}
+  .capa .eyebrow{color:var(--ciano)}
+  .capa .mark{background:none;color:var(--ciano);padding:0}
+  .capa .promessa{font-size:20px;color:#C9D6EE;margin-top:18px;max-width:640px}
+  .tempo{display:inline-block;margin-top:20px;background:rgba(255,255,255,.1);color:#fff;font-weight:600;border-radius:999px;padding:8px 16px;font-size:15px}
+
+  section{padding:48px 0;border-bottom:1px solid var(--linha)}
+  .passos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;counter-reset:p}
+  .passo{background:var(--fundo-2);border-radius:14px;padding:20px}
+  .passo::before{counter-increment:p;content:counter(p);display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--azul);color:#fff;font:700 16px "Instrument Sans",sans-serif;margin-bottom:10px}
+
+  .tag{display:inline-block;font-size:13px;font-weight:600;color:var(--azul-medio);background:var(--fundo-2);border-radius:6px;padding:3px 10px;margin-bottom:10px}
+  .bloco{background:var(--fundo-2);border-left:4px solid var(--azul);border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0}
+  .bloco p:last-child{margin:0}
+  ol.how,ul.how{margin:8px 0 0;padding-left:22px}
+  ol.how li,ul.how li{margin-bottom:8px}
+  .aviso{font-size:15px;color:var(--cinza-claro)}
+
+  .degrau{display:grid;grid-template-columns:72px 1fr;gap:20px;padding:24px 0;border-top:1px dashed var(--linha)}
+  .degrau:first-of-type{border-top:0}
+  .num{width:72px;height:72px;border-radius:16px;background:var(--azul-medio);color:#fff;display:grid;place-items:center;font:700 32px "Instrument Sans",sans-serif}
+  .degrau.ult .num{background:var(--azul)}
+
+  /* calculadora */
+  .calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:18px 0}
+  .calc label{font-size:14px;font-weight:600;color:var(--azul-medio)}
+  .calc input{width:100%;margin-top:6px;padding:12px;border:1px solid var(--linha);border-radius:10px;font:500 17px "Instrument Sans",sans-serif;color:var(--azul-escuro)}
+  .calc input:focus{outline:2px solid var(--azul);border-color:transparent}
+  .res{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+  .card{background:var(--fundo-2);border-radius:14px;padding:16px}
+  .card .k{font-size:13px;color:var(--cinza-claro)}
+  .card .v{font:700 26px "Instrument Sans",sans-serif;color:var(--azul-medio)}
+  .card.destaque{background:var(--azul)} .card.destaque .k{color:#D8E6FF} .card.destaque .v{color:#fff}
+  .leitura{margin-top:16px}
+
+  /* diagnóstico */
+  .perg{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1px solid var(--linha);border-radius:12px;margin-bottom:10px;cursor:pointer}
+  .perg input{margin-top:4px;width:20px;height:20px;accent-color:var(--azul);flex:none}
+  .perg:has(input:checked){background:var(--fundo-2);border-color:var(--azul)}
+  .nota{font:700 28px "Instrument Sans",sans-serif;color:var(--azul-medio)}
+
+  table{width:100%;border-collapse:collapse;font-size:16px}
+  .tbl{overflow-x:auto}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--linha)}
+  th{color:var(--azul-medio);font-weight:600;background:var(--fundo-2)}
+  td.n{text-align:right;font-variant-numeric:tabular-nums}
+
+  .prompt{border:1px solid var(--linha);border-radius:14px;padding:18px;margin:16px 0}
+  .prompt pre{white-space:pre-wrap;word-wrap:break-word;background:var(--fundo-2);border-radius:10px;padding:14px;margin:10px 0 12px;font:400 15px/1.55 "Instrument Sans",system-ui,sans-serif;color:var(--azul-escuro)}
+  .btn{display:inline-block;background:var(--azul);color:#fff;font:600 15px "Instrument Sans",sans-serif;border:0;border-radius:999px;padding:11px 20px;cursor:pointer;text-decoration:none}
+  .btn:hover{filter:brightness(.93)} .btn.grande{font-size:17px;padding:14px 26px}
+
+  /* quem preparou */
+  .autor{display:grid;grid-template-columns:160px 1fr;gap:32px;align-items:center}
+  .autor img{width:160px;height:160px;object-fit:cover;object-position:50% 18%;border-radius:50%;display:block;border:4px solid var(--fundo-2)}
+  .autor .nome{font:700 24px "Instrument Sans",sans-serif;color:var(--azul-escuro);margin-bottom:2px}
+  .autor .cargo{color:var(--azul);font-weight:600;margin-bottom:12px}
+
+  .proximo{background:var(--azul-escuro);color:#fff;border-radius:18px;padding:32px;margin:48px 0}
+  .proximo h2{color:#fff}
+  .proximo p{color:#D2DDF2;margin:0}
+  .proximo .btn{background:var(--ciano);color:var(--azul-escuro)}
+
+  footer{background:var(--azul-escuro);padding:32px 0 44px;font-size:14px;color:#9FB0D0}
+  footer img{height:22px;display:block;margin-bottom:14px}
+  @media (max-width:560px){.degrau{grid-template-columns:1fr}.num{width:56px;height:56px;font-size:26px}.proximo{padding:24px}.autor{grid-template-columns:1fr;justify-items:center;text-align:center}.autor img{width:150px;height:150px}}
+
+  /* figuras e caminhos com logos */
+  .fig{margin:18px 0;border:1px solid var(--linha);border-radius:18px;overflow:hidden;background:#fff}
+  .fig img{width:100%;display:block}
+  .fig figcaption{padding:10px 16px;font-size:14px;color:var(--cinza);border-top:1px solid var(--linha)}
+  .fig.peq{max-width:760px}
+  .caminho{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0}
+  .caminho .n{display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--linha);border-radius:12px;padding:8px 12px;font-weight:700;color:var(--azul-escuro);font-size:15px}
+  .caminho .n img{height:24px;width:auto}
+  .caminho .n.ok{background:var(--azul);border-color:var(--azul);color:#fff}
+  .caminho .s{color:#F26A1B;font-weight:800;font-size:22px;line-height:1}
+  .caminho.peq .n{font-size:14px;padding:6px 10px}
+  /* cara de indústria: faixa de alerta, etapa numerada e ficha de inspeção */
+  .alerta{height:12px;background:repeating-linear-gradient(-45deg,#F2C200 0 16px,#111 16px 32px)}
+  .etapa{display:inline-block;margin:0 0 8px;padding:3px 10px;background:#111;color:#F2C200;font:700 12px "Instrument Sans",sans-serif;letter-spacing:.14em;text-transform:uppercase;border-radius:4px}
+  .ficha{border:2px solid var(--azul-escuro);border-radius:12px;overflow:hidden;margin:16px 0;background:#fff}
+  .ficha-cab{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--azul-escuro);color:#fff;padding:10px 16px;font:700 13px "Instrument Sans",sans-serif;letter-spacing:.1em}
+  .ficha .tbl{margin:0;border:0;border-radius:0}
+  .carimbo{display:inline-block;border:3px solid;border-radius:6px;padding:2px 10px;font:800 14px "Instrument Sans",sans-serif;letter-spacing:.12em;transform:rotate(-4deg);background:#fff}
+  .carimbo.ok{color:#1F8A4C;border-color:#1F8A4C}
+  .carimbo.ruim{color:#C8372D;border-color:#C8372D}
+  .carimbo.peq{font-size:12px;padding:1px 7px;margin-right:6px}
+  /* foto do autor: maior, sem corte e sem círculo (só cantos levemente arredondados) */
+  .autor{grid-template-columns:280px 1fr;gap:36px;align-items:start}
+  .autor img{width:280px;height:auto;object-fit:contain;object-position:center;border-radius:18px;border:0;box-shadow:0 10px 28px rgba(3,20,82,.14)}
+  @media (max-width:760px){.autor{grid-template-columns:1fr;justify-items:center;text-align:center}.autor img{width:min(280px,78%)}}
+  /* calculadoras */
+  td input[type=number]{width:100%;min-width:110px;border:1px solid var(--linha);border-radius:8px;padding:8px 10px;font:500 15px "Instrument Sans",sans-serif;color:var(--azul-escuro);background:#fff}
+  td input[type=number]:focus{outline:2px solid var(--azul);border-color:var(--azul)}
+  .res{margin:18px 0 6px}
+  @page{size:A4;margin:12mm 12mm}
+  @media print{
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    body{font-size:11.5px;line-height:1.38}
+    .capa{padding:14px 0 16px}.capa .logo{margin-bottom:14px;height:20px}
+    h1{font-size:26px}h2{font-size:18px;margin-bottom:8px}h3{font-size:13.5px;margin-bottom:4px}
+    section{padding:12px 0}
+    .degrau,.prompt,.bloco,.tbl,.passo,.autor,.proximo,.fig,.ficha{break-inside:avoid}
+    .prompt .btn,.btn.copiar,.btn[id^=b-ex]{display:none}
+    footer{padding:10px 0 8px}a{text-decoration:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="capa">
+  <div class="wrap">
+    <img class="logo" src="logo-branca.png" alt="Zayvon">
+    <div class="eyebrow">Material gratuito · Maiky Miguel</div>
+    <h1>Quantos pedidos de orçamento da sua indústria viram <span class="mark">refugo</span>?</h1>
+    <p class="promessa">O plano de inspeção para separar o pedido de quem compra do pedido de quem só cota, com a ficha técnica, os comandos prontos e as calculadoras do custo do refugo e da meta de pedidos qualificados.</p>
+    <span class="tempo">Leitura de 15 minutos · a primeira inspeção você faz hoje, com os últimos 30 pedidos</span>
+  </div>
+</header>
+<div class="alerta" aria-hidden="true"></div>
+
+<main class="wrap">
+
+  <section>
+    <h2>O caminho do pedido de orçamento, em uma imagem</h2>
+    <figure class="fig">
+      <img src="diagrama-pedidos.png" alt="Pedidos de orçamento saem do Google Ads, passam pela inspeção do Claude Code e chegam ao comercial como fichas de pedido qualificado, ou caem no refugo">
+      <figcaption>O pedido entra pela esteira, passa pela inspeção e sai aprovado (vai para o comercial como ficha de pedido) ou como refugo (só cotando, fora da região, abaixo do mínimo).</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Como usar em 3 passos</h2>
+    <div class="passos">
+      <div class="passo"><h3>Leia as 6 etapas</h3><p>Em 10 minutos você entende como inspecionar o pedido de orçamento, do recebimento à entrada do comercial.</p></div>
+      <div class="passo"><h3>Faça a primeira inspeção</h3><p>Pegue os últimos 30 pedidos de orçamento e rode o comando da etapa 3. É o número que mostra o refugo de verdade.</p></div>
+      <div class="passo"><h3>Preencha as duas calculadoras</h3><p>A das etapas 4 e 5 mostram o que o refugo custa e quantos pedidos você precisa receber para chegar a 17 qualificados em 30 dias.</p></div>
+    </div>
+  </section>
+
+  <section id="ideia">
+    <div class="eyebrow">O problema</div>
+    <h2>Todo pedido de orçamento é tratado como se fosse pedido de compra</h2>
+    <p>Na linha de produção, ninguém monta peça sem inspeção: o que sai fora de especificação vira refugo ou retrabalho, e tem custo. No pedido de orçamento acontece o contrário. Chega pedido de todo tipo, o engenheiro de vendas gasta horas montando cotação, e só depois se descobre que o cliente só queria preço, fica fora da região ou pede abaixo do pedido mínimo.</p>
+    <p>Neste material, <strong>pedido de orçamento qualificado</strong> é o que passa em uma inspeção simples: tem quantidade acima do mínimo, prazo realista, região atendida, especificação clara e alguém que decide. O resto é <strong>refugo</strong>: pedido que consome horas do time e não vira venda.</p>
+    <div class="bloco"><p><strong>Em outras palavras:</strong> no mercado se chama "lead" o contato que chega pelo anúncio. Aqui vamos falar na linguagem da fábrica: pedido de orçamento, cotação e refugo.</p></div>
+  </section>
+
+  <section id="passos">
+    <div class="eyebrow">O plano de inspeção</div>
+    <h2>Seis etapas, do recebimento à parada do refugo na entrada</h2>
+
+    <!-- ETAPA 1 -->
+    <div class="degrau">
+      <div class="num">1</div>
+      <div>
+        <div class="etapa">Etapa 1 · Recebimento</div>
+        <h3>Separe os últimos 30 pedidos de orçamento</h3>
+        <p>Abra o e-mail, o WhatsApp ou a planilha de cotações e pegue os 30 pedidos mais recentes. Para cada um, anote:</p>
+        <div class="tbl"><table>
+          <tr><th>Coluna</th><th>O que anotar</th></tr>
+          <tr><td>Número</td><td>1 a 30 (sem o nome do cliente: use só o número)</td></tr>
+          <tr><td>Data</td><td>Quando o pedido chegou</td></tr>
+          <tr><td>Quantidade pedida</td><td>Peças, kits, lotes ou metros</td></tr>
+          <tr><td>Prazo pedido</td><td>Em dias</td></tr>
+          <tr><td>Região</td><td>Estado ou cidade da entrega</td></tr>
+          <tr><td>Quem pediu</td><td>Cargo (diretor, comprador, engenheiro, outro)</td></tr>
+          <tr><td>Horas gastas na cotação</td><td>Uma estimativa do time</td></tr>
+          <tr><td>Fechou?</td><td>Sim, não ou ainda em aberto</td></tr>
+        </table></div>
+        <p class="aviso">Para o comando da etapa 3, tire nomes, telefones e e-mails: a inspeção só precisa dos dados acima.</p>
+      </div>
+    </div>
+
+    <!-- ETAPA 2 -->
+    <div class="degrau">
+      <div class="num">2</div>
+      <div>
+        <div class="etapa">Etapa 2 · Plano de inspeção</div>
+        <h3>Escreva a ficha técnica do pedido qualificado</h3>
+        <div class="ficha">
+          <div class="ficha-cab"><span>FICHA DE INSPEÇÃO · PEDIDO DE ORÇAMENTO</span><span class="carimbo ok">APROVADO</span></div>
+          <div class="tbl"><table>
+            <tr><th>Item inspecionado</th><th>Critério (preencha com os da sua indústria)</th><th>Se não atender</th></tr>
+            <tr><td>Quantidade</td><td>Igual ou acima do pedido mínimo: [QUANTIDADE OU VALOR MÍNIMO]</td><td>Refugo: abaixo do mínimo</td></tr>
+            <tr><td>Prazo</td><td>Compatível com a sua capacidade: [PRAZO MÍNIMO EM DIAS]</td><td>Refugo: prazo impossível</td></tr>
+            <tr><td>Região</td><td>Dentro da área que você atende: [ESTADOS OU REGIÕES]</td><td>Refugo: fora da região</td></tr>
+            <tr><td>Especificação</td><td>Desenho, norma, material ou descrição clara do que precisa</td><td>Retrabalho: pedir a especificação antes de cotar</td></tr>
+            <tr><td>Quem decide</td><td>Quem pediu decide ou leva a decisão a quem decide</td><td>Atenção: só pesquisando preço</td></tr>
+          </table></div>
+        </div>
+        <p class="aviso">Comece com 5 critérios, no máximo. Cada critério precisa ser algo que o cliente responde em uma linha. Revise com o seu time comercial: eles sabem melhor do que ninguém o que vira venda.</p>
+      </div>
+    </div>
+
+    <!-- ETAPA 3 -->
+    <div class="degrau">
+      <div class="num">3</div>
+      <div>
+        <div class="etapa">Etapa 3 · Inspeção</div>
+        <h3>Passe os 30 pedidos pela inspeção com o Claude</h3>
+        <figure class="fig peq">
+          <img src="trecho-inspecao.png" alt="Pedidos passando pela inspeção do Claude Code e saindo como orçamento qualificado ou refugo">
+        </figure>
+        <p>O Claude é um assistente de inteligência artificial da Anthropic. Ele aplica a ficha de inspeção em cada pedido, classifica como aprovado ou refugo, diz o motivo e soma o que o refugo custou em horas.</p>
+        <div class="prompt">
+          <span class="tag">Comando para colar no Claude</span>
+<pre>Você é o inspetor de qualidade dos pedidos de orçamento da minha indústria. Vou colar os últimos 30 pedidos de orçamento e a minha ficha de inspeção.
+
+Para cada pedido, faça a inspeção e responda em uma tabela com as colunas: número, resultado (APROVADO ou REFUGO), motivo em poucas palavras e horas gastas na cotação.
+
+Depois da tabela, entregue:
+1. Quantos pedidos foram aprovados e quantos viraram refugo (em número e em porcentagem).
+2. Os 3 motivos de refugo que mais aparecem, do mais frequente para o menos frequente.
+3. O total de horas gastas com pedidos que viraram refugo.
+4. Entre os aprovados, quantos fecharam e quantos não (se a coluna "fechou" existir).
+5. Uma sugestão de frase para o anúncio e para o formulário que já avise o cliente do pedido mínimo e da região atendida.
+
+Regras: use só o que está na tabela. Se faltar informação em algum pedido, escreva "faltou informação" no motivo e não adivinhe. Não invente número. Não decida pelo comercial: no fim, liste os pedidos que ficaram "na dúvida" para uma pessoa revisar.
+
+Ficha de inspeção:
+[COLE AQUI A FICHA DA ETAPA 2]
+
+Pedidos (sem nomes, telefones nem e-mails):
+[COLE AQUI OS 30 PEDIDOS DA ETAPA 1]</pre>
+          <button class="btn copiar" type="button">Copiar comando</button>
+        </div>
+        <p class="aviso"><strong>Confira antes de usar:</strong> abra 5 pedidos que o Claude classificou e confirme com o seu time. Se o Claude barrar pedido que o comercial considera bom, ajuste o critério da ficha e rode de novo.</p>
+      </div>
+    </div>
+
+    <!-- ETAPA 4 -->
+    <div class="degrau">
+      <div class="num">4</div>
+      <div>
+        <div class="etapa">Etapa 4 · Custo do refugo</div>
+        <h3>Calcule quanto o refugo custa por mês</h3>
+        <p>Use os números da etapa 3. O valor da hora é opcional: se não preencher, a calculadora mostra só as horas.</p>
+        <div class="tbl"><table id="calc1">
+          <tr><th>Número</th><th>Preencha</th></tr>
+          <tr><td>Pedidos de orçamento que chegam por mês</td><td><input id="a-n" type="number" min="0" inputmode="decimal" placeholder="0" aria-label="Pedidos por mês"></td></tr>
+          <tr><td>Desses, quantos por cento viram refugo</td><td><input id="a-p" type="number" min="0" max="100" inputmode="decimal" placeholder="0" aria-label="Porcentagem de refugo"></td></tr>
+          <tr><td>Horas gastas para cotar cada pedido</td><td><input id="a-h" type="number" min="0" inputmode="decimal" placeholder="0" aria-label="Horas por cotação"></td></tr>
+          <tr><td>Custo de uma hora do time de vendas (R$, opcional)</td><td><input id="a-v" type="number" min="0" inputmode="decimal" placeholder="0" aria-label="Custo da hora em reais"></td></tr>
+        </table></div>
+        <p><button class="btn" type="button" id="b-ex1">Usar os valores do exemplo</button></p>
+        <div class="res" aria-live="polite">
+          <div class="card"><div class="k">Pedidos refugo por mês</div><div class="v" id="a-r1">–</div></div>
+          <div class="card destaque"><div class="k">Horas perdidas por mês</div><div class="v" id="a-r2">–</div></div>
+          <div class="card"><div class="k">Dias de trabalho perdidos</div><div class="v" id="a-r3">–</div></div>
+          <div class="card destaque"><div class="k">Custo do refugo por mês</div><div class="v" id="a-r4">–</div></div>
+        </div>
+        <p id="a-leitura" class="aviso"></p>
+        <p class="aviso">A conta usa 8 horas por dia de trabalho. Ela mostra como o custo funciona e não promete resultado.</p>
+      </div>
+    </div>
+
+    <!-- ETAPA 5 -->
+    <div class="degrau">
+      <div class="num">5</div>
+      <div>
+        <div class="etapa">Etapa 5 · Meta da linha</div>
+        <h3>Faça a conta da meta: 17 pedidos qualificados em 30 dias</h3>
+        <p>Com a taxa de aprovação da etapa 3, a calculadora mostra quantos pedidos de orçamento precisam chegar para você ter a quantidade de pedidos qualificados que quer. A meta de 17 já vem preenchida: troque pela sua.</p>
+        <div class="tbl"><table id="calc2">
+          <tr><th>Número</th><th>Preencha</th></tr>
+          <tr><td>Meta de pedidos qualificados em 30 dias</td><td><input id="b-m" type="number" min="0" inputmode="decimal" value="17" aria-label="Meta de pedidos qualificados"></td></tr>
+          <tr><td>Desses pedidos que chegam, quantos por cento passam na inspeção</td><td><input id="b-p" type="number" min="0" max="100" inputmode="decimal" placeholder="0" aria-label="Porcentagem aprovada"></td></tr>
+          <tr><td>Dos qualificados, quantos por cento fecham (opcional)</td><td><input id="b-f" type="number" min="0" max="100" inputmode="decimal" placeholder="0" aria-label="Porcentagem que fecha"></td></tr>
+          <tr><td>Valor médio de um pedido fechado (R$, opcional)</td><td><input id="b-t" type="number" min="0" inputmode="decimal" placeholder="0" aria-label="Valor médio do pedido"></td></tr>
+        </table></div>
+        <p><button class="btn" type="button" id="b-ex2">Usar os valores do exemplo</button></p>
+        <div class="res" aria-live="polite">
+          <div class="card destaque"><div class="k">Pedidos que precisam chegar</div><div class="v" id="b-r1">–</div></div>
+          <div class="card"><div class="k">Vão virar refugo</div><div class="v" id="b-r2">–</div></div>
+          <div class="card"><div class="k">Pedidos que fecham</div><div class="v" id="b-r3">–</div></div>
+          <div class="card destaque"><div class="k">Faturamento da meta</div><div class="v" id="b-r4">–</div></div>
+        </div>
+        <p id="b-leitura" class="aviso"></p>
+        <p class="aviso">A meta é uma conta de planejamento, não uma promessa. Ela só diz quantos pedidos precisam chegar para a taxa de aprovação que você informou.</p>
+      </div>
+    </div>
+
+    <!-- ETAPA 6 -->
+    <div class="degrau ult">
+      <div class="num">6</div>
+      <div>
+        <div class="etapa">Etapa 6 · Parar o refugo na entrada</div>
+        <h3>Faça o anúncio e o formulário inspecionarem o pedido antes de chegar ao comercial</h3>
+        <div class="caminho peq">
+          <div class="n"><img src="logos/google-ads.svg" alt="">Anúncio já filtra</div><div class="s">➜</div>
+          <div class="n"><img src="logos/claude-code.svg" alt="">Formulário inspeciona</div><div class="s">➜</div>
+          <div class="n ok">Só a ficha aprovada chega ao comercial</div>
+        </div>
+        <p>Agora você usa o que o refugo ensinou. Os 3 motivos mais frequentes da etapa 3 viram três ajustes:</p>
+        <ul class="how">
+          <li><strong>No anúncio do Google:</strong> o pedido mínimo e a região aparecem no texto, e as palavras de quem só cota (grátis, usado, conserto, uso doméstico) são bloqueadas.</li>
+          <li><strong>No formulário:</strong> as perguntas da ficha de inspeção filtram o pedido antes de ele chegar ao comercial.</li>
+          <li><strong>No comercial:</strong> só chega a ficha do pedido qualificado, com quantidade, prazo e região.</li>
+        </ul>
+        <figure class="fig peq">
+          <img src="trecho-comercial.png" alt="Fichas de pedido qualificado chegando ao comercial, com quantidade, prazo e região">
+        </figure>
+        <div class="prompt">
+          <span class="tag">Comando para colar no Claude (anúncio e palavras bloqueadas)</span>
+<pre>Com o resultado da inspeção (os 3 motivos de refugo mais frequentes), monte o que muda no meu anúncio de pesquisa do Google.
+
+Entregue:
+1. Uma lista de palavras a bloquear, com o motivo de cada uma (por exemplo: grátis, usado, conserto, uso doméstico, e termos que atraem pedido abaixo do mínimo).
+2. 3 títulos (até 30 caracteres cada) e 2 descrições (até 90 caracteres cada) que já avisem o pedido mínimo e a região atendida.
+3. Uma frase curta para o topo da página do formulário que explique para quem o orçamento é indicado.
+
+Regras: nenhuma promessa de resultado, nenhum número ou cliente inventado. Linguagem de quem fala com quem compra em indústria, em português simples. O pedido mínimo é [PEDIDO MÍNIMO] e eu atendo [REGIÕES].
+
+Os 3 motivos de refugo: [COLE AQUI O RESULTADO DA ETAPA 3]</pre>
+          <button class="btn copiar" type="button">Copiar comando</button>
+        </div>
+        <p>O Claude Code é um programa que escreve e organiza código a partir do que você pede em português. Na primeira vez, instale seguindo o guia oficial no site da Anthropic. Se preferir, peça a quem cuida do seu site ou de tecnologia para rodar o comando por você.</p>
+        <div class="prompt">
+          <span class="tag">Comando para colar no Claude Code (formulário que inspeciona)</span>
+<pre>Crie uma página web simples, em português do Brasil, com um formulário de pedido de orçamento que faz a inspeção do pedido.
+
+Primeiro, peça nome, e-mail de trabalho, WhatsApp e empresa. Inclua uma caixa de autorização, não marcada, e um texto curto dizendo para que os dados serão usados. Depois, faça estas perguntas de escolha, uma por tela:
+1. Qual a quantidade que você precisa? [FAIXAS, COM A ABAIXO DO MÍNIMO MARCADA COMO REFUGO]
+2. Para quando você precisa? [FAIXAS DE PRAZO, COM O PRAZO IMPOSSÍVEL MARCADO COMO REFUGO]
+3. Em que estado será a entrega? [ESTADOS ATENDIDOS, E "OUTRO" MARCADO COMO REFUGO]
+4. Você já tem o desenho ou a especificação? [SIM, TENHO / PRECISO DE AJUDA / AINDA NÃO]
+5. Qual o seu cargo e quem decide a compra? [OPÇÕES]
+
+Resultado: se o pedido passar nos critérios de quantidade, prazo e região, mostre "Pedido recebido, o comercial retorna em breve" e envie ao comercial uma ficha com quantidade, prazo, região, cargo e especificação, no e-mail [E-MAIL DO COMERCIAL]. Se não passar, mostre uma mensagem educada explicando o pedido mínimo e a região atendida, sem enviar ao comercial. Guarde todas as respostas e o resultado (aprovado ou refugo) em uma planilha.
+
+Regras: nenhuma promessa de resultado, nenhum número, cliente ou depoimento inventado. Visual limpo e profissional, que carregue rápido no celular. Não invente informação. Antes de terminar, me explique em linguagem simples como testar a página e como publicar.</pre>
+          <button class="btn copiar" type="button">Copiar comando</button>
+        </div>
+        <p class="aviso">Responda o formulário você mesmo de três jeitos (pedido aprovado, abaixo do mínimo e fora da região) antes de ligar o anúncio. Nas primeiras semanas, leia todos os pedidos que ficaram de fora, para ter certeza de que o formulário não barra quem compraria.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="rotina">
+    <div class="eyebrow">A rotina</div>
+    <h2>Acompanhe a linha toda semana, com 3 números</h2>
+    <div class="tbl"><table>
+      <tr><th>Número</th><th>Como calcular</th><th>O que mostra</th></tr>
+      <tr><td>Pedidos recebidos</td><td>Quantos pedidos de orçamento chegaram na semana</td><td>O volume que o anúncio traz</td></tr>
+      <tr><td>Taxa de aprovação</td><td>Pedidos aprovados ÷ pedidos recebidos</td><td>Se o filtro está funcionando</td></tr>
+      <tr><td>Pedidos qualificados no mês</td><td>Soma dos aprovados desde o dia 1, comparada com a meta (17, por exemplo)</td><td>Se a linha vai bater a meta</td></tr>
+    </table></div>
+    <p class="aviso">Escolha um dia e um horário fixos e anote os números numa planilha. Dez minutos por semana bastam.</p>
+  </section>
+
+  <section id="limites">
+    <div class="eyebrow">Cuidados</div>
+    <h2>O que a inteligência artificial não decide sozinha</h2>
+    <div class="tbl"><table>
+      <tr><th>A inteligência artificial pode</th><th>Uma pessoa decide</th></tr>
+      <tr><td>Aplicar a ficha de inspeção e classificar os pedidos</td><td>Os critérios da ficha e os pedidos que ficaram na dúvida</td></tr>
+      <tr><td>Escrever o texto do anúncio e as palavras bloqueadas</td><td>O que o anúncio diz: tudo precisa ser verdade e sem promessa de resultado</td></tr>
+      <tr><td>Criar o formulário e enviar a ficha ao comercial</td><td>Quem foi barrado nas primeiras semanas e o que fazer com esses casos</td></tr>
+      <tr><td>Calcular horas, custo e meta</td><td>Se a taxa de aprovação é boa o bastante para investir mais</td></tr>
+    </table></div>
+    <div class="bloco"><p><strong>A inspeção separa o pedido, não fecha a venda.</strong> Quem monta a cotação, negocia e fecha continua sendo o seu comercial.</p></div>
+    <p class="aviso"><strong>Poucos dados enganam.</strong> Com poucos pedidos, a taxa de aprovação pode mudar muito de uma semana para outra. Use os 30 pedidos como ponto de partida e continue medindo.</p>
+    <p class="aviso"><strong>Dados pessoais:</strong> peça só o necessário, escreva na página para que os dados serão usados e tenha uma caixa de autorização, não marcada. Revise com quem cuida de privacidade na sua empresa.</p>
+    <p class="aviso"><strong>Funciona sem comprar nada específico:</strong> os pedidos podem estar no e-mail, no WhatsApp ou numa planilha, e a planilha pode ser a do Google ou do Excel.</p>
+  </section>
+
+  <section id="exemplo">
+    <div class="eyebrow">Um exemplo preenchido</div>
+    <h2>Como fica a inspeção e a conta</h2>
+    <p class="aviso">Valores de exemplo. Indústria fictícia de componentes sob medida.</p>
+    <div class="ficha">
+      <div class="ficha-cab"><span>FICHA DE INSPEÇÃO · PEDIDOS 1 A 4 (EXEMPLO)</span></div>
+      <div class="tbl"><table>
+        <tr><th>Pedido</th><th>Quantidade</th><th>Prazo</th><th>Região</th><th>Resultado</th></tr>
+        <tr><td>1</td><td>500 peças</td><td>30 dias</td><td>SP</td><td><span class="carimbo ok peq">APROVADO</span></td></tr>
+        <tr><td>2</td><td>20 peças</td><td>30 dias</td><td>SP</td><td><span class="carimbo ruim peq">REFUGO</span> abaixo do mínimo</td></tr>
+        <tr><td>3</td><td>1.200 peças</td><td>45 dias</td><td>MG</td><td><span class="carimbo ok peq">APROVADO</span></td></tr>
+        <tr><td>4</td><td>300 peças</td><td>10 dias</td><td>AM</td><td><span class="carimbo ruim peq">REFUGO</span> fora da região</td></tr>
+      </table></div>
+    </div>
+    <div class="tbl"><table>
+      <tr><th>Conta do exemplo</th><th>Resultado</th></tr>
+      <tr><td>Pedidos que chegam por mês</td><td class="n">30</td></tr>
+      <tr><td>Viram refugo</td><td class="n">18 (60%)</td></tr>
+      <tr><td>Horas gastas por cotação</td><td class="n">3 horas</td></tr>
+      <tr><td><strong>Horas perdidas por mês</strong></td><td class="n"><strong>54 horas (quase 7 dias de trabalho)</strong></td></tr>
+      <tr><td>Meta de pedidos qualificados em 30 dias</td><td class="n">17</td></tr>
+      <tr><td>Aprovação na inspeção</td><td class="n">40%</td></tr>
+      <tr><td><strong>Pedidos que precisam chegar</strong></td><td class="n"><strong>43</strong></td></tr>
+    </table></div>
+    <p>Leitura do exemplo: com 60% de refugo, o time perde quase 7 dias de trabalho por mês cotando para quem não compra. Para ter 17 pedidos qualificados com 40% de aprovação, precisam chegar 43 pedidos, e é por isso que parar o refugo na entrada (etapa 6) muda a conta.</p>
+    <p class="aviso">Os números acima são de exemplo e não representam um caso real.</p>
+  </section>
+
+  <section id="autor">
+    <div class="eyebrow">Quem preparou este material</div>
+    <div class="autor">
+      <img src="foto-maiky.png" alt="Maiky Miguel">
+      <div>
+        <div class="nome">Maiky Miguel</div>
+        <div class="cargo">Zayvon Assessoria</div>
+        <p>Há mais de 5 anos trabalho com marketing digital. Sou formado em Marketing e me especializei em tráfego pago, com foco em performance: já investi mais de R$ 5 milhões em mídia paga.</p>
+        <p>Hoje, à frente da Zayvon, ajudo empresas B2B a estruturar a venda pela internet, do anúncio ao fechamento, por meio do Aquisição Previsível.</p>
+        <p style="margin:0">Na prática, conecto o anúncio, o filtro que separa pedido bom de pedido ruim, a automação, a inteligência artificial e o controle de orçamentos do time comercial. O anúncio atrai quem realmente pode comprar, e o tempo do seu time fica reservado para essa pessoa.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="proximo">
+    <h2>O próximo passo</h2>
+    <p>Se quiser olhar isso junto, é só pedir uma conversa.</p>
+    <p style="margin-top:20px"><a class="btn grande" href="https://cal.com/maiky-miguel-rh5mjb/40min?overlayCalendar=true" target="_blank" rel="noopener">Pedir uma conversa</a></p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="logo-branca.png" alt="Zayvon">
+    <span>Maiky Miguel · Zayvon Assessoria</span>
+    <p style="margin-top:12px">Material gratuito. Este material não promete resultado. Os critérios, as taxas e os valores são exemplos para você adaptar. Google Ads e Claude Code são marcas de seus respectivos donos.</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.copiar').forEach(b => b.addEventListener('click', () => {
+    const pre = b.parentElement.querySelector('pre');
+    const label = b.textContent;
+    const ok = () => { b.textContent = 'Copiado'; setTimeout(() => b.textContent = label, 1800); };
+    const manual = () => { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: aperte Ctrl+C'; };
+    if (navigator.clipboard) navigator.clipboard.writeText(pre.innerText).then(ok).catch(manual); else manual();
+  }));
+
+  //CALC_INICIO
+  const num = v => { const x = parseFloat(String(v).replace(',', '.')); return isFinite(x) && x > 0 ? x : 0; };
+  function custoRefugo(n, p, h, v) {
+    const pedidos = num(n), pct = Math.min(num(p), 100), horas = num(h), valor = num(v);
+    const refugo = pedidos * pct / 100;
+    const horasPerdidas = refugo * horas;
+    return { refugo, horasPerdidas, dias: horasPerdidas / 8, custo: valor > 0 ? horasPerdidas * valor : null };
+  }
+  function meta(m, p, f, t) {
+    const metaQ = num(m), pct = Math.min(num(p), 100), fecha = Math.min(num(f), 100), ticket = num(t);
+    if (metaQ <= 0 || pct <= 0) return { chegar: null, refugo: null, fecham: null, fat: null };
+    const chegar = Math.ceil(metaQ / (pct / 100) - 1e-9);
+    const fecham = fecha > 0 ? metaQ * fecha / 100 : null;
+    return { chegar, refugo: chegar - metaQ, fecham, fat: fecham !== null && ticket > 0 ? fecham * ticket : null };
+  }
+  function brl(v) { return 'R$ ' + Math.round(v).toLocaleString('pt-BR'); }
+  function dec(v) { return String(Math.round(v * 10) / 10).replace('.', ','); }
+  //CALC_FIM
+  const $ = id => document.getElementById(id);
+  function atualizar1() {
+    const r = custoRefugo($('a-n').value, $('a-p').value, $('a-h').value, $('a-v').value);
+    $('a-r1').textContent = r.refugo > 0 ? dec(r.refugo) : '–';
+    $('a-r2').textContent = r.horasPerdidas > 0 ? dec(r.horasPerdidas) + ' h' : '–';
+    $('a-r3').textContent = r.dias > 0 ? dec(r.dias) : '–';
+    $('a-r4').textContent = r.custo !== null && r.custo > 0 ? brl(r.custo) : '–';
+    $('a-leitura').textContent = r.horasPerdidas > 0 ? 'Com estes números, o time perde ' + dec(r.horasPerdidas) + ' horas por mês, ou ' + dec(r.dias) + ' dias de trabalho, cotando pedido que vira refugo.' : '';
+  }
+  function atualizar2() {
+    const r = meta($('b-m').value, $('b-p').value, $('b-f').value, $('b-t').value);
+    $('b-r1').textContent = r.chegar !== null ? r.chegar : '–';
+    $('b-r2').textContent = r.refugo !== null ? r.refugo : '–';
+    $('b-r3').textContent = r.fecham !== null ? dec(r.fecham) : '–';
+    $('b-r4').textContent = r.fat !== null ? brl(r.fat) : '–';
+    $('b-leitura').textContent = r.chegar !== null ? 'Para ' + $('b-m').value + ' pedidos qualificados com essa taxa de aprovação, precisam chegar ' + r.chegar + ' pedidos de orçamento, e ' + r.refugo + ' deles viram refugo.' : '';
+  }
+  ['a-n', 'a-p', 'a-h', 'a-v'].forEach(id => $(id).addEventListener('input', atualizar1));
+  ['b-m', 'b-p', 'b-f', 'b-t'].forEach(id => $(id).addEventListener('input', atualizar2));
+  $('b-ex1').addEventListener('click', () => { $('a-n').value = 30; $('a-p').value = 60; $('a-h').value = 3; $('a-v').value = ''; atualizar1(); });
+  $('b-ex2').addEventListener('click', () => { $('b-m').value = 17; $('b-p').value = 40; $('b-f').value = 25; $('b-t').value = 2000; atualizar2(); });
+  atualizar1(); atualizar2();
+</script>
+</body>
+</html>
