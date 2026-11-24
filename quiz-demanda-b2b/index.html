@@ -98,16 +98,16 @@ function descartar(k,v){
 }
 function cadastro(){
   app.innerHTML=barra()+`<h2>Quase lá! Preencha para ver o resultado</h2>
-  <iframe id="form-5657b8921dbc010b78" style="width:100%;min-height:520px;border:0" loading="lazy"></iframe>`;
+  <iframe id="form-93ecbece29495b5783" style="width:100%;min-height:520px;border:0" loading="lazy"></iframe>`;
   // Formulário do próprio CRM (Yollo, E-mail Marketing), embutido no quiz.
   var q=window.location.search.replace(/^\?/,'');
-  document.getElementById('form-5657b8921dbc010b78').src='https://mail.sistemacrmcomia.com.br/api/v1/email-mkt/f/5657b8921dbc010b78?embed=1'+(q?'&'+q:'');
+  document.getElementById('form-93ecbece29495b5783').src='https://mail.sistemacrmcomia.com.br/api/v1/email-mkt/f/93ecbece29495b5783?embed=1'+(q?'&'+q:'');
   log("formulário do CRM carregado dentro do quiz (lead qualificado)");
 }
 // Quando o formulário do CRM é enviado, ele avisa a página; daí disparamos Meta e Google.
 window.addEventListener('message',function(e){
   var d=e.data||{};
-  if(d.type!=='form_submitted'||d.form!=='5657b8921dbc010b78') return;
+  if(d.type!=='form_submitted'||d.form!=='93ecbece29495b5783') return;
   if(d.fb&&window.fbq) fbq('track',d.fb);
   if(d.gtag&&window.gtag) gtag('event','conversion',{send_to:d.gtag});
   log("<b>cadastro enviado ao CRM</b> → negociação criada; eventos Meta/Google disparados","ok");
