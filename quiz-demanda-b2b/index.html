@@ -98,27 +98,21 @@ function descartar(k,v){
 }
 function cadastro(){
   app.innerHTML=barra()+`<h2>Quase lá! Preencha para ver o resultado</h2>
-  <form onsubmit="enviar(event)">
-   <input name="nome" placeholder="Nome completo" required>
-   <input name="empresa" placeholder="Empresa" required>
-   <input name="email" type="email" placeholder="Seu melhor e-mail" required>
-   <input name="tel" type="tel" placeholder="WhatsApp com DDD" required>
-   <button class="btn" type="submit">Ver meu diagnóstico</button></form>
-   <div class="aviso">Seus dados não serão compartilhados.</div>`;
+  <iframe id="form-5657b8921dbc010b78" style="width:100%;min-height:520px;border:0" loading="lazy"></iframe>`;
+  // Formulário do próprio CRM (Yollo, E-mail Marketing), embutido no quiz.
+  var q=window.location.search.replace(/^\?/,'');
+  document.getElementById('form-5657b8921dbc010b78').src='https://mail.sistemacrmcomia.com.br/api/v1/email-mkt/f/5657b8921dbc010b78?embed=1'+(q?'&'+q:'');
+  log("formulário do CRM carregado dentro do quiz (lead qualificado)");
 }
-async function enviar(e){
-  e.preventDefault();
-  const d=Object.fromEntries(new FormData(e.target)); Object.assign(resp,d);
-  log("<b>cadastro enviado</b> (modo demonstração: nada sai do navegador)");
-  log("→ CRM: negociação criada no funil <b>Demonstração</b>, etapa <b>Novo Lead</b>","ok");
-  log("→ Meta, API de conversão: evento <b>Lead</b> (só lead qualificado)","ok");
-  log("→ Google: conversão de lead enviada","ok");
+// Quando o formulário do CRM é enviado, ele avisa a página; daí disparamos Meta e Google.
+window.addEventListener('message',function(e){
+  var d=e.data||{};
+  if(d.type!=='form_submitted'||d.form!=='5657b8921dbc010b78') return;
+  if(d.fb&&window.fbq) fbq('track',d.fb);
+  if(d.gtag&&window.gtag) gtag('event','conversion',{send_to:d.gtag});
+  log("<b>cadastro enviado ao CRM</b> → negociação criada; eventos Meta/Google disparados","ok");
   log("→ depois: SDR atende → etapa muda → evento <b>Conversão offline</b> com o valor da venda","ok");
-  if(CFG.ENVIO_URL){ try{ await fetch(CFG.ENVIO_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(resp)}); }catch(_){} }
-  app.innerHTML=`<h1>Obrigado, ${d.nome.split(" ")[0]}!</h1>
-  <p>Seu diagnóstico foi enviado. Um especialista da ${CFG.marca} vai falar com você pelo WhatsApp.</p>
-  <button class="btn" onclick="inicio()">Refazer (demonstração)</button>`;
-}
+});
 inicio();
 </script>
 </body>
