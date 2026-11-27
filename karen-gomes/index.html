@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Proposta · Zayvon</title>
+<link rel="icon" href="icon-zayvon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family:"GT Planar"; src:url("gt-planar-regular.otf") format("opentype"); unicode-range:U+0000-007F; font-display:swap; }
+  :root { --ink:#0A0A0A; --blue:#0B5CE0; --blue-lt:#5AA0FF; --line:#D5DAE1; --soft:#F4F5F7; --ease:cubic-bezier(.2,.7,.1,1); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { background:#fff; color:var(--ink); font-family:"Instrument Sans", Arial, sans-serif; font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  .wrap { max-width:1120px; margin:0 auto; padding:0 24px; }
+  .tag { display:block; font-family:"GT Planar", "Instrument Sans", sans-serif; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#374151; }
+  a, button { -webkit-tap-highlight-color:transparent; }
+  :focus-visible { outline:2px solid var(--blue); outline-offset:3px; }
+  h1, h2, h3, h4 { font-family:"Instrument Sans", Arial, sans-serif; font-weight:400; }
+  h1 { font-size:clamp(40px, 7vw, 88px); line-height:1.02; letter-spacing:-.035em; }
+  h2 { font-size:clamp(34px, 4.6vw, 60px); line-height:1.1; letter-spacing:-.023em; }
+  .blue { color:var(--blue); }
+
+  .nav { position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:50; width:min(820px, calc(100% - 32px)); background:#fff; border:1px solid var(--line); border-radius:6px; display:flex; justify-content:space-between; align-items:center; padding:10px 10px 10px 22px; }
+  .nav img { height:16px; display:block; }
+  .nav-links { display:flex; gap:32px; font-size:14px; font-family:"GT Planar", "Instrument Sans", sans-serif; }
+  .nav-links a { color:var(--ink); text-decoration:none; padding:12px 0; transition:color .2s; }
+  .nav-links a:hover { color:var(--blue); }
+  .pill { display:inline-flex; align-items:center; gap:10px; background:var(--ink); color:#fff; text-decoration:none; border-radius:4px; padding:0 20px; min-height:44px; font-size:14px; transition:background .3s; }
+  .pill:hover { background:var(--blue); }
+  .pill.big { padding:0 32px; min-height:64px; font-size:17px; }
+  .pill svg { width:20px; height:20px; flex:none; }
+
+  .hero { padding-top:176px; text-align:center; }
+  .hero h1 { margin:24px 0 32px; }
+  .hero p { font-size:clamp(18px, 1.8vw, 20px); max-width:50ch; margin:0 auto; color:#1F2937; }
+  .facts { display:grid; grid-template-columns:repeat(3, 1fr); margin-top:96px; border-top:2px solid var(--ink); text-align:left; }
+  .facts div { padding:24px 24px 0 0; display:flex; flex-direction:column; gap:8px; }
+  .facts div + div { padding-left:24px; border-left:1px solid var(--line); }
+  .facts b { display:block; font-size:clamp(32px, 3.8vw, 48px); font-weight:500; letter-spacing:-.02em; line-height:1.1; }
+  .facts span { font-size:15px; color:#1F2937; }
+
+  section.wrap { padding-top:128px; }
+  .center { display:grid; grid-template-columns:1.4fr 1fr; gap:24px 64px; align-items:end; }
+  .center .tag { grid-column:1 / -1; }
+  .center h2 { max-width:16ch; }
+  .center > p { max-width:40ch; color:#1F2937; font-size:18px; padding-bottom:8px; }
+
+  /* faixas pretas: fundo preto, cartões brancos */
+  .band { background:var(--ink); color:#fff; margin-top:128px; padding:128px 0; }
+  .band .tag { color:#C7CEDA; }
+  .band .blue { color:var(--blue-lt); }
+  .band .center > p { color:#E5E7EB; }
+
+  .tiles { display:grid; grid-template-columns:1fr; gap:12px; margin-top:64px; }
+  .tile { position:relative; background:#fff; color:var(--ink); padding:40px; display:flex; flex-direction:column; gap:32px; border-radius:8px; }
+  .tile .top { display:flex; align-items:flex-start; min-height:44px; }
+  .ic { width:44px; height:44px; padding:10px; border-radius:8px; background:var(--blue); color:#fff; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; flex:none; }
+  .chip { position:absolute; top:40px; right:40px; background:var(--blue); color:#fff; font-size:16px; font-weight:700; padding:10px 16px; border-radius:6px; white-space:nowrap; }
+  .tile h3 { font-size:clamp(26px, 2.6vw, 34px); letter-spacing:-.025em; line-height:1.15; margin-bottom:12px; }
+  .tile p { color:#1F2937; max-width:44ch; line-height:1.6; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:0 48px; align-items:start; }
+  .checks { list-style:none; display:flex; flex-direction:column; margin-top:52px; }
+  .checks li { display:flex; gap:12px; padding:12px 0; border-top:1px solid var(--line); font-size:16px; line-height:1.4; }
+  .checks li::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--blue); flex:none; margin-top:7px; }
+
+  /* funil em azul */
+  .tile.blue-tile { background:var(--blue); color:#fff; }
+  .tile.blue-tile .ic { background:#fff; color:var(--blue); }
+  .tile.blue-tile p { color:#fff; }
+  .flow { list-style:none; display:flex; flex-direction:column; }
+  .flow li { display:flex; gap:20px; padding:18px 0; border-top:1px solid rgba(255,255,255,.45); }
+  .flow li:first-child { border-top:0; }
+  .flow span { font-size:13px; color:#fff; padding-top:4px; min-width:24px; font-family:"GT Planar", "Instrument Sans", sans-serif; font-weight:700; }
+  .flow b { display:block; font-weight:500; font-size:20px; color:#fff; }
+  .flow small { display:block; font-size:15px; color:#fff; margin-top:2px; }
+
+  /* equipe */
+  .team { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:64px; max-width:760px; margin-left:auto; margin-right:auto; }
+  .person { background:#111; border-radius:12px; overflow:hidden; }
+  .person img { width:100%; aspect-ratio:2/3; object-fit:cover; display:block; }
+  .person div { padding:20px 20px 24px; }
+  .person small { display:block; color:var(--blue-lt); font-size:15px; font-weight:500; }
+  .person b { display:block; font-weight:500; font-size:22px; letter-spacing:.02em; text-transform:uppercase; color:#fff; margin-top:4px; }
+
+  /* investimento */
+  .price { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:64px; }
+  .p { border-radius:8px; padding:40px; display:flex; flex-direction:column; color:#fff; }
+  .p.main { background:var(--blue); }
+  .p.dark { background:var(--ink); }
+  .p small { font-size:16px; font-weight:500; color:#fff; }
+  .val { font-size:clamp(64px, 9vw, 112px); font-weight:500; letter-spacing:-.045em; line-height:1; margin:24px 0; color:#fff; }
+  .val sup { font-size:.3em; letter-spacing:0; vertical-align:top; position:relative; top:.3em; margin-right:.15em; }
+  .val sub { font-size:.2em; letter-spacing:0; vertical-align:baseline; }
+  .lines { list-style:none; margin-top:auto; }
+  .lines li { display:flex; justify-content:space-between; gap:16px; padding:14px 0; border-top:1px solid rgba(255,255,255,.5); font-size:17px; }
+  .lines li b { font-weight:700; white-space:nowrap; }
+  .extra { margin-top:12px; background:var(--blue); color:#fff; border-radius:8px; padding:32px 40px; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; }
+  .extra .n { font-size:clamp(36px, 4.4vw, 56px); font-weight:500; letter-spacing:-.03em; line-height:1.1; }
+  .extra .n sub { font-size:.4em; letter-spacing:0; }
+  .extra p { color:#fff; max-width:46ch; font-size:16px; }
+  .terms { display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-top:12px; }
+  .terms span { background:#fff; border:1.5px solid var(--ink); border-radius:8px; padding:20px 24px; font-size:16px; font-weight:500; }
+
+  .steps { list-style:none; display:grid; grid-template-columns:repeat(4, 1fr); margin-top:64px; border-top:2px solid var(--ink); }
+  .steps li { padding:24px 24px 0 0; }
+  .steps li + li { padding-left:24px; border-left:1px solid var(--line); }
+  .steps span { font-family:"GT Planar", "Instrument Sans", sans-serif; font-size:13px; font-weight:700; color:var(--blue); }
+  .steps b { display:block; font-weight:500; font-size:22px; letter-spacing:-.01em; margin:8px 0; }
+  .steps p { color:#1F2937; font-size:15px; }
+
+  .faq { margin-top:64px; border-top:2px solid var(--ink); }
+  .faq details { border-bottom:1px solid var(--line); }
+  .faq summary { list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:24px; padding:24px 0; font-size:clamp(18px, 1.8vw, 21px); letter-spacing:-.01em; min-height:44px; transition:color .2s; }
+  .faq summary::-webkit-details-marker { display:none; }
+  .faq summary:hover { color:var(--blue); }
+  .faq summary i { position:relative; width:14px; height:14px; flex:none; }
+  .faq summary i::before, .faq summary i::after { content:""; position:absolute; left:0; top:6.5px; width:14px; height:1.5px; background:currentColor; transition:transform .35s var(--ease); }
+  .faq summary i::after { transform:rotate(90deg); }
+  .faq details[open] summary i::after { transform:rotate(0); }
+  .faq details p { color:#1F2937; max-width:62ch; padding:0 0 24px; line-height:1.6; }
+
+  .end { padding-top:160px; padding-bottom:128px; text-align:center; }
+  .end h2 { margin:0 auto 32px; max-width:700px; }
+  .ctas { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+  .ghost-btn { background:#fff; color:var(--ink); border:1.5px solid var(--ink); }
+  .ghost-btn:hover { background:#25D366; border-color:#25D366; color:#fff; }
+  .wa-float { position:fixed; right:24px; bottom:24px; z-index:60; display:flex; align-items:center; gap:10px; height:56px; padding:0 18px 0 16px; border-radius:28px; background:#25D366; color:#fff; text-decoration:none; font-size:15px; box-shadow:0 10px 30px -10px rgba(0,0,0,.35); transition:transform .3s var(--ease); }
+  .wa-float svg { width:26px; height:26px; }
+  .wa-float:hover { transform:translateY(-2px); }
+  footer { border-top:1px solid var(--line); padding:28px 0; }
+  footer .wrap { display:flex; justify-content:space-between; align-items:center; font-size:13px; color:#374151; }
+  footer img { height:14px; }
+
+  @media screen and (max-width:900px) {
+    .nav-links { display:none; }
+    .center { grid-template-columns:1fr; }
+    .two { grid-template-columns:1fr; }
+    .checks { margin-top:8px; }
+    .steps { grid-template-columns:1fr 1fr; }
+    .steps li:nth-child(3) { padding-left:0; border-left:0; }
+    .steps li:nth-child(n+3) { margin-top:24px; border-top:1px solid var(--line); }
+  }
+  @media screen and (max-width:600px) {
+    .hero { padding-top:136px; }
+    .hero h1 br { display:none; }
+    .facts, .price, .terms { grid-template-columns:1fr; }
+    .tile, .p { padding:32px 24px; }
+    .tile .top { margin-bottom:8px; }
+    .chip { top:32px; right:24px; font-size:14px; padding:8px 12px; }
+    .extra { padding:28px 24px; }
+    .band { margin-top:96px; padding:96px 0; }
+    .facts div { padding:24px 0; }
+    .facts div + div { padding-left:0; border-left:0; border-top:1px solid var(--line); }
+    section.wrap { padding-top:96px; }
+    .team { gap:12px; }
+    .person div { padding:14px 14px 18px; }
+    .person b { font-size:17px; }
+    .steps { grid-template-columns:1fr; }
+    .steps li, .steps li + li { padding-left:0; border-left:0; }
+    .steps li + li { margin-top:24px; border-top:1px solid var(--line); padding-top:24px; }
+    .wa-float { width:56px; padding:0; justify-content:center; }
+    .wa-float span { display:none; }
+  }
+  @media print {
+    * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .nav, .wa-float { display:none !important; }
+    .tile, .p, .terms, .faq details, .facts, .center, .extra, .person { break-inside:avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <img src="logo-zayvon.png" alt="Zayvon">
+  <nav class="nav-links"><a href="#entrega">Entrega</a><a href="#funil">Funil</a><a href="#investimento">Investimento</a><a href="#faq">Dúvidas</a></nav>
+  <a class="pill wa" href="#">Aprovar proposta</a>
+</header>
+
+<main>
+  <div class="hero wrap">
+    <span class="tag">Proposta · Estrutura para infoproduto</span>
+    <h1><span id="first">Karen</span>, a estrutura completa<br> para vender o seu <span class="blue">infoproduto<br> o ano inteiro.</span></h1>
+    <p>Páginas, funil de vendas, Kiwify, tráfego pago em todas as plataformas e CRM com atendimento automático. Montado e operado pela Zayvon.</p>
+    <div class="facts">
+      <div><b>R$ 3.500</b><span>para montar tudo, pagamento único</span></div>
+      <div><b>R$ 1.497/mês</b><span>tráfego pago e CRM com IA</span></div>
+      <div><b>Sem fidelidade</b><span>você fica enquanto fizer sentido</span></div>
+    </div>
+  </div>
+
+  <section id="entrega" class="band"><div class="wrap">
+    <div class="center">
+      <span class="tag">O que você recebe</span>
+      <h2>Três etapas montadas. <span class="blue">Duas operadas todo mês.</span></h2>
+      <p>Você grava e atende as pessoas. A Zayvon cuida de tudo o que existe entre o anúncio e a compra.</p>
+    </div>
+    <div class="tiles">
+
+      <article class="tile">
+        <div class="top"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18M8 14h8"/></svg></div>
+        <span class="chip">R$ 2.200 · pagamento único</span>
+        <div class="two">
+          <div>
+            <h3>Todas as páginas, com copy e design</h3>
+            <p>Por um valor só, a gente cria todas as páginas que o seu infoproduto precisar, escritas e desenhadas pela Zayvon, e deixa tudo organizado e no ar.</p>
+          </div>
+          <ul class="checks">
+            <li>Landing page de vendas, com a copy escrita para vender o seu produto</li>
+            <li>Página de captura para quem quer receber o seu conteúdo</li>
+            <li>Quiz, quando o funil pedir</li>
+            <li>Página de obrigado, depois do cadastro e depois da compra</li>
+            <li>Página da aula gratuita, onde o vídeo fica hospedado</li>
+            <li>Link na bio organizado, levando cada pessoa para a página certa</li>
+            <li>Política de privacidade e termos de uso</li>
+            <li>Domínio conectado e páginas rápidas no celular e no computador</li>
+            <li>Título, descrição e imagem do link para quando ele for compartilhado</li>
+            <li>Duas rodadas de ajustes depois da entrega</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="tile">
+        <div class="top"><svg class="ic" viewBox="0 0 24 24"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></svg></div>
+        <span class="chip">R$ 600 · pagamento único</span>
+        <div class="two">
+          <div>
+            <h3>Estruturação do funil de vendas</h3>
+            <p>O desenho completo do caminho que a pessoa percorre, do primeiro contato até a compra, e como cada ferramenta se conecta à outra.</p>
+          </div>
+          <ul class="checks">
+            <li>Mapa da jornada: do anúncio ou conteúdo orgânico até a compra e o pós-compra</li>
+            <li>Definição de cada etapa: captação, aula gratuita, oferta, remarketing e upsell</li>
+            <li>Definição dos públicos dos anúncios: frio, morno e quente</li>
+            <li>Regras de segmentação: o que acontece com quem compra, quem não compra e quem abandona o checkout</li>
+            <li>Integração entre as ferramentas: páginas, CRM, Kiwify e WhatsApp</li>
+            <li>Métricas de acompanhamento: custo por lead, taxa de conversão e custo por venda</li>
+            <li>Documento do funil desenhado, para você guardar</li>
+            <li>Reunião de alinhamento do funil</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="tile">
+        <div class="top"><svg class="ic" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+        <span class="chip">R$ 700 · pagamento único</span>
+        <div class="two">
+          <div>
+            <h3>Configuração da Kiwify</h3>
+            <p>A plataforma de vendas e de entrega do curso, pronta para receber o pagamento e os alunos.</p>
+          </div>
+          <ul class="checks">
+            <li>Configuração do produto e do checkout na Kiwify</li>
+            <li>Order bump e upsell configurados</li>
+            <li>Cupom de desconto</li>
+            <li>Recuperação de carrinho abandonado</li>
+            <li>Política de garantia e reembolso na página</li>
+            <li>Pixel instalado e rastreamento das vendas</li>
+            <li>Formulário e compra ligados ao CRM</li>
+            <li>Área de membros montada</li>
+            <li>Upload das aulas</li>
+            <li>Organização dos alunos</li>
+            <li>Teste de compra do começo ao fim antes de abrir as vendas</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="tile">
+        <div class="top"><svg class="ic" viewBox="0 0 24 24"><path d="M3 11l18-8-8 18-2-8z"/></svg></div>
+        <span class="chip">R$ 1.197/mês</span>
+        <div class="two">
+          <div>
+            <h3>Tráfego pago em todas as plataformas</h3>
+            <p>Anúncios para o seu infoproduto chegar a quem ainda não te conhece e voltar a quem já visitou, onde o seu público estiver.</p>
+          </div>
+          <ul class="checks">
+            <li>Meta Ads: Instagram e Facebook</li>
+            <li>Google Ads: pesquisa e YouTube</li>
+            <li>TikTok Ads</li>
+            <li>Criação e configuração das contas de anúncio</li>
+            <li>Campanhas de captação e de venda</li>
+            <li>Remarketing para quem não comprou</li>
+            <li>Públicos e testes de criativos</li>
+            <li>Copy dos anúncios</li>
+            <li>Otimização toda semana</li>
+            <li>Relatórios e reunião mensal de resultados</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="tile">
+        <div class="top"><svg class="ic" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg></div>
+        <span class="chip">R$ 300/mês</span>
+        <div class="two">
+          <div>
+            <h3>CRM com inteligência artificial</h3>
+            <p>Cada contato registrado, com resposta automática no WhatsApp para quem pergunta fora do seu horário.</p>
+          </div>
+          <ul class="checks">
+            <li>Atendimento automático no WhatsApp</li>
+            <li>Qualificação dos interessados</li>
+            <li>Etapas do funil montadas no CRM</li>
+            <li>Funil visível, do contato até a venda</li>
+            <li>Aviso quando entra um contato novo</li>
+            <li>Treinamento de uso</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="tile">
+        <div class="top"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M10 8l6 4-6 4z"/></svg></div>
+        <span class="chip">R$ 30 por vídeo</span>
+        <div class="two">
+          <div>
+            <h3>Edição de vídeo para o Instagram</h3>
+            <p>Você grava, a Zayvon edita. Sem plano fechado: você paga só pelos vídeos que quiser postar.</p>
+          </div>
+          <ul class="checks">
+            <li>R$ 30 por edição de vídeo, para postar no Instagram</li>
+            <li>Cobrado só pelo que for editado no mês</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div></section>
+
+  <section id="funil" class="wrap">
+    <div class="center">
+      <span class="tag">O funil</span>
+      <h2>Do primeiro contato <span class="blue">até a compra.</span></h2>
+      <p>Este é o caminho que a Zayvon desenha e conecta. Cada etapa tem ferramenta, regra e número para acompanhar.</p>
+    </div>
+    <div class="tiles">
+      <article class="tile blue-tile">
+        <ol class="flow">
+          <li><span>01</span><div><b>Atração</b><small>Seu conteúdo no Instagram e no TikTok, mais os anúncios em todas as plataformas.</small></div></li>
+          <li><span>02</span><div><b>Captação</b><small>Página de captura ou quiz: a pessoa deixa o contato.</small></div></li>
+          <li><span>03</span><div><b>Aula gratuita</b><small>Ela conhece o seu método e a sua forma de explicar.</small></div></li>
+          <li><span>04</span><div><b>Oferta na Kiwify</b><small>Página de vendas e checkout, com o pagamento rastreado.</small></div></li>
+          <li><span>05</span><div><b>Remarketing e upsell</b><small>Anúncios para quem não comprou e a próxima oferta para quem comprou.</small></div></li>
+        </ol>
+      </article>
+    </div>
+  </section>
+
+  <section class="band"><div class="wrap">
+    <div class="center">
+      <span class="tag">Quem cuida do seu projeto</span>
+      <h2>A liderança por trás <span class="blue">da Zayvon.</span></h2>
+      <p>Dois sócios acompanhando de perto a montagem e a operação do seu funil.</p>
+    </div>
+    <div class="team">
+      <figure class="person"><img src="pedro-lucas.png" alt="Pedro Lucas"><div><small>Design &amp; Operações</small><b>Pedro Lucas</b></div></figure>
+      <figure class="person"><img src="maiky-miguel.png" alt="Maiky Miguel"><div><small>Marketing &amp; Expansão</small><b>Maiky Miguel</b></div></figure>
+    </div>
+  </div></section>
+
+  <section id="investimento" class="wrap">
+    <div class="center">
+      <span class="tag">Investimento</span>
+      <h2>Valores claros, <span class="blue">sem fidelidade.</span></h2>
+      <p>Um valor para montar tudo e uma mensalidade para operar. A verba dos anúncios você define depois e paga direto às plataformas.</p>
+    </div>
+    <div class="price">
+      <div class="p main">
+        <small>Montagem · pagamento único</small>
+        <div class="val"><sup>R$</sup>3.500</div>
+        <ul class="lines">
+          <li><span>Todas as páginas, com copy e design</span><b>R$ 2.200</b></li>
+          <li><span>Estruturação do funil de vendas</span><b>R$ 600</b></li>
+          <li><span>Configuração da Kiwify</span><b>R$ 700</b></li>
+        </ul>
+      </div>
+      <div class="p dark">
+        <small>Todo mês</small>
+        <div class="val"><sup>R$</sup>1.497<sub>/mês</sub></div>
+        <ul class="lines">
+          <li><span>Tráfego pago em todas as plataformas</span><b>R$ 1.197</b></li>
+          <li><span>CRM com inteligência artificial</span><b>R$ 300</b></li>
+        </ul>
+      </div>
+    </div>
+    <div class="extra">
+      <div class="n">R$ 30<sub> por vídeo editado</sub></div>
+      <p>Edição de vídeo para o Instagram, cobrada só pelo que você pedir no mês.</p>
+    </div>
+    <div class="terms">
+      <span>Pagamento à vista e adiantado</span>
+      <span>Sem fidelidade</span>
+      <span>Verba de anúncios definida por você, paga direto às plataformas</span>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="center">
+      <span class="tag">Como começa</span>
+      <h2>Quatro passos, <span class="blue">sem burocracia.</span></h2>
+    </div>
+    <ol class="steps">
+      <li><span>01</span><b>Você aprova</b><p>Você confirma a proposta pelo botão ou pelo WhatsApp.</p></li>
+      <li><span>02</span><b>Contrato</b><p>A Zayvon envia o contrato para assinatura.</p></li>
+      <li><span>03</span><b>Pagamento</b><p>Após a assinatura, o pagamento adiantado.</p></li>
+      <li><span>04</span><b>Início dos trabalhos</b><p>Com o pagamento confirmado, a gente começa a montar.</p></li>
+    </ol>
+  </section>
+
+  <section id="faq" class="wrap">
+    <div class="center">
+      <span class="tag">Perguntas frequentes</span>
+      <h2>Ficou <span class="blue">alguma dúvida?</span></h2>
+      <p>As respostas para o que mais perguntam antes de começar.</p>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Quanto preciso investir em anúncios?<i aria-hidden="true"></i></summary>
+        <p>Isso você define depois, com a gente, de acordo com o seu produto e a sua meta. A verba é paga direto às plataformas de anúncios e não passa pela Zayvon. Não faz parte do contrato.</p>
+      </details>
+      <details>
+        <summary>O valor do tráfego vale para quais plataformas?<i aria-hidden="true"></i></summary>
+        <p>Para todas: Meta Ads (Instagram e Facebook), Google Ads (pesquisa e YouTube) e TikTok Ads, pelo mesmo valor mensal.</p>
+      </details>
+      <details>
+        <summary>Existe fidelidade ou multa?<i aria-hidden="true"></i></summary>
+        <p>Não. Não há fidelidade. Você continua enquanto fizer sentido para você.</p>
+      </details>
+      <details>
+        <summary>Como funciona a edição de vídeo?<i aria-hidden="true"></i></summary>
+        <p>Você grava, a Zayvon edita para o Instagram. Cada vídeo editado custa R$ 30. Você paga só pelos vídeos que pedir.</p>
+      </details>
+      <details>
+        <summary>Vocês garantem um número de vendas?<i aria-hidden="true"></i></summary>
+        <p>Não prometemos número fixo, porque a venda também depende do produto, da oferta e do momento da sua audiência. O nosso compromisso é estruturar o funil, medir cada etapa e ajustar o que for preciso.</p>
+      </details>
+      <details>
+        <summary>O que não está incluído nesta proposta?<i aria-hidden="true"></i></summary>
+        <p>A criação do produto e do grupo terapêutico, a copy de e-mails e de mensagens de WhatsApp e a edição da aula gratuita não fazem parte desta proposta. Se você quiser, a gente orça à parte.</p>
+      </details>
+      <details>
+        <summary>Quem grava as aulas e o conteúdo?<i aria-hidden="true"></i></summary>
+        <p>Você. A Zayvon cuida das páginas, do funil, da Kiwify, dos anúncios, do CRM e da edição dos vídeos que você pedir.</p>
+      </details>
+      <details>
+        <summary>Como funciona o pagamento?<i aria-hidden="true"></i></summary>
+        <p>À vista e adiantado. Você aprova a proposta, assina o contrato, faz o pagamento e a Zayvon inicia os trabalhos.</p>
+      </details>
+    </div>
+  </section>
+
+  <div class="end wrap">
+    <h2>Vamos começar, <span class="blue" id="first2">Karen</span>?</h2>
+    <div class="ctas">
+      <a class="pill big wa" href="#">Aprovar proposta →</a>
+      <a class="pill big ghost-btn wa-chat" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zM20.5 3.5A11.8 11.8 0 0 0 1.9 17.7L.2 24l6.4-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.5-8.5z"/></svg>Conversar no WhatsApp</a>
+    </div>
+  </div>
+</main>
+
+<a class="wa-float wa-chat" href="#" aria-label="Conversar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zM20.5 3.5A11.8 11.8 0 0 0 1.9 17.7L.2 24l6.4-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.5-8.5z"/></svg><span>Fale com a Zayvon</span></a>
+
+<footer><div class="wrap"><img src="logo-zayvon.png" alt="Zayvon"><span>azayvon.com.br</span></div></footer>
+
+<script>
+  // ?para=Nome&wa=55DDDNUMERO personalizam sem editar o arquivo
+  const q = new URLSearchParams(location.search);
+  const nome = (q.get('para') || 'Karen').split(' ')[0];
+  document.getElementById('first').textContent = nome;
+  document.getElementById('first2').textContent = nome;
+  const wa = (q.get('wa') || '5532988139103').replace(/\D/g, '');
+  document.querySelectorAll('.wa').forEach(a => a.href = 'https://wa.me/' + wa + '?text=' + encodeURIComponent('Olá! Quero aprovar a proposta da Zayvon.'));
+  document.querySelectorAll('.wa-chat').forEach(a => { a.href = 'https://wa.me/' + wa + '?text=' + encodeURIComponent('Olá! Vi a proposta da Zayvon e queria conversar.'); a.target = '_blank'; a.rel = 'noopener'; });
+  if (q.has('pdf')) {
+    document.querySelectorAll('details').forEach(d => d.open = true);
+    // PDF em página única e contínua, do tamanho da proposta
+    addEventListener('load', () => document.fonts.ready.then(() => {
+      const st = document.createElement('style');
+      st.textContent = '.end { padding-top:96px !important; padding-bottom:56px !important; } @page { size:1280px ' + (document.documentElement.scrollHeight - 120) + 'px; margin:0; }';
+      document.head.append(st);
+      document.documentElement.dataset.ready = '1';
+    }));
+  }
+  addEventListener('beforeprint', () => document.querySelectorAll('details').forEach(d => d.open = true));
+</script>
+</body>
+</html>
