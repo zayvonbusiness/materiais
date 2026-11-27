@@ -192,11 +192,13 @@
   .price { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:64px; }
   .p { border-radius:2px; padding:40px; background:var(--bg2); min-height:320px; display:flex; flex-direction:column; }
   .p p { margin-top:auto; max-width:34ch; }
-  .p.main { background:var(--blue); color:#fff; border-color:var(--blue); }
+  .p.main { background:var(--ink); color:#fff; }
   .p small { font-size:14px; opacity:.72; }
-  .plan-name { font-size:clamp(30px, 3.4vw, 44px); line-height:1.08; letter-spacing:-.03em; font-weight:400; max-width:14ch; }
-  .p { position:relative; } .plan-badge { position:absolute; top:24px; right:24px; font-family:"GT Planar","Instrument Sans",sans-serif; font-size:11px; letter-spacing:.18em; text-transform:uppercase; background:#fff; color:var(--blue); padding:4px 10px; border-radius:2px; margin-bottom:16px; }
-  .p .val { margin:auto 0 24px; }
+  .plan-name { font-size:clamp(24px, 2.4vw, 31px); line-height:1.15; letter-spacing:-.02em; font-weight:500; max-width:none; text-wrap:balance; padding-bottom:24px; border-bottom:1px solid rgba(10,10,10,.14); padding-right:120px; }
+  .p.main .plan-name { border-bottom-color:rgba(255,255,255,.2); }
+  .p { position:relative; }
+  .plan-badge { position:absolute; top:40px; right:40px; font-family:"GT Planar","Instrument Sans",sans-serif; font-size:11px; letter-spacing:.18em; text-transform:uppercase; background:#fff; color:var(--ink); padding:5px 10px; border-radius:2px; }
+  .p .val { margin:32px 0 24px; }
   .val { font-size:clamp(56px, 8vw, 104px); letter-spacing:-.045em; line-height:1; margin:24px 0 32px; }
   .val sup { font-size:.3em; letter-spacing:0; vertical-align:top; position:relative; top:.3em; margin-right:.15em; }
   .val sub { font-size:.2em; letter-spacing:0; vertical-align:baseline; opacity:.7; }
