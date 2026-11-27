@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Proposta · Zayvon</title>
+<link rel="icon" href="icon-zayvon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* shortcut: o arquivo GT Planar é Trial e perde acentos; acentuados caem no Arial. Trocar pela fonte completa quando houver. */
+  @font-face { font-family:"GT Planar"; src:url("gt-planar-regular.otf") format("opentype"); unicode-range:U+0000-007F; font-display:swap; }
+  :root { --ink:#0A0A0A; --muted:#6B7280; --blue:#116BF8; --blue-soft:#EAF1FF; --line:#E6EAF0; --card:#F6F8FB; --bg2:#F4F5F7; --green:#12B76A; --red:#F04438; --amber:#F79009; --ease:cubic-bezier(.2,.7,.1,1); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { background:#fff; color:var(--ink); font-family:"Instrument Sans", Arial, sans-serif; font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  .wrap { max-width:1120px; margin:0 auto; padding:0 24px; }
+  .tag { display:block; font-family:"GT Planar", "Instrument Sans", sans-serif; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+  a, button { -webkit-tap-highlight-color:transparent; }
+  :focus-visible { outline:2px solid var(--blue); outline-offset:3px; }
+  h1 { font-size:clamp(44px, 7vw, 96px); line-height:1; letter-spacing:-.035em; font-weight:400; }
+  h2 { font-size:clamp(34px, 4.6vw, 60px); line-height:1.05; letter-spacing:-.03em; font-weight:400; }
+  .blue { color:var(--blue); }
+  .muted { color:var(--muted); }
+
+  /* menu pílula, como no site */
+  .nav { position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:50; width:min(820px, calc(100% - 32px)); background:rgba(255,255,255,.92); backdrop-filter:blur(10px); border:1px solid var(--line); border-radius:6px; display:flex; justify-content:space-between; align-items:center; padding:10px 10px 10px 22px; }
+  .nav img { height:16px; display:block; }
+  .nav-links { display:flex; gap:32px; font-size:14px; font-family:"GT Planar", "Instrument Sans", sans-serif; }
+  .nav-links a { color:var(--ink); text-decoration:none; opacity:.65; padding:12px 0; transition:opacity .2s; }
+  .nav-links a:hover { opacity:1; }
+  .pill { display:inline-flex; align-items:center; gap:10px; background:var(--ink); color:#fff; text-decoration:none; border-radius:4px; padding:0 20px; min-height:44px; font-size:14px; transition:background .3s; }
+  .pill:hover { background:var(--blue); }
+  .pill.big { padding:0 32px; min-height:64px; font-size:17px; }
+
+  /* reveals */
+  .r { opacity:0; transform:translateY(28px); transition:opacity .9s var(--ease), transform .9s var(--ease); transition-delay:var(--d,0s); }
+  .r.in { opacity:1; transform:none; }
+
+  /* capa */
+  .hero { padding-top:176px; text-align:center; }
+  .hero h1 { margin:24px auto 32px; max-width:19ch; font-size:clamp(38px, 5.6vw, 72px); }
+  .hero p { font-size:clamp(18px, 1.8vw, 20px); max-width:46ch; margin:0 auto; }
+  .facts { display:grid; grid-template-columns:repeat(3, 1fr); margin-top:96px; border-top:1px solid var(--line); text-align:left; }
+  .facts div { padding:24px 24px 0 0; display:flex; flex-direction:column; gap:8px; }
+  .facts div + div { padding-left:24px; border-left:1px solid var(--line); }
+  .facts b { display:block; font-weight:400; font-size:clamp(30px, 3.4vw, 44px); letter-spacing:-.02em; line-height:1.1; }
+  .facts span { font-size:14px; color:var(--muted); }
+
+  section.wrap { padding-top:128px; }
+  .center { display:grid; grid-template-columns:1.4fr 1fr; gap:24px 64px; align-items:end; }
+  .center .tag { grid-column:1 / -1; }
+  .center h2 { max-width:16ch; }
+  .center > p { max-width:40ch; color:var(--muted); font-size:18px; padding-bottom:8px; }
+
+  /* logos de clientes, em preto como no site */
+  .logos-sec .tag { text-align:center; }
+  .logos { list-style:none; display:grid; grid-template-columns:repeat(5, 1fr); margin-top:32px; border-top:1px solid var(--line); border-left:1px solid var(--line); }
+  .logos li { display:grid; place-items:center; height:112px; padding:24px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .logos img { max-width:128px; max-height:36px; width:auto; height:auto; object-fit:contain; filter:brightness(0); opacity:.7; transition:opacity .3s, filter .3s; }
+  .logos li:hover img { opacity:1; filter:none; }
+
+  /* ===== demo do CRM ===== */
+  .demo { margin-top:64px; background:var(--bg2); border-radius:4px; padding:24px; }
+  .demo-top { display:flex; justify-content:flex-end; align-items:center; gap:16px; margin-bottom:24px; flex-wrap:wrap; }
+  .switch { display:flex; background:#fff; border:1px solid var(--line); border-radius:4px; padding:4px; position:relative; }
+  .switch button { all:unset; cursor:pointer; padding:12px 20px; border-radius:2px; font-size:14px; position:relative; z-index:1; transition:color .3s; }
+  .switch button[aria-pressed="true"] { color:#fff; }
+  .switch .knob { position:absolute; top:4px; bottom:4px; border-radius:2px; background:var(--ink); transition:left .45s var(--ease), width .45s var(--ease), background .3s; }
+  .switch.zay .knob { background:var(--blue); }
+  .live { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--muted); }
+  .live::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--green); animation:pulse 1.6s infinite; }
+  @keyframes pulse { 50% { opacity:.25; } }
+
+  .app { position:relative; display:grid; grid-template-columns:64px 1fr; background:#fff; border:1px solid var(--line); border-radius:4px; overflow:hidden; height:600px; box-shadow:0 1px 2px rgba(10,10,10,.04), 0 24px 48px -32px rgba(10,10,10,.18); }
+  .rail { border-right:1px solid var(--line); display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 0; }
+  .rail img { width:28px; height:28px; border-radius:2px; margin-bottom:16px; }
+  .rail span { width:40px; height:40px; display:grid; place-items:center; border-radius:4px; color:var(--muted); }
+  .rail span.on { background:var(--bg2); color:var(--ink); }
+  .rail svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+  .main { display:flex; flex-direction:column; min-width:0; }
+  .topbar { display:flex; align-items:center; gap:16px; padding:16px 24px; border-bottom:1px solid var(--line); }
+  .topbar .ttl { flex:1; min-width:0; }
+  .topbar .ttl b { display:block; font-weight:500; font-size:15px; }
+  .topbar .ttl span { font-size:12px; color:var(--muted); }
+  .search { display:flex; align-items:center; gap:8px; border:1px solid var(--line); border-radius:4px; padding:8px 12px; font-size:13px; color:var(--muted); width:220px; }
+  .search svg { width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2; }
+  .me { width:32px; height:32px; border-radius:50%; background:var(--ink); color:#fff; display:grid; place-items:center; font-size:12px; }
+  .view { display:none; flex:1; min-height:0; }
+  .view.on { display:flex; flex-direction:column; animation:fade .5s var(--ease); }
+  @keyframes fade { from { opacity:0; transform:translateY(8px); } }
+
+  /* hoje: caixa de entrada sem controle */
+  .chaos { display:grid; grid-template-columns:1fr 280px; flex:1; min-height:0; }
+  .chats { border-right:1px solid var(--line); overflow:hidden; }
+  .chat { display:flex; gap:12px; align-items:center; padding:14px 24px; border-bottom:1px solid var(--line); transition:opacity .8s, filter .8s; animation:slide .5s var(--ease); }
+  @keyframes slide { from { opacity:0; transform:translateY(-12px); } }
+  .av { width:32px; height:32px; border-radius:50%; flex:none; display:grid; place-items:center; font-size:11px; color:#fff; background:var(--muted); }
+  .chat .who { flex:1; min-width:0; }
+  .chat .who b { display:block; font-weight:500; font-size:14px; }
+  .chat .who span { font-size:13px; color:var(--muted); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .chat .st { font-size:11px; padding:4px 8px; border-radius:2px; background:var(--bg2); color:var(--muted); white-space:nowrap; }
+  .chat.wait .st { background:#FFF4E5; color:#B54708; }
+  .chat.lost { opacity:.4; filter:grayscale(1); }
+  .chat.lost .st { background:#FEECEB; color:#B42318; }
+  .chaos-side { padding:24px; display:flex; flex-direction:column; gap:8px; }
+  .q { background:var(--bg2); border-radius:4px; padding:16px; font-size:13px; color:var(--muted); }
+  .q b { display:block; font-weight:400; font-size:36px; letter-spacing:-.03em; line-height:1.1; margin-top:4px; color:var(--ink); }
+  .q.red b { color:var(--red); }
+  .q .unknown { color:#C2C7D0; }
+
+  /* com a Zayvon: CRM */
+  .kpis { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; padding:16px 24px 0; }
+  .kpi { border:1px solid var(--line); border-radius:4px; padding:12px 16px; font-size:12px; color:var(--muted); }
+  .kpi b { display:block; font-weight:400; font-size:28px; letter-spacing:-.03em; line-height:1.15; color:var(--ink); margin-top:2px; transition:color .3s; }
+  .kpi.won b { color:var(--blue); }
+  .kpi b.bump { animation:bump .6s var(--ease); }
+  @keyframes bump { 40% { transform:translateY(-3px); color:var(--blue); } }
+  .filters { display:flex; gap:8px; padding:16px 24px; }
+  .filters span { font-size:12px; padding:6px 12px; border-radius:2px; border:1px solid var(--line); color:var(--muted); }
+  .filters span.on { background:var(--ink); border-color:var(--ink); color:#fff; }
+  .kanban { display:grid; grid-template-columns:repeat(4, minmax(150px, 1fr)); gap:8px; padding:0 24px 24px; flex:1; min-height:0; }
+  .col { background:var(--bg2); border-radius:4px; padding:8px; display:flex; flex-direction:column; min-width:0; overflow:hidden; outline:1.5px dashed transparent; outline-offset:-1.5px; transition:background .3s, outline-color .3s; }
+  .col.drop { background:var(--blue-soft); outline-color:var(--blue); }
+  .col h4 { font-family:"Instrument Sans", sans-serif; font-weight:500; font-size:13px; display:flex; align-items:center; gap:8px; padding:6px 6px 10px; }
+  .col h4 i { width:8px; height:8px; border-radius:50%; }
+  .col h4 em { margin-left:auto; font-style:normal; font-weight:400; font-size:12px; color:var(--muted); }
+  .list { display:flex; flex-direction:column; gap:8px; }
+  .kc { background:#fff; border:1px solid var(--line); border-radius:4px; padding:12px; font-size:12px; line-height:1.35; animation:pop .5s var(--ease); }
+  @keyframes pop { from { opacity:0; transform:translateY(-8px) scale(.97); } }
+  .kc-top { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .kc-top .av { width:22px; height:22px; font-size:9px; }
+  .kc-top b { font-weight:500; font-size:13px; flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .kc-top time { font-size:11px; color:var(--muted); }
+  .kc p { color:var(--muted); margin-bottom:8px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .kc-tags { display:flex; gap:4px; flex-wrap:wrap; }
+  .t { font-size:10.5px; padding:2px 6px; border-radius:2px; background:var(--bg2); color:var(--muted); }
+  .t.src { background:var(--blue-soft); color:var(--blue); }
+  .t.hot { background:#ECFDF3; color:#067647; }
+  .col.won .kc { border-color:#B9D2FD; }
+  .kc.hide { visibility:hidden; }
+  .ghost { position:absolute; z-index:6; pointer-events:none; margin:0; animation:none; box-shadow:0 18px 36px -12px rgba(10,10,10,.28); transform-origin:20% 20%; }
+  .cursor { position:absolute; left:0; top:0; z-index:8; width:22px; height:22px; pointer-events:none; opacity:0; transition:opacity .3s; filter:drop-shadow(0 2px 3px rgba(0,0,0,.25)); }
+  .cursor.show { opacity:1; }
+  .cursor svg { width:22px; height:22px; transition:transform .15s; }
+  .cursor.grab svg { transform:scale(.88); }
+  .toast { position:absolute; right:24px; bottom:24px; background:var(--ink); color:#fff; font-size:13px; border-radius:4px; padding:12px 16px; display:flex; gap:10px; align-items:center; max-width:340px; transform:translateY(160%); transition:transform .5s var(--ease); z-index:9; }
+  .toast.show { transform:none; }
+  .toast::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--green); flex:none; }
+  .toast.bad::before { background:var(--red); }
+  .note { font-size:13px; color:var(--muted); margin-top:16px; }
+
+  /* entregas: faixa cinza, blocos 2x2 */
+  .band { background:var(--bg2); margin-top:128px; padding:128px 0; }
+  .tiles { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:64px; }
+  .tile { background:#fff; padding:40px; min-height:400px; display:flex; flex-direction:column; justify-content:space-between; gap:48px; border-radius:2px; }
+  .tile svg { width:28px; height:28px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; transition:transform .5s var(--ease); }
+  .tile:hover svg { transform:translateY(-4px); }
+  .tile h3 { font-size:clamp(26px, 2.6vw, 34px); letter-spacing:-.025em; line-height:1.15; margin-bottom:16px; }
+  .tile p { color:var(--muted); max-width:40ch; line-height:1.6; }
+  .tile.dark { background:#18181B; color:#fff; }
+  .addon { margin-top:8px; }
+  .addon .bot { color:var(--ink); }
+  .addon-tag { display:inline-block; font-family:"GT Planar", "Instrument Sans", sans-serif; font-size:11px; letter-spacing:.18em; text-transform:uppercase; background:var(--blue); color:#fff; padding:4px 10px; border-radius:2px; margin-bottom:16px; }
+  .addon-price { display:flex; align-items:baseline; gap:12px; margin-top:32px; padding-top:24px; border-top:1px solid rgba(255,255,255,.14); }
+  .addon-price b { font-family:"Instrument Sans", sans-serif; font-weight:400; font-size:44px; letter-spacing:-.03em; line-height:1; }
+  .addon-price span { font-size:14px; color:rgba(255,255,255,.6); }
+  .tile.wide { grid-column:1 / -1; display:grid; grid-template-columns:1fr 1fr; gap:48px; min-height:440px; }
+  .wide-text { display:flex; flex-direction:column; justify-content:space-between; gap:48px; }
+  .bot { background:var(--bg2); border-radius:2px; padding:24px; display:flex; flex-direction:column; justify-content:flex-end; gap:8px; height:392px; overflow:hidden; font-size:14px; }
+  .msg { max-width:78%; padding:10px 14px; border-radius:2px; line-height:1.4; animation:pop .45s var(--ease); }
+  .msg.b { background:#fff; align-self:flex-start; }
+  .msg.u { background:var(--ink); color:#fff; align-self:flex-end; }
+  .msg.typing { color:var(--muted); }
+  .verdict { align-self:center; margin-top:8px; font-size:13px; padding:8px 14px; border-radius:2px; animation:pop .45s var(--ease); }
+  .verdict.hot { background:var(--blue); color:#fff; }
+  .verdict.cold { background:#fff; color:var(--muted); border:1px solid var(--line); }
+  .tile.dark p { color:rgba(255,255,255,.72); }
+  .flow { list-style:none; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:2px; padding:8px 24px; display:flex; flex-direction:column; justify-content:center; }
+  .flow li { display:flex; gap:16px; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.08); position:relative; opacity:.38; transition:opacity .5s var(--ease); }
+  .flow li:last-child { border-bottom:0; }
+  .flow li::after { content:""; position:absolute; left:0; bottom:-1px; height:1px; width:100%; background:var(--blue); transform:scaleX(0); transform-origin:0 50%; }
+  .flow li.on { opacity:1; }
+  .flow li.on::after { transform:scaleX(1); transition:transform 1.6s linear; }
+  .flow li.done { opacity:.75; }
+  .flow span { font-size:12px; color:var(--blue); padding-top:3px; min-width:20px; font-family:"GT Planar", "Instrument Sans", sans-serif; }
+  .flow b { display:block; font-weight:400; font-size:16px; color:#fff; }
+  .flow small { display:block; font-size:13px; color:rgba(255,255,255,.6); margin-top:2px; }
+
+  /* investimento */
+  .price { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:64px; }
+  .p { border-radius:2px; padding:40px; background:var(--bg2); min-height:320px; display:flex; flex-direction:column; }
+  .p p { margin-top:auto; max-width:34ch; }
+  .p.main { background:var(--blue); color:#fff; border-color:var(--blue); }
+  .p small { font-size:14px; opacity:.72; }
+  .plan-name { font-size:clamp(30px, 3.4vw, 44px); line-height:1.08; letter-spacing:-.03em; font-weight:400; max-width:14ch; }
+  .p { position:relative; } .plan-badge { position:absolute; top:24px; right:24px; font-family:"GT Planar","Instrument Sans",sans-serif; font-size:11px; letter-spacing:.18em; text-transform:uppercase; background:#fff; color:var(--blue); padding:4px 10px; border-radius:2px; margin-bottom:16px; }
+  .p .val { margin:auto 0 24px; }
+  .val { font-size:clamp(56px, 8vw, 104px); letter-spacing:-.045em; line-height:1; margin:24px 0 32px; }
+  .val sup { font-size:.3em; letter-spacing:0; vertical-align:top; position:relative; top:.3em; margin-right:.15em; }
+  .val sub { font-size:.2em; letter-spacing:0; vertical-align:baseline; opacity:.7; }
+  .terms { display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-top:8px; }
+  .terms span { background:var(--bg2); border-radius:2px; padding:20px 24px; font-size:15px; }
+
+  /* perguntas frequentes */
+  .faq { margin-top:64px; border-top:1px solid var(--ink); }
+  .faq details { border-bottom:1px solid var(--line); }
+  .faq summary { list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:24px; padding:24px 0; font-size:clamp(18px, 1.8vw, 21px); letter-spacing:-.01em; min-height:44px; transition:color .2s; }
+  .faq summary::-webkit-details-marker { display:none; }
+  .faq summary:hover { color:var(--blue); }
+  .faq summary i { position:relative; width:14px; height:14px; flex:none; }
+  .faq summary i::before, .faq summary i::after { content:""; position:absolute; left:0; top:6.5px; width:14px; height:1.5px; background:currentColor; transition:transform .35s var(--ease); }
+  .faq summary i::after { transform:rotate(90deg); }
+  .faq details[open] summary i::after { transform:rotate(0); }
+  .faq details p { color:var(--muted); max-width:62ch; padding:0 0 24px; line-height:1.6; animation:fade .4s var(--ease); }
+  .end { padding-top:160px; padding-bottom:128px; text-align:center; }
+  .end h2 { margin:0 auto 32px; max-width:700px; }
+  .ctas { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+  .ghost-btn { background:#fff; color:var(--ink); border:1px solid var(--ink); }
+  .ghost-btn:hover { background:#25D366; border-color:#25D366; color:#fff; }
+  .pill svg { width:20px; height:20px; flex:none; }
+  .wa-float { position:fixed; right:24px; bottom:24px; z-index:60; display:flex; align-items:center; gap:10px; height:56px; padding:0 18px 0 16px; border-radius:28px; background:#25D366; color:#fff; text-decoration:none; font-size:15px; box-shadow:0 10px 30px -10px rgba(0,0,0,.35); transition:transform .3s var(--ease), box-shadow .3s; }
+  .wa-float svg { width:26px; height:26px; }
+  .wa-float:hover { transform:translateY(-2px); box-shadow:0 14px 34px -10px rgba(0,0,0,.4); }
+  @media screen and (max-width:600px) { .wa-float { width:56px; padding:0; justify-content:center; } .wa-float span { display:none; } }
+  @media print { .wa-float { display:none !important; } }
+  footer { border-top:1px solid var(--line); padding:28px 0; }
+  footer .wrap { display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--muted); }
+  footer img { height:14px; }
+
+  /* títulos e números como no azayvon.com.br: Instrument Sans regular, tracking apertado */
+  h1, h2, h3, h4, .val, .facts b, .kpi b, .q b { font-family:"Instrument Sans", Arial, sans-serif; font-weight:400; }
+  h1 { letter-spacing:-.035em; line-height:1.02; }
+  h2 { letter-spacing:-.023em; line-height:1.1; }
+  @media screen and (max-width:900px) {
+    .nav-links { display:none; }
+    .center { grid-template-columns:1fr; }
+    .app { grid-template-columns:1fr; height:640px; }
+    .rail, .search { display:none; }
+    .chaos { grid-template-columns:1fr; }
+    .chats { border-right:0; }
+    .chaos-side { flex-direction:row; flex-wrap:wrap; border-top:1px solid var(--line); padding:16px; }
+    .q { flex:1 1 40%; }
+    .kpis { grid-template-columns:1fr 1fr; padding:16px 16px 0; }
+    .filters { padding:16px; }
+    .kanban { overflow-x:auto; padding:0 16px 16px; grid-template-columns:repeat(4, 160px); }
+  }
+  @media screen and (max-width:600px) {
+    .hero { padding-top:136px; }
+    .hero h1 br { display:none; }
+    .facts, .price, .tiles, .terms { grid-template-columns:1fr; }
+    .logos { grid-template-columns:repeat(2, 1fr); }
+    .logos li { height:88px; }
+    .tile, .p { padding:32px 24px; min-height:300px; }
+    .tile.wide { grid-template-columns:1fr; }
+    .bot { height:360px; padding:16px; }
+    .band { margin-top:96px; padding:96px 0; }
+    .facts div { padding:24px 0; }
+    .facts div + div { border-top:1px solid var(--line); }
+    .demo { padding:12px; }
+    .facts div + div { padding-left:0; border-left:0; }
+    section.wrap { padding-top:96px; }
+    .toast { left:16px; right:16px; max-width:none; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    *, *::before, *::after { animation:none !important; transition:none !important; }
+    .r { opacity:1; transform:none; }
+  }
+  @media print {
+    * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .r { opacity:1 !important; transform:none !important; }
+    .nav { position:absolute; }
+    .cursor, .toast, .live { display:none !important; }
+    .tile, .p, .terms, .app, .logos, .faq details, .facts, .center { break-inside:avoid; }
+    section.wrap, .band { break-before:auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <img src="logo-zayvon.png" alt="Zayvon">
+  <nav class="nav-links"><a href="#crm">CRM</a><a href="#entrega">Entrega</a><a href="#investimento">Investimento</a><a href="#faq">Dúvidas</a></nav>
+  <a class="pill wa" href="#">Aprovar proposta</a>
+</header>
+
+<main>
+  <div class="hero wrap">
+    <span class="tag r">Proposta · Aquisição Previsível</span>
+    <h1 class="r" style="--d:.1s"><span id="first">Luciana</span>, um plano para levar <span class="blue">novas pacientes à sua clínica</span> todos os meses.</h1>
+    <p class="r muted" style="--d:.2s">Tráfego pago, criativos, CRM e números para estética integrativa e pós-operatório. Montado e operado pela Zayvon.</p>
+    <div class="facts r" style="--d:.3s">
+      <div><b>Campanhas ilimitadas</b><span>sem limite por mês</span></div>
+      <div><b>CRM incluído</b><span>sem custo adicional</span></div>
+      <div><b>100% remoto</b><span>reunião mensal de resultados</span></div>
+    </div>
+  </div>
+
+  <section class="wrap logos-sec" aria-label="Clientes">
+    <p class="tag r">Marcas que já confiam na Zayvon</p>
+    <ul class="logos r" style="--d:.1s">
+      <li><img src="clientes/glamour.webp" alt="Glamour Beauty &amp; Nails" loading="lazy"></li>
+      <li><img src="clientes/concept.svg" alt="Escola Concept" loading="lazy"></li>
+      <li><img src="clientes/kids-bilingue.webp" alt="Kids Bilíngue" loading="lazy"></li>
+      <li><img src="clientes/bohm.svg" alt="Bohm Tecnologia e Inteligência" loading="lazy"></li>
+      <li><img src="clientes/analysis.svg" alt="Analysis Cloud ERP" loading="lazy"></li>
+      <li><img src="clientes/bonaliment-mono.svg" alt="Bonaliment" loading="lazy"></li>
+      <li><img src="clientes/glyca.webp" alt="Glyca" loading="lazy"></li>
+      <li><img src="clientes/liviin.avif" alt="Livinn" loading="lazy"></li>
+      <li><img src="clientes/yollo.png" alt="Yollo I.A" loading="lazy"></li>
+      <li><img src="clientes/minali.avif" alt="Minali" loading="lazy"></li>
+    </ul>
+  </section>
+
+  <section id="crm" class="wrap">
+    <div class="center">
+      <span class="tag r">O que muda na prática</span>
+      <h2 class="r" style="--d:.1s">Quantas pacientes você <span class="blue">deixou de atender este mês?</span></h2>
+      <p class="r" style="--d:.2s">Sem CRM, ninguém sabe. Com a Zayvon, cada contato tem etapa, histórico e próximo passo.</p>
+    </div>
+
+    <div class="demo r" style="--d:.25s">
+      <div class="demo-top">
+        <span class="live">Simulação ao vivo</span>
+      </div>
+      <div class="app" id="app">
+        <aside class="rail" aria-hidden="true">
+          <img src="icon-zayvon.png" alt="">
+          <span class="on"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="5" height="16" rx="1"/><rect x="10" y="4" width="5" height="11" rx="1"/><rect x="17" y="4" width="4" height="7" rx="1"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><path d="M4 20V11M10 20V5M16 20v-6M22 20H2"/></svg></span>
+        </aside>
+        <div class="main">
+          <div class="topbar">
+            <div class="ttl"><b>Funil de pacientes</b><span>CRM Zayvon · atualizado agora</span></div>
+            <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Buscar paciente</div>
+            <div class="me">LA</div>
+          </div>
+
+          <div class="view on" id="vZay">
+            <div class="kpis">
+              <div class="kpi">Contatos no mês<b id="kIn">0</b></div>
+              <div class="kpi">Qualificados<b id="kQual">0</b></div>
+              <div class="kpi">Avaliações agendadas<b id="kVis">0</b></div>
+              <div class="kpi won">Procedimentos fechados<b id="kWon">0</b></div>
+            </div>
+            <div class="filters" aria-hidden="true"><span class="on">Todos</span><span>Pós-operatório</span><span>Facial</span><span>Corporal</span></div>
+            <div class="kanban" id="board"></div>
+          </div>
+        </div>
+        <div class="cursor" id="cursor" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3l14 7.5-6.2 1.6L10 18.5z" fill="#0A0A0A" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <div class="toast" id="toast" role="status"></div>
+      </div>
+    </div>
+    <p class="note">Simulação ilustrativa. Nomes e números são exemplos, não resultados.</p>
+  </section>
+
+  <section id="entrega" class="band"><div class="wrap">
+    <div class="center">
+      <span class="tag r">O que você recebe</span>
+      <h2 class="r" style="--d:.1s">Seis entregas. <span class="blue">Tudo incluso no plano.</span></h2>
+      <p class="r" style="--d:.2s">Montado e operado pela Zayvon, nos dois planos. Você foca no atendimento das suas pacientes.</p>
+    </div>
+    <div class="tiles">
+      <article class="tile dark r">
+        <svg viewBox="0 0 24 24"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></svg>
+        <div><h3>Campanhas ilimitadas</h3><p>Anúncios para os seus tratamentos de estética integrativa e pós-operatório, sem limite de campanhas.</p></div>
+      </article>
+      <article class="tile r" style="--d:.06s">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg>
+        <div><h3>Criativos e copy</h3><p>Textos para criativos em vídeo e imagem, pensados para quem procura cuidado no pós-operatório.</p></div>
+      </article>
+      <article class="tile r" style="--d:.12s">
+        <svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>
+        <div><h3>Estratégia de campanhas</h3><p>A arquitetura do tráfego: qual tratamento anunciar, para quem e em que momento.</p></div>
+      </article>
+      <article class="tile r" style="--d:.18s">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>
+        <div><h3>Configuração e rastreamento</h3><p>Configuração técnica das contas e mensuração de cada contato, do clique ao agendamento.</p></div>
+      </article>
+      <article class="tile r" style="--d:.24s">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="5" height="16" rx="1"/><rect x="10" y="4" width="5" height="11" rx="1"/><rect x="17" y="4" width="4" height="7" rx="1"/></svg>
+        <div><h3>CRM incluído</h3><p>Todo contato registrado, funil até o procedimento fechado e lembrete de quem precisa de retorno.</p></div>
+      </article>
+      <article class="tile r" style="--d:.30s">
+        <svg viewBox="0 0 24 24"><path d="M4 20V11M10 20V5M16 20v-6M22 20H2"/></svg>
+        <div><h3>Relatórios e reunião mensal</h3><p>Relatório de desempenho todo mês e uma reunião de alinhamento estratégico.</p></div>
+      </article>
+    </div>
+  </div></section>
+
+  <section id="investimento" class="wrap">
+    <div class="center">
+      <span class="tag r">Investimento</span>
+      <h2 class="r" style="--d:.1s">Escolha o <span class="blue">seu plano.</span></h2>
+      <p class="r" style="--d:.2s">Mensalidade fixa, com o CRM incluso nos dois planos. A verba de anúncios é definida com você.</p>
+    </div>
+    <div class="price">
+      <div class="p r">
+        <h3 class="plan-name">Plano para uma rede social</h3>
+        <div class="val"><sup>R$</sup><span class="count" data-to="997">997</span><sub>/mês</sub></div>
+        <p class="muted">Anúncios e estratégia em uma rede social, com todas as entregas incluídas.</p>
+      </div>
+      <div class="p main r" style="--d:.1s">
+        <span class="plan-badge">Mais completo</span><h3 class="plan-name">Plano para todas as redes sociais</h3>
+        <div class="val"><sup>R$</sup><span class="count" data-to="1497">1.497</span><sub>/mês</sub></div>
+        <p>Anúncios e estratégia em todas as redes sociais, com todas as entregas incluídas.</p>
+      </div>
+    </div>
+    <div class="terms r">
+      <span>CRM incluído nos dois planos</span>
+      <span>Campanhas ilimitadas</span>
+      <span>Verba de anúncios paga direto às plataformas</span>
+    </div>
+
+    <article class="tile wide dark addon r">
+      <div class="wide-text">
+        <svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg>
+        <div>
+          <span class="addon-tag">Opcional</span>
+          <h3>Atendimento com I.A</h3>
+          <p>Uma I.A atende os leads que chegam dos anúncios, 24 horas por dia, e qualifica cada um antes de chegar até você. Você recebe só quem realmente quer agendar, e quem não respondeu recebe acompanhamento automático.</p>
+          <div class="addon-price"><b>R$ 600</b><span>implementação única</span></div>
+        </div>
+      </div>
+      <div class="bot" id="bot" aria-label="Exemplo de conversa do atendimento com I.A"></div>
+    </article>
+  </section>
+
+  <section id="faq" class="wrap">
+    <div class="center">
+      <span class="tag r">Perguntas frequentes</span>
+      <h2 class="r" style="--d:.1s">Ficou <span class="blue">alguma dúvida?</span></h2>
+      <p class="r" style="--d:.2s">As respostas para o que mais perguntam antes de começar.</p>
+    </div>
+    <div class="faq">
+      <details class="r">
+        <summary>Qual a diferença entre os dois planos?<i aria-hidden="true"></i></summary>
+        <p>No plano de 1 rede social, os anúncios e a estratégia ficam concentrados em uma rede. No plano de todas as redes, cobrimos todas as redes sociais com uma estratégia única. As entregas e o CRM são os mesmos nos dois.</p>
+      </details>
+      <details class="r" style="--d:.05s">
+        <summary>Quanto preciso investir em anúncios?<i aria-hidden="true"></i></summary>
+        <p>Definimos juntos, com base nos tratamentos que você quer divulgar e no valor de cada um. A verba é paga direto às plataformas, não passa pela Zayvon.</p>
+      </details>
+      <details class="r" style="--d:.05s">
+        <summary>O CRM tem custo extra?<i aria-hidden="true"></i></summary>
+        <p>Não. O CRM está incluído nos dois planos.</p>
+      </details>
+      <details class="r" style="--d:.05s">
+        <summary>O que é o atendimento com I.A?<i aria-hidden="true"></i></summary>
+        <p>É opcional. Uma I.A atende os leads dos anúncios no WhatsApp, faz as perguntas certas e separa quem quer agendar de quem só está curioso. A implementação é de R$ 600, paga uma única vez.</p>
+      </details>
+      <details class="r" style="--d:.05s">
+        <summary>Vocês garantem um número de pacientes?<i aria-hidden="true"></i></summary>
+        <p>Não prometemos número fixo, porque o agendamento também depende do atendimento, da oferta e da época do ano. O nosso compromisso é estruturar as campanhas, medir cada etapa e otimizar continuamente.</p>
+      </details>
+      <details class="r" style="--d:.05s">
+        <summary>Vou ter acesso às campanhas e aos números?<i aria-hidden="true"></i></summary>
+        <p>Sim. Você tem acesso às contas de anúncio, aos números e a cada decisão tomada, além da reunião mensal de alinhamento.</p>
+      </details>
+      <details class="r" style="--d:.05s">
+        <summary>Como funciona o atendimento da Zayvon?<i aria-hidden="true"></i></summary>
+        <p>100% remoto, com reunião mensal de resultados e contato direto pelo WhatsApp.</p>
+      </details>
+    </div>
+  </section>
+
+  <div class="end wrap">
+    <h2 class="r">Vamos começar, <span class="blue" id="first2">Luciana</span>?</h2>
+    <div class="ctas r" style="--d:.1s">
+      <a class="pill big wa" href="#">Aprovar proposta →</a>
+      <a class="pill big ghost-btn wa-chat" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zM20.5 3.5A11.8 11.8 0 0 0 1.9 17.7L.2 24l6.4-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.5-8.5z"/></svg>Conversar no WhatsApp</a>
+    </div>
+  </div>
+</main>
+
+<a class="wa-float wa-chat" href="#" aria-label="Conversar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zM20.5 3.5A11.8 11.8 0 0 0 1.9 17.7L.2 24l6.4-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.5-8.5z"/></svg><span>Fale com a Zayvon</span></a>
+
+<footer><div class="wrap"><img src="logo-zayvon.png" alt="Zayvon"><span>azayvon.com.br</span></div></footer>
+
+<script>
+  // ?para=Nome&wa=55DDDNUMERO personalizam sem editar o arquivo
+  const q = new URLSearchParams(location.search);
+  const nome = (q.get('para') || 'Luciana Almeida').split(' ')[0];
+  document.getElementById('first').textContent = nome;
+  document.getElementById('first2').textContent = nome;
+  const wa = (q.get('wa') || '5532988139103').replace(/\D/g, '');
+  document.querySelectorAll('.wa').forEach(a => a.href = wa
+    ? 'https://wa.me/' + wa + '?text=' + encodeURIComponent('Olá! Quero aprovar a proposta da Zayvon.')
+    : '#investimento');
+  document.querySelectorAll('.wa-chat').forEach(a => { a.href = 'https://wa.me/' + (wa || '5532988139103') + '?text=' + encodeURIComponent('Olá! Vi a proposta da Zayvon e queria conversar.'); a.target = '_blank'; a.rel = 'noopener'; });
+
+  if (q.has('pdf')) {
+    document.querySelectorAll('details').forEach(d => d.open = true);
+    // PDF em página única e contínua, do tamanho da proposta
+    addEventListener('load', () => document.fonts.ready.then(() => {
+      const st = document.createElement('style');
+      st.textContent = '@page { size:1280px ' + (document.documentElement.scrollHeight + 8) + 'px; margin:0; }';
+      document.head.append(st);
+    }));
+  }
+  addEventListener('beforeprint', () => document.querySelectorAll('details').forEach(d => d.open = true));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fmt = n => n.toLocaleString('pt-BR');
+
+  // revela ao rolar + contagem dos preços
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('in');
+    e.target.querySelectorAll('.count').forEach(el => {
+      const to = +el.dataset.to; if (reduce) return;
+      const t0 = performance.now();
+      const tick = t => { const p = Math.min((t - t0) / 1300, 1); el.textContent = fmt(p < 1 ? Math.round(to * (1 - Math.pow(1 - p, 3)) / 10) * 10 : to); if (p < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    });
+    io.unobserve(e.target);
+  }), { threshold: .15 });
+  document.querySelectorAll('.r').forEach(el => io.observe(el));
+
+  // ---------- simulação ----------
+  const NAMES = ['Ana Souza','Beatriz Lima','Carla Mendes','Daniela Rocha','Eduarda Reis','Fernanda Alves','Gabriela Nunes','Helena Dias','Isabela Costa','Juliana Pires','Karina Melo','Larissa Prado','Mariana Silva','Natália Ramos','Paula Teixeira','Renata Gomes','Sabrina Lopes','Tatiane Martins','Vanessa Cruz','Yasmin Ferreira'];
+  const COURSES = ['Drenagem pós-operatório','Protocolo pós-lipo','Tratamento de fibrose','Ultrassom pós-cirúrgico','Estética facial integrativa','Massagem modeladora'];
+  const MSGS = ['Oi, qual o valor do curso?','Ainda tem vaga para março?','Vocês têm EAD?','Queria saber da pós','Como faço a matrícula?','Tem desconto à vista?'];
+  const SRC = ['Google','Instagram','Indicação','Site'];
+  const COLORS = ['#116BF8','#0A0A0A','#878EA0','#052698','#3B82F6','#4B5563'];
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  let ni = 0;
+  const person = () => ({ name: NAMES[ni++ % NAMES.length], course: pick(COURSES), src: pick(SRC) });
+  const initials = n => n.split(' ').map(w => w[0]).join('');
+
+  const toastEl = document.getElementById('toast');
+  let toastT;
+  function toast(msg, bad) { toastEl.textContent = msg; toastEl.classList.toggle('bad', !!bad); toastEl.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('show'), 2600); }
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+
+  // modo "Zayvon": CRM com cursor arrastando os cards
+  const STAGES = [['Novo contato','#878EA0'],['Em conversa','#F79009'],['Avaliação','#116BF8'],['Fechado','#12B76A']];
+  const board = document.getElementById('board'), app = document.getElementById('app'), cursor = document.getElementById('cursor');
+  board.innerHTML = STAGES.map(([n, c], i) => `<div class="col${i === 3 ? ' won' : ''}"><h4><i style="background:${c}"></i>${n}<em>0</em></h4><div class="list"></div></div>`).join('');
+  const cols = [...board.querySelectorAll('.col')], lists = cols.map(c => c.querySelector('.list'));
+  const counts = [14, 8, 5, 3], MAXV = 4;
+  const k = { In: 30, Qual: 19, Vis: 8, Won: 3 };
+  const AGO = ['agora', '2 min', '8 min', '15 min', '1 h', '3 h'];
+  function card(stage) {
+    const p = person(), hot = stage > 0 || Math.random() < .7;
+    const el = document.createElement('div'); el.className = 'kc';
+    el.innerHTML = `<div class="kc-top"><span class="av" style="background:${pick(COLORS)}">${initials(p.name)}</span><b>${p.name}</b><time>${pick(AGO)}</time></div><p>${p.course}</p><div class="kc-tags"><span class="t src">${p.src}</span>${hot ? '<span class="t hot">Interesse alto</span>' : '<span class="t">Em acompanhamento</span>'}</div>`;
+    el.dataset.name = p.name;
+    return el;
+  }
+  function fill() { lists.forEach((l, i) => { while (l.children.length < Math.min(counts[i], MAXV)) l.append(card(i)); while (l.children.length > MAXV) l.lastChild.remove(); }); }
+  function render(changed) {
+    cols.forEach((c, i) => c.querySelector('em').textContent = counts[i]);
+    for (const key in k) { const el = document.getElementById('k' + key); if (el.textContent != k[key]) { el.textContent = k[key]; if (changed) { el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); } } }
+  }
+  fill(); render(false);
+
+  const rel = el => { const a = app.getBoundingClientRect(), b = el.getBoundingClientRect(); return { x: b.left - a.left, y: b.top - a.top, w: b.width, h: b.height }; };
+  function moveCursor(x, y, ms) { cursor.style.transition = `transform ${ms}ms cubic-bezier(.45,0,.2,1), opacity .3s`; cursor.style.transform = `translate(${x}px, ${y}px)`; }
+  const narrow = () => app.clientWidth < 760;
+
+  let zRun = 0;
+  async function zayLoop() {
+    const run = ++zRun, alive = () => run === zRun && mode === 'zay' && visible;
+    cursor.classList.toggle('show', !narrow());
+    const r0 = rel(board); moveCursor(r0.x + r0.w * .5, r0.y + 120, 0);
+    while (alive()) {
+      await wait(700); if (!alive()) break;
+      // às vezes chega um interessado novo, já qualificado pelo atendimento
+      if (Math.random() < .3 || counts[0] < 3) {
+        counts[0]++; k.In++; k.Qual++;
+        lists[0].prepend(card(0)); fill(); render(true);
+        toast('Novo contato chegou pelo anúncio');
+        await wait(1400); continue;
+      }
+      const from = [2, 1, 0].find(i => counts[i] > 0 && Math.random() < .55) ?? [0, 1, 2].find(i => counts[i] > 0);
+      const to = from + 1, src = lists[from].firstElementChild;
+      if (!src) { fill(); continue; }
+      const name = src.dataset.name;
+
+      if (narrow()) {
+        src.remove(); lists[to].prepend(src); src.style.animation = 'none'; void src.offsetWidth; src.style.animation = '';
+      } else {
+        const a = rel(src);
+        moveCursor(a.x + a.w * .55, a.y + 18, 750); await wait(800); if (!alive()) break;
+        cursor.classList.add('grab');
+        const ghost = src.cloneNode(true); ghost.classList.add('ghost');
+        Object.assign(ghost.style, { left: a.x + 'px', top: a.y + 'px', width: a.w + 'px', transition: 'none', transform: 'none' });
+        app.append(ghost); src.classList.add('hide');
+        await wait(60);
+        ghost.style.transition = 'transform .2s var(--ease)'; ghost.style.transform = 'rotate(-2.5deg) scale(1.03)';
+        cols[to].classList.add('drop');
+        await wait(220);
+        const t = rel(lists[to]), dx = t.x - a.x, dy = t.y - a.y;
+        ghost.style.transition = 'transform .95s cubic-bezier(.45,0,.2,1)';
+        ghost.style.transform = `translate(${dx}px, ${dy}px) rotate(-2.5deg) scale(1.03)`;
+        moveCursor(t.x + a.w * .55, t.y + 18, 950);
+        await wait(1000);
+        src.remove(); src.classList.remove('hide'); lists[to].prepend(src);
+        src.style.animation = 'none';
+        ghost.remove(); cols[to].classList.remove('drop'); cursor.classList.remove('grab');
+      }
+      counts[from]--; counts[to]++;
+      if (to === 1 && Math.random() < .6) toast('Lembrete: retornar ' + name + ' hoje');
+      if (to === 2) { k.Vis++; toast('Avaliação agendada: ' + name); }
+      if (to === 3) { k.Won++; toast('Procedimento fechado: ' + name); }
+      // a coluna de matrículas guarda só as mais recentes; o funil continua andando
+      if (counts[3] > 6) counts[3] = 6;
+      fill(); render(true);
+      await wait(900);
+    }
+    cursor.classList.remove('show', 'grab');
+    app.querySelectorAll('.ghost').forEach(g => g.remove());
+    lists.forEach(l => l.querySelectorAll('.hide').forEach(h => h.classList.remove('hide')));
+    cols.forEach(c => c.classList.remove('drop'));
+  }
+
+  // o CRM anima só enquanto está na tela
+  let mode = 'zay', visible = false;
+  function restart() {
+    zRun++; cursor.classList.remove('show');
+    if (visible && !reduce) setTimeout(zayLoop, 400);
+  }
+  new IntersectionObserver(([e]) => {
+    const was = visible; visible = e.isIntersecting;
+    if (visible !== was) restart();
+  }, { threshold: .35 }).observe(document.querySelector('.demo'));
+
+  // ---------- atendimento automatizado: duas conversas em loop ----------
+  const SCRIPTS = [
+    { lines: [['b','Olá! Sou a assistente virtual da Luciana. Qual tratamento você procura?'],['u','Drenagem pós-operatório'],['b','Entendi! Você fez a cirurgia há quanto tempo?'],['u','Fiz lipo há 10 dias'],['b','Prefere atendimento de manhã ou à tarde?'],['u','De manhã']],
+      verdict: ['hot','Lead qualificado · enviado para agendamento'] },
+    { lines: [['b','Olá! Sou a assistente virtual da Luciana. Qual tratamento você procura?'],['u','Só queria saber o valor'],['b','Claro! Te mando os valores. Pensa em começar quando?'],['u','Ainda não sei']],
+      verdict: ['cold','Curioso · acompanhamento automático em 3 dias'] }
+  ];
+  const bot = document.getElementById('bot');
+  let botRun = 0, botOn = false;
+  async function playBot() {
+    const run = ++botRun;
+    for (let k = 0; botOn && run === botRun; k++) {
+      const sc = SCRIPTS[k % SCRIPTS.length];
+      bot.innerHTML = '';
+      for (const [who, text] of sc.lines) {
+        if (!botOn || run !== botRun) return;
+        if (who === 'b') { const t = document.createElement('div'); t.className = 'msg b typing'; t.textContent = 'digitando...'; bot.append(t); await wait(700); t.remove(); }
+        const m = document.createElement('div'); m.className = 'msg ' + who; m.textContent = text; bot.append(m);
+        await wait(who === 'u' ? 900 : 1100);
+      }
+      const v = document.createElement('div'); v.className = 'verdict ' + sc.verdict[0]; v.textContent = sc.verdict[1]; bot.append(v);
+      await wait(3200);
+    }
+  }
+  if (reduce) {
+    bot.innerHTML = SCRIPTS[0].lines.map(([w, t]) => '<div class="msg ' + w + '">' + t + '</div>').join('') + '<div class="verdict hot">' + SCRIPTS[0].verdict[1] + '</div>';
+  } else {
+    new IntersectionObserver(([e]) => { const was = botOn; botOn = e.isIntersecting; if (botOn && !was) playBot(); }, { threshold: .3 }).observe(bot);
+  }
+
+  // ---------- processo comercial: etapas acendem em sequência ----------
+  const flowItems = [...document.querySelectorAll('#flow li')];
+  let flowOn = false, flowRun = 0;
+  async function playFlow() {
+    const run = ++flowRun;
+    while (flowOn && run === flowRun) {
+      for (let i = 0; i < flowItems.length; i++) {
+        if (!flowOn || run !== flowRun) return;
+        flowItems.forEach((li, j) => { li.classList.toggle('on', j === i); li.classList.toggle('done', j < i); });
+        await wait(1700);
+      }
+      flowItems.forEach(li => li.classList.add('done'));
+      flowItems.forEach(li => li.classList.remove('on'));
+      await wait(1600);
+    }
+  }
+  if (reduce) flowItems.forEach(li => li.classList.add('on'));
+  else if (flowItems.length) new IntersectionObserver(([e]) => { const was = flowOn; flowOn = e.isIntersecting; if (flowOn && !was) playFlow(); }, { threshold: .3 }).observe(document.getElementById('flow'));
+</script>
+</body>
+</html>
